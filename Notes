@@ -1,0 +1,3 @@
+Node class om voor elk aminozuur een node te creeren met: 4 pointers (upper, right, lower, left), een type definitie (aminozuur),
+en een position (int die positie in het eiwit aangeeft)
+voorbeeld HHPHHHPH, het derde aminozuur krijgt:
