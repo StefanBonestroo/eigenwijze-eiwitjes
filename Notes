@@ -1,3 +1,10 @@
 Node class om voor elk aminozuur een node te creeren met: 4 pointers (upper, right, lower, left), een type definitie (aminozuur),
 en een position (int die positie in het eiwit aangeeft)
-voorbeeld HHPHHHPH, het derde aminozuur krijgt:
+tactieken voor tellen van aantal h-bonden:
+elke h-bond wordt tweekeer geregistreerd wanneer je alle az nodes langs gaat en checkt op of buren ook een H zijn. 
+
+1: posities van beiden az's van een bond opslaan in een array.Aan het einde tellen hoeveel bonden in de array staan. en op basis daarvan
+de score berekenen. 
+2: boolean toevoegen aan az classe en op true zetten wanneer je een bond (voor de eerste keer) ziet ( de tweede keer ook). Bij een bond
+tussen twee az met boolean=true update je de score.
+3. bij een H-bond een halve punt updaten. (elke h-bond wordt twee keer gezien)
