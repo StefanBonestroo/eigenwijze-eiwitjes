@@ -9,7 +9,7 @@ class Protein:
 
         for amino in self.proteinChain:
             
-
+Werkt dit
 
     def calculateFolding (self):
 
