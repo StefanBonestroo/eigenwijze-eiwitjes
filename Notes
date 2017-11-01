@@ -8,3 +8,5 @@ de score berekenen.
 2: boolean toevoegen aan az classe en op true zetten wanneer je een bond (voor de eerste keer) ziet ( de tweede keer ook). Bij een bond
 tussen twee az met boolean=true update je de score.
 3. bij een H-bond een halve punt updaten. (elke h-bond wordt twee keer gezien)
+
+https://en.wikipedia.org/wiki/Hydrophobic-polar_protein_folding_model
