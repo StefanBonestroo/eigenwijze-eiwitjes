@@ -3,11 +3,16 @@ class Protein:
     def __init__(self, proteinChain):
 
         self.proteinChain = proteinChain
-
-
-    def makeChainStructure (self):
-
-        for amino in self.proteinChain:
+   
+    def makeChainStructure(self, amino_zuur, counter):
+        
+        if counter >= len(self.proteinChain)
+            break
+ 
+        amino_zuur.left = Amino(counter)
+        counter +=1
+        makeChainStructure(amino_zuur.left, counter) 
+  
             
 
     def calculateFolding (self):
@@ -18,7 +23,7 @@ class Protein:
 
 class Amino(Protein):
 
-    def __init__(self, upper, right, lower, left):
+    def __init__(self, position):
         upper = None
         right = None
         lower = None
@@ -31,4 +36,12 @@ class Amino(Protein):
 
 main()
 protie = Protein("PPHHHPHHHPH")
-protie.culculateFolding
+#protie.culculateFolding
+
+counter = 0
+first_amino = Amino(counter)
+counter = 1
+
+protie.makeChainStructure(first_amino, counter)
+
+    
