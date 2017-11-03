@@ -21,27 +21,25 @@ class Protein:
     def visualizeFolding (self):
 
 
-class Amino(Protein):
-
+class Amino(self, position):
+    self.position = position
     def __init__(self, position):
         upper = None
         right = None
         lower = None
         left = None
 
-        molecule =
-
-
+        molecule = position
 
 
 main()
 protie = Protein("PPHHHPHHHPH")
-#protie.culculateFolding
 
 counter = 0
 first_amino = Amino(counter)
 counter = 1
 
 protie.makeChainStructure(first_amino, counter)
+#protie.culculateFolding
 
     
