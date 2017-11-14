@@ -17,8 +17,6 @@ def randomizer (Protein, tries):
 
         for amino in range(2,len(Protein.proteinChain)):
 
-            print(aminoCoordinates)
-            print(amino-1)
             # Get's location of previous amino acid
             currentLocation = aminoCoordinates[amino - 1]
 
