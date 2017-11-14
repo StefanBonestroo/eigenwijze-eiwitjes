@@ -1,25 +1,16 @@
 
 class Protein:
 
-    def __init__(self, proteinChain, loops):
-
-        # slaat de waardes op die belangrijk zijn voor het programma
+    def __init__(self, proteinChain):
+        # string of amino acids chars
         self.proteinChain = proteinChain
-        self.proteinDict = {'x-cor': [], 'y-cor': [], 'type': []}
-        self.tries = loops
-        self.exist = [(0, 0), (0, 1)]
 
-        # de waardes die aan het einde van het programma belangrijk zijn
-        self.bestProteinDict = None
+        # location coordinates and amino acid type
+        self.proteinDict = {'x-cor': [], 'y-cor': [], 'type': []}
         self.strength = 0
 
-        # maakt de dictionary aan met de benodigde lengte
-        for round in range(len(proteinChain)):
-            if round == 1:
-                self.proteinDict["y-cor"].append(1)
-            else:
-                self.proteinDict["y-cor"].append(0)
+        # initialize dictionary
+        for aminoAcid in range(len(proteinChain)):
+            self.proteinDict["y-cor"].append(aminoAcid)
             self.proteinDict["x-cor"].append(0)
-            self.proteinDict["type"].append(proteinChain[round])
-
-        self.makeChainStructure(self.proteinDict, len(proteinChain))
+            self.proteinDict["type"].append(proteinChain[aminoAcid])
