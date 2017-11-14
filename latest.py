@@ -91,21 +91,6 @@ class Protein:
 
     # def visualizeFolding (self):
 
-    # stores the calculate folding and visualize folding of the best posible folding done
-    def bestFolding (self, strength, values, loops):
-        currentprofile = self.proteinDict
-        if self.strength < strength:
-            self.bestProteinDict = currentprofile
-            self.strength = strength
-
-        if loops > 0:
-            self.tries = loops - 1
-            self.reset()
-        else:
-            print("done")
-        # else:
-        #     self.visualize(self.bestProteinDict, len(self.proteinChain))
-
     def reset (self):
         self.exist = [(0, 0), (0, 1)]
         self.makeChainStructure(self.proteinDict, len(self.proteinChain))

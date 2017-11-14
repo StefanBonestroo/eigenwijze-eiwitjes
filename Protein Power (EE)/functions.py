@@ -77,7 +77,8 @@ def calculateFolding (aminoCoordinates, proteinChain):
             (abs(current_y - neighbor_y) == 0)) or\
             ((abs(current_y - neighbor_y) == 1) and\
             (abs(current_x - neighbor_x) == 0))) and\
-            (proteinChain[focus] == 'H' and proteinChain[partner] == 'H'):
+            (proteinChain[focus] == 'H' and proteinChain[partner] == 'H')\
+            and (focus-partner) not in [0, -1, 1]:
                 strength += 0.5
 
     return strength
