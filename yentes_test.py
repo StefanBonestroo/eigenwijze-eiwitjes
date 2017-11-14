@@ -11,7 +11,7 @@ class Protein:
         self.proteinDict = {'x-cord': [], 'y-cord': [], 'type': []}
         self.tries = loops
 
-direct = random.choice([amino_zuur.left,amino_zuur.right,amino_zuur.upper,amino_zuur.lower])
+def makeChainStructure(self, amino_zuur, counter, coordinates):
     print
     if direct == amino_zuur.left:
         new_position = (coordinates[len(coordinates) - 1][0] - 1,coordinates[len(coordinates) - 1][1])
@@ -27,3 +27,22 @@ direct = random.choice([amino_zuur.left,amino_zuur.right,amino_zuur.upper,amino_
     counter += 1
     direct = Amino(counter)
     self.makeChainStructure(direct, counter, coordinates)
+
+    class Amino:
+        def __init__(self, position):
+            self.position = position
+            self.upper = None
+            self.right = None
+            self.lower = None
+            self.left = None
+
+counter = 0
+coordinates= [(0,0)]
+first_amino = Amino(counter)
+counter = 1
+#print(first_amino)
+
+protie.makeChainStructure(first_amino, counter, coordinates)
+#protie.culculateFolding
+if __name__=='__main__':
+    main()
