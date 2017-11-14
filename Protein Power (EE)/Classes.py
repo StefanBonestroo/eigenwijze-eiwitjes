@@ -1,4 +1,5 @@
-
+# A class to store a proteinchain in with types of amino acids, coordinates of
+# folded protein chain and the strength of this folding
 class Protein:
 
     def __init__(self, proteinChain):
@@ -6,7 +7,7 @@ class Protein:
         self.proteinChain = proteinChain
 
         # location coordinates and amino acid type
-        self.proteinDict = {'x-cor': [], 'y-cor': [], 'type': []}
+        self.proteinDict = {'x-cor': [], 'y-cor': []}
         self.strength = 0
 
         # initialize dictionary
