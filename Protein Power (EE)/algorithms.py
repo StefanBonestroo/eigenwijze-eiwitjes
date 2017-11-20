@@ -59,7 +59,11 @@ def randomizer (Protein, tries):
 
             # Updates 'bestScore' and 'bestFolding' if the folding is better, and
             # resets the coordinates
-            if oneScore > bestScore:
+
+            if success == 0:
+                bestScore = oneScore
+                bestFolding = aminoCoordinates
+            elif oneScore > bestScore:
                 bestScore = oneScore
                 bestFolding = aminoCoordinates
 
@@ -69,5 +73,5 @@ def randomizer (Protein, tries):
         stuck = 0
         aminoCoordinates = [(0,0),(0,1)]
 
-    print(loops)
+    # print(loops)
     return [bestFolding, bestScore]
