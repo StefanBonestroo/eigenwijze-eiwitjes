@@ -7,8 +7,8 @@ import timeit
 
 eggwhite = Protein("HHPHPHPHPHHHHPHPPPHPPPHPPPPHPPPHPPPHPHHHHPHPHPHPHH")
 
-start = start = timeit.default_timer()
-output = randomizer(eggwhite, 100000)
+start = timeit.default_timer()
+output = randomizer(eggwhite, 10000)
 stop = timeit.default_timer()
 print stop-start
 eggwhite.aminoCoordinates = output[0]
