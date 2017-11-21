@@ -19,7 +19,6 @@ def randomizer (Protein, tries):
     while success != tries:
 
         for amino in range(2,len(Protein.proteinChain)):
-
             # Get's location of previous amino acid
             currentLocation = aminoCoordinates[amino - 1]
 
@@ -32,15 +31,19 @@ def randomizer (Protein, tries):
             # Randomly picks one of the directions, checks if it's valid, and adds it to 'aminoCoordinates'
             while True:
                 direction = random.choice([left, right, up, down])
-                # Will not add a location if it's taken by another amino acid
-                if direction not in aminoCoordinates:
-                    aminoCoordinates.append(direction)
 
                 # Prevents a folding where it traps itself
-                elif left in aminoCoordinates and right in aminoCoordinates and\
+                if left in aminoCoordinates and right in aminoCoordinates and\
                 up in aminoCoordinates and down in aminoCoordinates:
                     stuck = 1
                     break
+
+                # Will not add a location if it's taken by another amino acid
+                elif direction not in aminoCoordinates:
+                    aminoCoordinates.append(direction)
+                    break
+
+
             if stuck == 1:
                 break
 
@@ -50,7 +53,6 @@ def randomizer (Protein, tries):
 
             # Updates 'bestScore' and 'bestFolding' if the folding is better, and
             # resets the coordinates
-
             if success == 0:
                 bestScore = oneScore
                 bestFolding = aminoCoordinates
@@ -60,6 +62,8 @@ def randomizer (Protein, tries):
 
             # Add one succes
             success += 1
+
+        # Resets values for a new try
         loops += 1
         stuck = 0
         aminoCoordinates = [(0,0),(0,1)]
