@@ -1,4 +1,5 @@
 import random
+
 from functions import calculateFolding
 
 def randomizer (Protein, tries):

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import timeit
 
 from classes import Protein
