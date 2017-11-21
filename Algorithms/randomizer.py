@@ -1,4 +1,4 @@
-from random import randint
+import random
 from functions import calculateFolding
 
 def randomizer (Protein, tries):
@@ -30,20 +30,10 @@ def randomizer (Protein, tries):
 
             # Randomly picks one of the directions, checks if it's valid, and adds it to 'aminoCoordinates'
             while True:
-                direction = randint(1,4)
+                direction = random.choice([left, right, up, down])
                 # Will not add a location if it's taken by another amino acid
-                if direction == 1 and left not in aminoCoordinates:
-                    aminoCoordinates.append(left)
-                    break
-                elif direction == 2 and right not in aminoCoordinates:
-                    aminoCoordinates.append(right)
-                    break
-                elif direction == 3 and up not in aminoCoordinates:
-                    aminoCoordinates.append(up)
-                    break
-                elif direction == 4 and down not in aminoCoordinates:
-                    aminoCoordinates.append(down)
-                    break
+                if direction not in aminoCoordinates:
+                    aminoCoordinates.append(direction)
 
                 # Prevents a folding where it traps itself
                 elif left in aminoCoordinates and right in aminoCoordinates and\
