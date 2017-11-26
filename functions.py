@@ -22,9 +22,9 @@ def visualizeFolding (Protein):
         plotY.append(current_y)
 
         if proteinChain[focus] == 'H':
-            plot.scatter(current_x, current_y,color='r',s=500,zorder=1)
+            plot.scatter(current_x, current_y,color='r',s=200,zorder=1)
         else:
-            plot.scatter(current_x, current_y,color='b',s=500,zorder=1)
+            plot.scatter(current_x, current_y,color='b',s=200,zorder=1)
 
         # Iterates over all the other amino acids in the chain
         for partner in range(len(proteinChain)):

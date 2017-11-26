@@ -15,13 +15,13 @@ totaltime = 0
 testX = [0]
 testY = [0]
 
-eggwhite = Protein('HPHPPHHPHPPHPPHHHHHHHHPPPH')
+eggwhite = Protein('HPHPPHHPHPPHPHHPPHPH')
 
 # Records starting time
 start = round(timeit.default_timer(), 2)
 
 # Runs AND samples (the ouput of) the algorithm function 10,000 times
-for i in range(1,1000):
+for i in range(1,10000):
 
     # Starts timer for a single algorithm function run
     startloop = round(timeit.default_timer(), 2)

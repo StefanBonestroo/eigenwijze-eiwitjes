@@ -1,6 +1,5 @@
-import random
-
 from functions import calculateFolding
+from Algorithms import helpers
 
 def randomizer (Protein, tries):
 
@@ -19,32 +18,16 @@ def randomizer (Protein, tries):
     while success != tries:
 
         for amino in range(2,len(Protein.proteinChain)):
-            # Get's location of previous amino acid
-            currentLocation = aminoCoordinates[amino - 1]
 
-            # Defines possible locations for the current amino acid
-            left = ((currentLocation[0] - 1), currentLocation[1])
-            right = ((currentLocation[0] + 1), currentLocation[1])
-            up = (currentLocation[0], (currentLocation[1] + 1))
-            down = (currentLocation[0], (currentLocation[1] - 1))
+            # Generate possibilities for neighboring locations
+            left, right, up, down = helpers.possibilityCheck(amino, aminoCoordinates)
 
             # Randomly picks one of the directions, checks if it's valid, and adds it to 'aminoCoordinates'
-            while True:
-                direction = random.choice([left, right, up, down])
-
-                # Prevents a folding where it traps itself
-                if left in aminoCoordinates and right in aminoCoordinates and\
-                up in aminoCoordinates and down in aminoCoordinates:
-                    stuck = 1
-                    break
-
-                # Will not add a location if it's taken by another amino acid
-                elif direction not in aminoCoordinates:
-                    aminoCoordinates.append(direction)
-                    break
-
-
-            if stuck == 1:
+            valid = helpers.validityCheck(left, right, up, down, aminoCoordinates)
+            if valid != None:
+                aminoCoordinates.append(valid)
+            else:
+                stuck = 1
                 break
 
         if stuck == 0:
