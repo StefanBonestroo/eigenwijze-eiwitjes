@@ -6,6 +6,7 @@ def main():
     from classes import Protein
     from functions import visualizeFolding
     from Algorithms.randomizer import randomizer
+    from Algorithms.simulatedAnnealing import simulatedAnnealing
 
 
     best = [0, 0]
@@ -27,7 +28,7 @@ def main():
         startloop = round(timeit.default_timer(), 2)
 
         # Runs the algorithm function (10 tries)
-        output = randomizer(eggwhite, 10)
+        output = simulatedAnnealing(eggwhite, 100, 0.8)
 
         # Ends timer and calculates time
         endloop = round(timeit.default_timer(), 2)
