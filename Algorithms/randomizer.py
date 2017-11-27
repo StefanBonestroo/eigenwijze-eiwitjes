@@ -1,5 +1,4 @@
 import random
-
 from functions import calculateFolding
 
 def randomizer (Protein, tries):
@@ -8,7 +7,6 @@ def randomizer (Protein, tries):
 
     x = 0
     y = 1
-    tries = tries
     success = 0
     stuck = 0
     loops = 0
@@ -18,7 +16,7 @@ def randomizer (Protein, tries):
 
     while success != tries:
 
-        for amino in range(2,len(Protein.proteinChain)):
+        for amino in range(2, len(Protein.proteinChain)):
             # Get's location of previous amino acid
             currentLocation = aminoCoordinates[amino - 1]
 
@@ -70,3 +68,10 @@ def randomizer (Protein, tries):
 
     # print(loops)
     return [bestFolding, bestScore]
+
+#######################################################################
+# Function that randomizes certain folds within an already folded
+# protein. 
+#######################################################################
+
+def randomOptimize (Protein, tries):

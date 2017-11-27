@@ -1,17 +1,19 @@
 #!/usr/bin/env python
+import timeit
+import matplotlib.pyplot as plot
+
+from classes import Protein
+from functions import visualizeFolding
+import sys
+sys.path.insert(0,'C:\Users\Yente Stor\Documents\Uni\programmeren\Heuristieken\eigenwijze-eiwitjes-master\Algorithms')
+from randomizer import randomizer
+# from Algorithms.randomizer import randomizer
+
 def main():
-    import timeit
-    import matplotlib.pyplot as plot
-
-    from classes import Protein
-    from functions import visualizeFolding
-    from Algorithms.randomizer import randomizer
-
-
-    best = [0, 0]
-    totaltime = 0
 
     # Stores 'totalTime'(X) and 'bestScore' (Y)
+    best = [0, 0]
+    totaltime = 0
     testX = [0]
     testY = [0]
 
