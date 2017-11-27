@@ -55,8 +55,10 @@ def visualizeFolding (Protein):
 # Calculates the protein stability/strength
 def calculateFolding (aminoCoordinates, proteinChain):
 
+    # X & Y's for increased readability
     x = 0
     y = 1
+    
     strength = 0
 
     # Iterates over all single amino acids in the protein
