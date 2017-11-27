@@ -1,5 +1,6 @@
 import random
 
+# Determines possible neighboring positions
 def possibilityCheck(amino, aminoCoordinates):
 
     # X & Y's for increased readability
@@ -17,12 +18,13 @@ def possibilityCheck(amino, aminoCoordinates):
 
     return left, right, up, down
 
-
 def validityCheck(left, right, up, down, aminoCoordinates, algorithm):
 
-    if algorithm == 'randomizer':
+    neighbors = [left, right, up, down]
+
+    if algorithm[0] == 'randomizer':
         while True:
-            direction = random.choice([left, right, up, down])
+            direction = random.choice(neighbors)
 
             # Prevents a folding where it traps itself
             if left in aminoCoordinates and right in aminoCoordinates and\
@@ -32,4 +34,10 @@ def validityCheck(left, right, up, down, aminoCoordinates, algorithm):
             # Will not add a location if it's taken by another amino acid
             elif direction not in aminoCoordinates:
                 return direction
-    elif algorithm == 'simulated annealing':
+
+    elif algorithm[0] == 'simulated annealing':
+
+        if (aminoCoordinates[algorithm - 1] in neighbors and\
+        aminoCoordinates[algorithm + 1] in neighbors) and aminoCoordinates[algorithm]\
+        in [aminoCoordinates[algorithm - 1], aminoCoordinates[algorithm + 1]]:
+            return True

@@ -21,7 +21,7 @@ def randomizer (Protein, tries):
             left, right, up, down = helpers.possibilityCheck(amino, aminoCoordinates)
 
             # Randomly picks one of the directions, checks if it's valid, and adds it to 'aminoCoordinates'
-            valid = helpers.validityCheck(left, right, up, down, aminoCoordinates, 'randomizer')
+            valid = helpers.validityCheck(left, right, up, down, aminoCoordinates, ['randomizer'])
             if valid != None:
                 aminoCoordinates.append(valid)
             else:
