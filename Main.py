@@ -22,7 +22,7 @@ def main():
     start = round(timeit.default_timer(), 2)
 
     # Runs AND samples (the ouput of) the algorithm function 10,000 times
-    for i in range(1,1000):
+    for i in range(1,2):
 
         # Starts timer for a single algorithm function run
         startloop = round(timeit.default_timer(), 2)

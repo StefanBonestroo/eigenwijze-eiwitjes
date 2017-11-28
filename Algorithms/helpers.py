@@ -37,7 +37,7 @@ def validityCheck(left, right, up, down, aminoCoordinates, algorithm):
 
     elif algorithm[0] == 'simulated annealing':
 
-        if (aminoCoordinates[algorithm - 1] in neighbors and\
-        aminoCoordinates[algorithm + 1] in neighbors) and aminoCoordinates[algorithm]\
-        in [aminoCoordinates[algorithm - 1], aminoCoordinates[algorithm + 1]]:
+        if (aminoCoordinates[algorithm[1] - 1] in neighbors and\
+        aminoCoordinates[algorithm[1] + 1] in neighbors) and aminoCoordinates[algorithm[1]]\
+        in [aminoCoordinates[algorithm[1] - 1], aminoCoordinates[algorithm[1] + 1]]:
             return True

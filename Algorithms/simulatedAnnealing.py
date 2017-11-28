@@ -2,12 +2,14 @@ import random
 import math
 
 from functions import calculateFolding
-from Algorithms import helpers
+from Algorithms.helpers import possibilityCheck
+from Algorithms.helpers import validityCheck
+from Algorithms.randomizer import randomizer
 
 def simulatedAnnealing(Protein, tries, conservatism):
 
     # Creates a protein to work with
-    randomizers = 10000
+    randomizers = 1000
     currentProteinBest = randomizer(Protein, randomizers)
 
     bestFolding = currentProteinBest[0]
@@ -21,65 +23,83 @@ def simulatedAnnealing(Protein, tries, conservatism):
 
     # Set temperatures
     Temp = 1
-    TempMinus = 0.001
+    TempMinus = 0.05
 
     # Repeat until the minimal temperature is reached
-    while T > T_min:
+    while Temp > TempMinus:
 
         steps = 0
 
         # For every temp, repeat 'tries' times
         while steps < tries:
+
+            if bestScore < currentScore:
+                bestFolding = currentFolding
+                bestScore = currentScore
+
+            overlap = False
+            bondBreak = False
+
+            distanceFromStart = 0
+
             # Generate neighboring solution
-            amino = random.randint(0, length
-            left, right, up, down = possibilityCheck(amino, currentFolding)
-            tweak = random.choice([left, right, up, down])
+            amino = random.randint(0, length - 1)
 
-            overlapPenalty = 1
-            overlapOccurances = 0
+            # Makes sure a change doesn't involve breaking the rules
+            while (not overlap and not bondBreak) and (amino < length - 1):
 
-            bondBreakPenalty = 1
-            bondBreakOccurances = 0
+                # Get possibilities for change
+                left, right, up, down = possibilityCheck(amino, currentFolding)
 
-            # Make a possible change and calculate the score
-            changedFolding = currentFolding
-            changedFolding[amino] = tweak
-            changedScore = calculateFolding(changedFolding, Protein.proteinChain)
+                # Get a tweak option
+                tweak = random.choice([left, right, up, down])
 
-            # Checks whether there is overlap and/or bondbreaking
-            overlap = len(currentFolding) != len(set(changedFolding))
-            bondBreak = validityCheck(left, right, up, down, changedFolding,\
-            ['simulated annealing', amino])
+                # Make a possible change and calculate the score
+                changedFolding = currentFolding
+                changedFolding[amino] = tweak
 
-            # Penalizes if 2 aminoacids overlap & updates
-            if overlap:
-                changedScore -= overlapPenalty
-                overlapOccurances += 1
-                overlapPenalty += (0.5 * overlapOccurances)
+                # Gets neighbors of the tweaked aminoacid
+                left, right, up, down = possibilityCheck(amino, changedFolding)
 
-            # Gets neighbors of the tweaked aminoacid
-            left, right, up, down = possibilityCheck(amino, changedFolding)
+                # If the aminoacid next up is neighboring, the chain is reconciled
+                if currentFolding[amino + 1] in [left, right, up, down]:
+                    break
 
-            # Penalizes if covalent bonds are broken (neighbors are too far away)
-            if bondBreak:
-                changedScore -= bondBreakPenalty
-                bondBreakOccurances += 1
-                bondBreakPenalty += (0.5 * bondBreakPenalty)
+                # Checks whether there is overlap and/or bondbreaking
+                overlap = len(currentFolding) != len(set(changedFolding))
+                bondBreak = validityCheck(left, right, up, down, changedFolding,\
+                ['simulated annealing', amino])
 
-            # Get the difference between scores of current and tweaked
-            differenceScore = currentScore - changedScore
+                # Go to next amino acid
+                distanceFromStart += 1
+                amino += distanceFromStart
 
-            # Generate a probability and a random float
-            acceptance = math.pow(math.e, (differenceScore/Temp))
-            randomInt = random.int(0,length)
 
-            # Change current if accepted
-            if probability > random:
-                currentFolding = changedFolding
-                currentScore = changedScore
+            if not overlap and not bondBreak and distanceFromStart != 0:
+                # Calculate the score for a reconciled protein
+                changedScore = calculateFolding(changedFolding, Protein.proteinChain)
 
-            # Add step
-            steps += 1
+                # Get the difference between scores of current and tweaked
+                differenceScore = currentScore - changedScore
+                # print(differenceScore)
+                # print(currentScore)
+                # print(changedScore)
+
+                # Generate a probability and a random float
+                acceptance = int(math.e**(differenceScore/Temp))
+                randomInt = random.randint(0,length)
+
+                # Change current if accepted
+                if acceptance <= randomInt:
+                    currentFolding = changedFolding
+                    currentScore = changedScore
+
+                # Add step
+                steps += 1
+                # print(steps)
 
         # Change temperature
         Temp *= conservatism
+        print(Temp)
+
+    return [bestFolding, bestScore]
