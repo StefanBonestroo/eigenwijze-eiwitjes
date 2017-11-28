@@ -21,54 +21,65 @@ def simulatedAnnealing(Protein, tries, conservatism):
 
     # Set temperatures
     Temp = 1
-    TempMinus = 0.0001
+    TempMinus = 0.001
 
+    # Repeat until the minimal temperature is reached
     while T > T_min:
-        # Generate neighboring solution
-        amino = random.randint(0, length
-        left, right, up, down = possibilityCheck(amino, currentFolding)
-        tweak = random.choice([left, right, up, down])
 
-        overlapPenalty = 1
-        overlapOccurances = 0
+        steps = 0
 
-        bondBreakPenalty = 1
-        bondBreakOccurances = 0
+        # For every temp, repeat 'tries' times
+        while steps < tries:
+            # Generate neighboring solution
+            amino = random.randint(0, length
+            left, right, up, down = possibilityCheck(amino, currentFolding)
+            tweak = random.choice([left, right, up, down])
 
-        # Make a possible change and calculate the score
-        changedFolding = currentFolding
-        changedFolding[amino] = tweak
-        changedScore = calculateFolding(changedFolding, Protein.proteinChain)
+            overlapPenalty = 1
+            overlapOccurances = 0
 
-        # Checks whether there is overlap and/or bondbreaking
-        overlap = len(currentFolding) != len(set(changedFolding))
-        bondBreak = validityCheck(left, right, up, down, changedFolding,\
-        ['simulated annealing', amino])
+            bondBreakPenalty = 1
+            bondBreakOccurances = 0
 
-        # Penalizes if 2 aminoacids overlap & updates
-        if overlap:
-            changedScore -= overlapPenalty
-            overlapOccurances += 1
-            overlapPenalty += (0.5 * overlapOccurances)
+            # Make a possible change and calculate the score
+            changedFolding = currentFolding
+            changedFolding[amino] = tweak
+            changedScore = calculateFolding(changedFolding, Protein.proteinChain)
 
-        # Gets neighbors of the tweaked aminoacid
-        left, right, up, down = possibilityCheck(amino, changedFolding)
+            # Checks whether there is overlap and/or bondbreaking
+            overlap = len(currentFolding) != len(set(changedFolding))
+            bondBreak = validityCheck(left, right, up, down, changedFolding,\
+            ['simulated annealing', amino])
 
-        # Penalizes if covalent bonds are broken (neighbors are too far away)
-        if bondBreak:
-            changedScore -= bondBreakPenalty
-            bondBreakOccurances += 1
-            bondBreakPenalty += (0.5 * bondBreakPenalty)
+            # Penalizes if 2 aminoacids overlap & updates
+            if overlap:
+                changedScore -= overlapPenalty
+                overlapOccurances += 1
+                overlapPenalty += (0.5 * overlapOccurances)
 
-        # Get the difference between scores of current and tweaked
-        differenceScore = changedScore - currentScore
+            # Gets neighbors of the tweaked aminoacid
+            left, right, up, down = possibilityCheck(amino, changedFolding)
 
-        # If score's better, change current best
-        if changedScore > currentScore:
-            currentFolding = changedFolding
-            currentScore = changedScore
+            # Penalizes if covalent bonds are broken (neighbors are too far away)
+            if bondBreak:
+                changedScore -= bondBreakPenalty
+                bondBreakOccurances += 1
+                bondBreakPenalty += (0.5 * bondBreakPenalty)
 
-        # If score's equal or worse, maybe change current best
-        else:
-            probability = math.pow(math.e, (differenceScore * conservatism) / Temp)
-            random = randint(0,) 
+            # Get the difference between scores of current and tweaked
+            differenceScore = currentScore - changedScore
+
+            # Generate a probability and a random float
+            acceptance = math.pow(math.e, (differenceScore/Temp))
+            randomInt = random.int(0,length)
+
+            # Change current if accepted
+            if probability > random:
+                currentFolding = changedFolding
+                currentScore = changedScore
+
+            # Add step
+            steps += 1
+
+        # Change temperature
+        Temp *= conservatism
