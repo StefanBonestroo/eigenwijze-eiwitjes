@@ -100,6 +100,6 @@ def simulatedAnnealing(Protein, tries, conservatism):
 
         # Change temperature
         Temp *= conservatism
-        print(Temp)
+        print(bestScore)
 
     return [bestFolding, bestScore]

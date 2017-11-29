@@ -28,7 +28,7 @@ def main():
         startloop = round(timeit.default_timer(), 2)
 
         # Runs the algorithm function (10 tries)
-        output = simulatedAnnealing(eggwhite, 100, 0.8)
+        output = simulatedAnnealing(eggwhite, 1, 0.5)
 
         # Ends timer and calculates time
         endloop = round(timeit.default_timer(), 2)
