@@ -28,7 +28,7 @@ def main():
         startloop = round(timeit.default_timer(), 2)
 
         # Runs the algorithm function (10 tries)
-        output = randomizer(eggwhite, 1)
+        output = randomizer(eggwhite, 1, '2D')
 
         # Ends timer and calculates time
         endloop = round(timeit.default_timer(), 2)
@@ -47,16 +47,25 @@ def main():
 
     print('I found this solution in ' + str(round((stop - start), 2)) + ' seconds.')
 
-    # Store the best output
-    eggwhite.aminoCoordinates = best[0]
-    eggwhite.strength = best[1]
+    if len(best[0][0]) == 2:
+        # Store the best output
+        eggwhite.aminoCoordinates2D = best[0]
+        eggwhite.strength = best[1]
+
+        # Visualizes the best folding
+        visualizeFolding(eggwhite, '2D')
+        
+    elif len(best[0][0]) == 3:
+        # Store the best output
+        eggwhite.aminoCoordinates3D = best[0]
+        eggwhite.strength = best[1]
+
+        # Visualizes the best folding
+        visualizeFolding(eggwhite, '2D')
 
     # Visualizes the samples
     plot.scatter(testX, testY)
     plot.show()
-
-    # Visualizes the best folding
-    visualizeFolding(eggwhite)
 
 if __name__ == "__main__":
     main()

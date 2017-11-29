@@ -1,11 +1,14 @@
 
 from functions import calculateFolding
-from Algorithms import helpers
+from helpers import possibilityCheck
+from helpers import calculateFolding
 
-def randomizer (Protein, tries):
+def randomizer (Protein, tries, dimension):
 
-    aminoCoordinates = [(0,0),(0,1)]
-
+    if dimension == '2D'
+        aminoCoordinates = [(0,0),(0,1)]
+    elif dimension == '3D'
+        aminoCoordinates = [(0,0,0),(0,0,1)]
 
     tries = tries
     success = 0
@@ -17,14 +20,13 @@ def randomizer (Protein, tries):
 
     while success != tries:
 
-
         for amino in range(2,len(Protein.proteinChain)):
 
             # Generate possibilities for neighboring locations
-            left, right, up, down = helpers.possibilityCheck(amino, aminoCoordinates)
+            possibilities = possibilityCheck(amino, aminoCoordinates, dimension)
 
             # Randomly picks one of the directions, checks if it's valid, and adds it to 'aminoCoordinates'
-            valid = helpers.validityCheck(left, right, up, down, aminoCoordinates, ['randomizer'])
+            valid = validityCheck(possibilities, aminoCoordinates, 'randomizer', amino)
             if valid != None:
                 aminoCoordinates.append(valid)
             else:
@@ -33,7 +35,7 @@ def randomizer (Protein, tries):
 
         if stuck == 0:
             # Calculates the folding score
-            oneScore = calculateFolding(aminoCoordinates, Protein.proteinChain)
+            oneScore = calculateFolding(aminoCoordinates, Protein.proteinChain, dimension)
 
             # Updates 'bestScore' and 'bestFolding' if the folding is better, and
             # resets the coordinates
@@ -50,7 +52,10 @@ def randomizer (Protein, tries):
         # Resets values for a new try
         loops += 1
         stuck = 0
-        aminoCoordinates = [(0,0),(0,1)]
+        if dimension == '2D'
+            aminoCoordinates = [(0,0),(0,1)]
+        elif dimension == '3D'
+            aminoCoordinates = [(0,0,0),(0,0,1)]
 
     # print(loops)
     return [bestFolding, bestScore]
