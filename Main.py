@@ -1,18 +1,17 @@
 #!/usr/bin/env python
+import timeit
+import matplotlib.pyplot as plot
+
+from classes import Protein
+from functions import visualizeFolding
+from Algorithms.randomizer import randomizer
+# from Algorithms.simulatedAnnealing import simulatedAnnealing
+
 def main():
-    import timeit
-    import matplotlib.pyplot as plot
-
-    from classes import Protein
-    from functions import visualizeFolding
-    from Algorithms.randomizer import randomizer
-    from Algorithms.simulatedAnnealing import simulatedAnnealing
-
-
-    best = [0, 0]
-    totaltime = 0
 
     # Stores 'totalTime'(X) and 'bestScore' (Y)
+    best = [0, 0]
+    totaltime = 0
     testX = [0]
     testY = [0]
 
@@ -22,13 +21,14 @@ def main():
     start = round(timeit.default_timer(), 2)
 
     # Runs AND samples (the ouput of) the algorithm function 10,000 times
-    for i in range(1,2):
+
+    for i in range(1,100000):
 
         # Starts timer for a single algorithm function run
         startloop = round(timeit.default_timer(), 2)
 
         # Runs the algorithm function (10 tries)
-        output = simulatedAnnealing(eggwhite, 1, 0.5)
+        output = randomizer(eggwhite, 1)
 
         # Ends timer and calculates time
         endloop = round(timeit.default_timer(), 2)

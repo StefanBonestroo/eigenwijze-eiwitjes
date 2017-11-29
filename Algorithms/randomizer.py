@@ -1,9 +1,11 @@
+
 from functions import calculateFolding
 from Algorithms import helpers
 
 def randomizer (Protein, tries):
 
     aminoCoordinates = [(0,0),(0,1)]
+
 
     tries = tries
     success = 0
@@ -14,6 +16,7 @@ def randomizer (Protein, tries):
     bestFolding = []
 
     while success != tries:
+
 
         for amino in range(2,len(Protein.proteinChain)):
 

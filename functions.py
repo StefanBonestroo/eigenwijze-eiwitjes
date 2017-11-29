@@ -28,7 +28,7 @@ def visualizeFolding (Protein):
 
         # Iterates over all the other amino acids in the chain
         for partner in range(len(proteinChain)):
-
+            print(Protein.aminoCoordinates)
             neighbor_x = Protein.aminoCoordinates[partner][x]
             neighbor_y = Protein.aminoCoordinates[partner][y]
 
@@ -58,7 +58,7 @@ def calculateFolding (aminoCoordinates, proteinChain):
     # X & Y's for increased readability
     x = 0
     y = 1
-    
+
     strength = 0
 
     # Iterates over all single amino acids in the protein
