@@ -1,7 +1,7 @@
 import random
 
 # Determines possible neighboring positions
-def possibilityCheck(amino, aminoCoordinates, dimension):
+def possibilityCheck(amino, aminoCoordinates):
 
     # X & Y's for increased readability
     x = 0
@@ -11,7 +11,7 @@ def possibilityCheck(amino, aminoCoordinates, dimension):
     # Get's location of previous amino acid
     currentLocation = aminoCoordinates[amino - 1]
 
-    if dimension == '2D':
+    if len(aminoCoordinates[0]) == 2:
         # Defines possible locations for the current amino acid
         left = ((currentLocation[x] - 1), currentLocation[y])
         right = ((currentLocation[x] + 1), currentLocation[y])
@@ -21,7 +21,7 @@ def possibilityCheck(amino, aminoCoordinates, dimension):
         return [left, right, up, down]
 
 
-    elif dimension == '3D':
+    elif len(aminoCoordinates[0]) == 3:
         # Defines possible locations for the current amino acid
         left = ((currentLocation[x] - 1), currentLocation[y], currentLocation[z])
         right = ((currentLocation[x] + 1), currentLocation[y], currentLocation[z])
@@ -42,6 +42,11 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 direction = random.choice(possibilities)
 
                 # Prevents a folding where it traps itself
+                left = possibilities[0]
+                right = possibilities[1]
+                up = possibilities[2]
+                down = possibilities[3]
+
                 if left in aminoCoordinates and right in aminoCoordinates and\
                 up in aminoCoordinates and down in aminoCoordinates:
                     return None
@@ -65,6 +70,7 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
             while True:
                 direction = random.choice(possibilities)
 
+                # Prevents a folding where it traps itself
                 left = possibilities[0]
                 right = possibilities[1]
                 up = possibilities[2]
@@ -72,7 +78,6 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 front = possibilities[4]
                 back = possibilities[5]
 
-                # Prevents a folding where it traps itself
                 if left in aminoCoordinates and right in aminoCoordinates and\
                 up in aminoCoordinates and down in aminoCoordinates and\
                 front in aminoCoordinates and back in aminoCoordinates:
