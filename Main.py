@@ -54,6 +54,9 @@ def main():
     # Visualizes the best folding
     visualizeFolding(eggwhite)
 
+    # Initiate experimental plot
+    experimental = plot.figure()
+
     # Visualizes the samples
     plot.scatter(testX, testY)
     plot.show()

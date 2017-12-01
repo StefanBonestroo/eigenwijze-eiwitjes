@@ -101,9 +101,9 @@ def visualizeFolding (Protein):
             plotY.append(current_y)
 
             if proteinChain[focus] == 'H':
-                plot2D.scatter(current_x,current_y,color='r',s=200,zorder=1)
+                plot.scatter(current_x,current_y,color='r',s=200,zorder=1)
             else:
-                plot2D.scatter(current_x,current_y,color='b',s=200,zorder=1)
+                plot.scatter(current_x,current_y,color='b',s=200,zorder=1)
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
@@ -120,16 +120,16 @@ def visualizeFolding (Protein):
                 (abs(current_y - neighbor_y) == 1))) and\
                 (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') and\
                 (focus - partner) not in [-1, 0, 1]:
-                    plot2D.plot([current_x, neighbor_x],[current_y,neighbor_y]\
+                    plot.plot([current_x, neighbor_x],[current_y,neighbor_y]\
                     , 'r--', linewidth=0.5, zorder=-1)
 
         # Plots the covalent bonds in the protein
-        plot2D.plot(plotX, plotY, linewidth = 5.0, zorder = 0)
+        plot.plot(plotX, plotY, linewidth = 5.0, zorder = 0)
 
         # Graph info
-        plot2D.title('Strength: ' + str(Protein.strength))
-        plot2D.ylabel('Y axis')
-        plot2D.xlabel('X axis')
+        plot.title('Strength: ' + str(Protein.strength))
+        plot.ylabel('Y axis')
+        plot.xlabel('X axis')
 
         plot2D.show()
 
@@ -151,9 +151,11 @@ def visualizeFolding (Protein):
             plotZ.append(current_z)
 
             if proteinChain[focus] == 'H':
-                plot3D.scatter(current_x, current_y, current_z, color='r',s=200,zorder=1)
+                plot3D.scatter(current_x, current_y, current_z, c='r', depthshade = 1\
+                ,s=200,zorder=1)
             else:
-                plot3D.scatter(current_x, current_y, current_z, color='b',s=200,zorder=1)
+                plot3D.scatter(current_x, current_y, current_z, c='b',depthshade = 1\
+                ,s=200,zorder=1)
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
