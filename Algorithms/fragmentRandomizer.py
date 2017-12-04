@@ -15,7 +15,10 @@ def fragmentRandomizer (Protein, fragment, dimension):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
 
     if len(Protein.proteinChain) < (fragment - 2):
-        print("fragment is to big for fragmentRandomizer to sample fragment from protein")
+        raise Exception('fragment is to big for fragmentRandomizer to sample fragment from protein')
+
+    if fragment <= 2:
+         raise Exception('fragment must be at least 2')
 
     start = randint(0, (len(Protein.proteinChain) - fragment))
     stop = start + fragment
@@ -38,18 +41,36 @@ def fragmentRandomizer (Protein, fragment, dimension):
             Protein.aminoCoordinates[amino + 1][1]-Protein.aminoCoordinates[amino][1],
             Protein.aminoCoordinates[amino + 1][2]-Protein.aminoCoordinates[amino][2]))
 
+    #
     check = 0
     while(check == 0):
-
+        # initialize a list of new coordinates for the fragment
         newCoordinates = [(Protein.aminoCoordinates[start][0],Protein.aminoCoordinates[start][1])]
+        az = 0
 
-        # create new coordinates of fragment
-        for az in range(fragment):
+        # find a new coordinate for every aminoacid of the fragment
+        while az <= fragment:
 
-            shiftChoice = random.choice(shifts)
-            shifts.remove(shiftChoice)
-            newC = (newCoordinates[az][0] + shiftChoice[0], newCoordinates[az][1] + shiftChoice[1])
-            newCoordinates.append(newC)
+            newCtries = 0
+            while newCtries < len(shifts):
+                random.shuffle(shifts)
+
+                newC = (newCoordinates[az][0] + shifts[i][0], newCoordinates[az][1] + shifts[i][1])
+
+                if newC not in Protein.coordinates[0:start] and not in Protein.coordinates[stop:]:
+                    # found a possible coordinate -> remove this shift from possibilities for the other amino acids
+                    shifts.remove(shiftChoice)
+                    # add new coordinate
+                    newCoordinates.append(newC)
+                    # end the whileloop for this amino acid coordinate search
+                    newCtries = shifts
+                elif newCtries == (len(shifts) - 1):
+                    # something here that gives a message that there are no possible coordinates for this amino acid
+                elif:
+                    newCtries += 1
+
+
+
 
         # implement new coordinates using slicing
         # for c in newCoordinates:
