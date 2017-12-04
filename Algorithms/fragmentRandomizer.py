@@ -1,4 +1,7 @@
-# This function takes a protein (that already has coordinates)
+# This function takes a folded protein and refolds a fragment of a defined length
+# in a randomized matter.
+import random
+
 from random import randint
 from functions import calculateFolding
 from Algorithms import helpers
@@ -21,11 +24,33 @@ def fragmentRandomizer (Protein, fragment, dimension):
     print(start)
     print('stop: ')
     print(stop)
-
+    print('coordinaten: ')
+    print(Protein.aminoCoordinates)
 
     for amino in range(start, stop):
+        print(amino)
         # append the shift in coordinates
-        shifts.append((Protein.aminoCoordinates[amino + 1][0]-Protein.aminoCoordinates[amino][0],
-        Protein.aminoCoordinates[amino + 1][1]-Protein.aminoCoordinates[amino][1]))
+        if dimension == '2D':
+            shifts.append((Protein.aminoCoordinates[amino + 1][0]-Protein.aminoCoordinates[amino][0],
+            Protein.aminoCoordinates[amino + 1][1]-Protein.aminoCoordinates[amino][1]))
+        else:
+            shifts.append((Protein.aminoCoordinates[amino + 1][0]-Protein.aminoCoordinates[amino][0],
+            Protein.aminoCoordinates[amino + 1][1]-Protein.aminoCoordinates[amino][1],
+            Protein.aminoCoordinates[amino + 1][2]-Protein.aminoCoordinates[amino][2]))
 
-    print(shifts)
+    check = 0
+    while(check == 0):
+
+        newCoordinates = [(Protein.aminoCoordinates[start][0],Protein.aminoCoordinates[start][1])]
+
+        # create new coordinates of fragment
+        for az in range(fragment):
+
+            shiftChoice = random.choice(shifts)
+            shifts.remove(shiftChoice)
+            newC = (newCoordinates[az][0] + shiftChoice[0], newCoordinates[az][1] + shiftChoice[1])
+            newCoordinates.append(newC)
+
+        # implement new coordinates using slicing
+        # for c in newCoordinates:
+        check = 1
