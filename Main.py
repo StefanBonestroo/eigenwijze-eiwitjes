@@ -32,23 +32,24 @@ def main():
     proteinString = sys.argv[1]
     runningAlgorithm = sys.argv[2]
     dimension = sys.argv[3]
+
     if runningAlgorithm == 'randomizer':
-        tries = sys.argv[4]
+        tries = int(sys.argv[4])
 
     eggwhite = Protein(proteinString)
 
     # Records starting time
     start = round(timeit.default_timer(), 2)
 
-        if runningAlgorithm == 'randomizer':
-            # Runs the randomizer algorithm (10 tries)
-            output = randomizer(eggwhite, tries, dimension)
-        elif runningAlgorithm == 'depth-first':
-            # Runs the depth-first algorithm
-            output = depthFirst(eggwhite, dimension)
-        elif runningAlgorithm == 'fragment randomizer':
-            # Runs an algorithm that tweaks fragments of a randomized protein
-            output = fragmentRandomizer(eggwhite, dimension)
+    if runningAlgorithm == 'randomizer':
+        # Runs the randomizer algorithm
+        output = randomizer(eggwhite, tries, dimension)
+    elif runningAlgorithm == 'depth-first':
+        # Runs the depth-first algorithm
+        output = depthFirst(eggwhite, dimension)
+    elif runningAlgorithm == 'fragment randomizer':
+        # Runs an algorithm that tweaks fragments of a randomized protein
+        output = fragmentRandomizer(eggwhite, dimension)
 
     # Records stop time
     stop = round(timeit.default_timer(), 2)

@@ -130,7 +130,7 @@ def visualizeFolding (Protein):
         plot.ylabel('Y axis')
         plot.xlabel('X axis')
 
-        plot2D.show()
+        plot.show()
 
 
     elif len(Protein.aminoCoordinates[0]) == 3:
@@ -188,4 +188,4 @@ def visualizeFolding (Protein):
         plot3D.set_xlabel('X axis')
         plot3D.set_zlabel('Z axis')
 
-        figure3D.show()
+        plot.show()
