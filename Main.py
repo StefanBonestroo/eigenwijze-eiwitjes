@@ -22,13 +22,13 @@ def main():
 
     # Runs AND samples (the ouput of) the algorithm function 10,000 times
 
-    for i in range(1,1000):
+    for i in range(1,100):
 
         # Starts timer for a single algorithm function run
         startloop = round(timeit.default_timer(), 2)
 
         # Runs the algorithm function (10 tries)
-        output = randomizer(eggwhite, 10, '3D')
+        output = randomizer(eggwhite, 1, '3D')
 
         # Ends timer and calculates time
         endloop = round(timeit.default_timer(), 2)
