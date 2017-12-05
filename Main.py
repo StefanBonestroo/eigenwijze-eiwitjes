@@ -15,20 +15,37 @@ def main():
     testX = [0]
     testY = [0]
 
-    eggwhite = Protein('HPHPPHHPHPPHPPHHHHHHHHPPPH')
+    proteinString = sys.argv[1]
+    runningAlgorithm = sys.argv[2]
+    dimension = sys.argv[3]
+
+    if len(sys.argv) < 4:
+        print('usage: ')
+        print(' argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
+        print(' argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment randomizer\'')
+        print(' argument 3: desired folding dimensions -> \'2D\' or \'3D\'')
+
+    eggwhite = Protein(proteinString)
 
     # Records starting time
     start = round(timeit.default_timer(), 2)
 
-    # Runs AND samples (the ouput of) the algorithm function 10,000 times
+    # Runs AND samples (the output of) the algorithm function 10,000 times
 
     for i in range(1,1000):
 
         # Starts timer for a single algorithm function run
         startloop = round(timeit.default_timer(), 2)
 
-        # Runs the algorithm function (10 tries)
-        output = randomizer(eggwhite, 10, '3D')
+        if runningAlgorithm == 'randomizer':
+            # Runs the randomizer algorithm (10 tries)
+            output = randomizer(eggwhite, 10, dimension)
+        elif runningAlgorithm == 'depth-first':
+            # Runs the depth-first algorithm
+            output = depthFirst(eggwhite, dimension)
+        elif runningAlgorithm == 'fragment randomizer':
+            # Runs an algorithm that tweaks fragments of a randomized protein
+            output = fragmentRandomizer(eggwhite, dimension)
 
         # Ends timer and calculates time
         endloop = round(timeit.default_timer(), 2)
