@@ -19,7 +19,7 @@ def randomizer (Protein, tries, dimension):
     bestScore = 0
     bestFolding = []
 
-    while success != tries:
+    while success < tries:
 
         for amino in range(2,len(Protein.proteinChain)):
 
