@@ -31,7 +31,7 @@ def fragmentRandomizer (Protein, fragment, dimension):
     print(Protein.aminoCoordinates)
 
     for amino in range(start, stop):
-        print(amino)
+        print('amino: ',amino)
         # append the shift in coordinates
         if dimension == '2D':
             shifts.append((Protein.aminoCoordinates[amino + 1][0]-Protein.aminoCoordinates[amino][0],
@@ -45,31 +45,38 @@ def fragmentRandomizer (Protein, fragment, dimension):
     check = 0
     while(check == 0):
         # initialize a list of new coordinates for the fragment
-        newCoordinates = [(Protein.aminoCoordinates[start][0],Protein.aminoCoordinates[start][1])]
         az = 0
 
         # find a new coordinate for every aminoacid of the fragment
         while az <= fragment:
-
+            newCoordinates = [(Protein.aminoCoordinates[start][0],Protein.aminoCoordinates[start][1])]
             newCtries = 0
+
             while newCtries < len(shifts):
                 random.shuffle(shifts)
+                print('az: ', az, ', start: ', start, 'newCoordinates: ', newCoordinates)
+                print(newCoordinates[start + az][0])
+                print(shifts[newCtries][0])
+                newShift = (shifts[newCtries][0], shifts[newCtries][1])
+                newC = (newCoordinates[start + az][0] + newShift[0] , newCoordinates[start + az][1] + newShift[1])
+                print('newC:', newC)
 
-                newC = (newCoordinates[az][0] + shifts[i][0], newCoordinates[az][1] + shifts[i][1])
-
-                if newC not in Protein.coordinates[0:start] and not in Protein.coordinates[stop:]:
-                    # found a possible coordinate -> remove this shift from possibilities for the other amino acids
-                    shifts.remove(shiftChoice)
+                if newC not in Protein.aminoCoordinates[0:start + az] and newC not in Protein.aminoCoordinates[stop:]:
+                    # # found a possible coordinate -> remove this shift from possibilities for the other amino acids
+                    shifts.remove(shifts)
                     # add new coordinate
                     newCoordinates.append(newC)
+                    print('found new coordinate',newCoordinates ,' for amino acid', az)
+                    break
                     # end the whileloop for this amino acid coordinate search
-                    newCtries = shifts
-                elif newCtries == (len(shifts) - 1):
-                    # something here that gives a message that there are no possible coordinates for this amino acid
-                elif:
-                    newCtries += 1
-
-
+                #     newCtries += 1
+                # # elif newCtries == (len(shifts) - 1):
+                # #     # something here that gives a message that there are no possible coordinates for this amino acid
+                # else:
+                #     newCtries += 1
+                print('newCtries', newCtries)
+                newCtries += 1
+            az +=1
 
 
         # implement new coordinates using slicing
