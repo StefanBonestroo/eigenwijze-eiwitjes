@@ -13,6 +13,7 @@ def main():
 
     # Ensure proper usage
     if len(sys.argv) < 4:
+        print('')
         print('Usage: ')
         print('')
         print(' Argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
