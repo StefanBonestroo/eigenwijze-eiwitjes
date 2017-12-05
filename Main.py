@@ -13,10 +13,12 @@ def main():
 
     # Ensure proper usage
     if len(sys.argv) < 4:
-        print('usage: ')
-        print(' argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
-        print(' argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment randomizer\'')
-        print(' argument 3: desired folding dimensions -> \'2D\' or \'3D\'')
+        print('Usage: ')
+        print('')
+        print(' Argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
+        print(' Argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment randomizer\'')
+        print(' Argument 3: desired folding dimensions -> \'2D\' or \'3D\'')
+        print('')
         return
 
     # Stores 'totalTime'(X) and 'bestScore' (Y)
