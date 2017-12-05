@@ -9,6 +9,14 @@ from Algorithms.randomizer import randomizer
 
 def main():
 
+    # Ensure proper usage
+    if len(sys.argv) < 4:
+        print('usage: ')
+        print(' argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
+        print(' argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment randomizer\'')
+        print(' argument 3: desired folding dimensions -> \'2D\' or \'3D\'')
+        return
+
     # Stores 'totalTime'(X) and 'bestScore' (Y)
     best = [0, 0]
     totaltime = 0
@@ -18,12 +26,6 @@ def main():
     proteinString = sys.argv[1]
     runningAlgorithm = sys.argv[2]
     dimension = sys.argv[3]
-
-    if len(sys.argv) < 4:
-        print('usage: ')
-        print(' argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
-        print(' argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment randomizer\'')
-        print(' argument 3: desired folding dimensions -> \'2D\' or \'3D\'')
 
     eggwhite = Protein(proteinString)
 
