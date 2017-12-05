@@ -40,6 +40,13 @@ def main():
     # Records starting time
     start = round(timeit.default_timer(), 2)
 
+    # Runs AND samples (the output of) the algorithm function 10,000 times
+
+    for i in range(1,1000):
+
+        # Starts timer for a single algorithm function run
+        startloop = round(timeit.default_timer(), 2)
+
         if runningAlgorithm == 'randomizer':
             # Runs the randomizer algorithm (10 tries)
             output = randomizer(eggwhite, tries, dimension)
@@ -50,12 +57,20 @@ def main():
             # Runs an algorithm that tweaks fragments of a randomized protein
             output = fragmentRandomizer(eggwhite, dimension)
 
+        # Ends timer and calculates time
+        endloop = round(timeit.default_timer(), 2)
+        totaltime += (endloop-startloop)
+
+        # Updates the best score
+        if best[1] < output[1]:
+            best = output
+
+        # Adds sampled times and scores to be plotted later
+        testX.append(totaltime)
+        testY.append(best[1])
+
     # Records stop time
     stop = round(timeit.default_timer(), 2)
-
-    # Updates the best score
-    if best[1] < output[1]:
-        best = output
 
     print('I found this solution in ' + str(round((stop - start), 2)) + ' seconds.')
 
@@ -65,6 +80,13 @@ def main():
 
     # Visualizes the best folding
     visualizeFolding(eggwhite)
+
+    # Initiate experimental plot
+    experimental = plot.figure()
+
+    # Visualizes the samples
+    plot.scatter(testX, testY)
+    plot.show()
 
 if __name__ == "__main__":
     main()
