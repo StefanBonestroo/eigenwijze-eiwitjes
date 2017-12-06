@@ -11,10 +11,11 @@ def main():
     eggwhite = Protein('PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP')
 
     # Runs the algorithm function (10 tries)
-    output = randomizer(eggwhite, 100, '2D')
+    output = randomizer(eggwhite, 1000, '2D')
     eggwhite.aminoCoordinates = output[0]
     eggwhite.strength = output[1]
-    fragmentRandomizer(eggwhite, 4, '2D', 10)
+    visualizeFolding(eggwhite)
+    fragmentRandomizer(eggwhite, 9, '2D', 10000)
 
 
 
