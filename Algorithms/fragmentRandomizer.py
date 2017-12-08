@@ -2,23 +2,25 @@
 # in a randomized matter.
 import random
 
-from classes import Protein
 from random import randint
+
+from classes import Protein
 from functions import calculateFolding, visualizeFolding
 from Algorithms import helpers
-from Algorithms import randomizer
+from Algorithms.randomizer import randomizer
 
 def fragmentRandomizer (Protein, trieMax, dimension, fragment):
 
     tries = 0
 
     # Get the best protein from a 100 random foldings
-    output = randomizer(Protein, 100, dimension)
+    output = randomizer(Protein, 1000, dimension)
     Protein.aminoCoordinates = output[0]
     Protein.strength = output[1]
 
     origPro = Protein
-    oldScore = OrigPro.strength
+    print(Protein.aminoCoordinates)
+    oldScore = origPro.strength
 
     while tries < trieMax:
 
@@ -104,4 +106,4 @@ def fragmentRandomizer (Protein, trieMax, dimension, fragment):
             check = 1
 
 
-        tries +=1
+        tries += 1

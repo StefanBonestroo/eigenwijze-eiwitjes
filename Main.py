@@ -41,7 +41,7 @@ def main():
             tries = int(sys.argv[4])
 
             # You can only try something a number of times
-            if tries.isdigit() == False:
+            if str(tries).isdigit() == False:
                 printUsage()
                 return
 
@@ -53,7 +53,7 @@ def main():
             fragmentLength = int(sys.argv[5])
 
             # Fragments can only be a number long
-            if fragmentLength.isdigit() == False:
+            if str(fragmentLength).isdigit() == False:
                 printUsage()
                 return
             elif fragmentLength < 3 or len(proteinString) < (fragmentLength - 2):
