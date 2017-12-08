@@ -8,6 +8,7 @@ from classes import Protein
 from functions import visualizeFolding
 from functions import printUsage
 from Algorithms.randomizer import randomizer
+from Algorithms.fragmentRandomizer import fragmentRandomizer
 
 # from Algorithms.simulatedAnnealing import simulatedAnnealing
 
@@ -32,6 +33,11 @@ def main():
             tries = int(sys.argv[4])
         else:
             tries = 10000
+    elif runningAlgorithm == 'fragment randomizer'
+            if len(sys.argv) == 5:
+                tries = int(sys.argv[4])
+            else:
+                tries = 10000
 
     # Stores 'totalTime'(X) and 'bestScore' (Y)
     best = [0, 0]
@@ -53,7 +59,7 @@ def main():
         output = depthFirst(eggwhite)
     elif runningAlgorithm == 'fragment randomizer':
         # Runs an algorithm that tweaks fragments of a randomized protein
-        output = fragmentRandomizer(eggwhite, dimension)
+        output = fragmentRandomizer(eggwhite, ,dimension)
 
     # Records stop time
     stop = round(timeit.default_timer(), 2)
