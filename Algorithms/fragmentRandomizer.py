@@ -6,27 +6,23 @@ from classes import Protein
 from random import randint
 from functions import calculateFolding, visualizeFolding
 from Algorithms import helpers
+from Algorithms import randomizer
 
-def fragmentRandomizer (origPro, fragment, dimension, trieMax):
-    # input checks
-    if dimension != ('2D' or '3D'):
-        raise Exception('dimension has to be 2D or 3D')
-
-    if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
-        raise Exception('proteinlength does not correspond to length of aminoCoordinates')
-
-    if len(origPro.proteinChain) < (fragment - 2):
-        raise Exception('fragment is to big for fragmentRandomizer to sample fragment from protein')
-
-    if fragment <= 2:
-         raise Exception('fragment must be at least 2')
+def fragmentRandomizer (Protein, trieMax, dimension, fragment):
 
     tries = 0
-    oldScore = calculateFolding(origPro.aminoCoordinates, origPro.proteinChain)
+
+    # Get the best protein from a 100 random foldings
+    output = randomizer(Protein, 100, dimension)
+    Protein.aminoCoordinates = output[0]
+    Protein.strength = output[1]
+
+    origPro = Protein
+    oldScore = OrigPro.strength
 
     while tries < trieMax:
 
-        # define start as random amino acid at least a fragment length before the end of the protein.
+        # Define start as random amino acid at least a fragment length before the end of the protein.
         start = len(origPro.proteinChain)
         # print('stoppoint: ', (len(origPro.proteinChain) - fragment))
         while start >= (len(origPro.proteinChain) - fragment):
@@ -36,7 +32,7 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
         shifts = []
 
         for amino in range(start, stop):
-            # append the shift in coordinates
+            # Append the shift in coordinates
             if dimension == '2D':
                 shifts.append((origPro.aminoCoordinates[amino + 1][0] - origPro.aminoCoordinates[amino][0],
                 origPro.aminoCoordinates[amino + 1][1] - origPro.aminoCoordinates[amino][1]))
@@ -47,10 +43,10 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
 
         check = 0
         while(check == 0):
-            # initialize a list of new coordinates for the fragment
+            # Initialize a list of new coordinates for the fragment
             newCoordinates = [(origPro.aminoCoordinates[start][0],origPro.aminoCoordinates[start][1])]
 
-            # find a new coordinate for every aminoacid of the fragment
+            # Find a new coordinate for every aminoacid of the fragment
             az = 0
             while az <= fragment:
 
@@ -58,8 +54,8 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
 
                 while newCtries < len(shifts):
 
-                    # break when there was no coordinate added for last az
-                    # break if there are already (fragmentlen) coordinates in newCoordinates and they are identical to original coordinates
+                    # Break when there was no coordinate added for last az
+                    # Break if there are already (fragmentlen) coordinates in newCoordinates and they are identical to original coordinates
                     if az == len(newCoordinates) or (az == fragment-1 and newCoordinates == origPro.aminoCoordinates[start:stop]):
                         break
 
@@ -74,10 +70,10 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
                     if (newC not in origPro.aminoCoordinates[0:start + az]
                     and newC not in origPro.aminoCoordinates[stop + 1:]
                     and newC not in newCoordinates):
-                        # found a possible coordinate -> remove this shift from possibilities for the other amino acids
+                        # Found a possible coordinate -> remove this shift from possibilities for the other amino acids
                         shifts.remove(newShift)
 
-                        # add new coordinate
+                        # Add new coordinate
                         newCoordinates.append(newC)
                         break
 
@@ -87,23 +83,23 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
                 if az == len(newCoordinates) and az != fragment:
                     break
                 az +=1
-            # if it finds new possible coordinates, check the score change
+            # If it finds new possible coordinates, check the score change
             if len(newCoordinates) == fragment + 1:
 
-                # create protein with these coordinates for the fragments
+                # Create protein with these coordinates for the fragments
                 newPro = Protein(origPro.proteinChain)
                 newPro.aminoCoordinates = origPro.aminoCoordinates[0:start ]
                 newPro.aminoCoordinates.extend(newCoordinates)
                 newPro.aminoCoordinates.extend(origPro.aminoCoordinates[stop + 1:])
 
-                # compare score with old protein
+                # Compare score with old protein
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
 
                 if newPro.strength > origPro.strength:
                     origPro = newPro
                     visualizeFolding(origPro)
 
-                # probability of acceptance
+                # Probability of acceptance
 
             check = 1
 
