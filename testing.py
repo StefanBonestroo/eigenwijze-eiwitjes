@@ -26,15 +26,21 @@
 # if __name__ == "__main__":
 #     main()
 
-p = [[1,2],[2,5],[1,3]]
-z = []
-z.append([tuple(l) for l in p])
-list(map(tuple, p))
+# p = [[1,2],[2,5],[1,3]]
+# z = []
+# z.append([tuple(l) for l in p])
+# list(map(tuple, p))
+#
+# for i in range(5):
+#     print (i)
+#
+# print (p)
+# print (z)
+#
+# print (set(z[0]))
 
-for i in range(5):
-    print (i)
-
-print (p)
-print (z)
-
-print (set(z[0]))
+dataStructure = [[0,0,0,1],[0,0,0,0],[0,0,0,2]]
+correntCoor = dataStructure[2][3:8]
+for loop in correntCoor:
+    print("niks")
+print(dataStructure[2][3:4])
