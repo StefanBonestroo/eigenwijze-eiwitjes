@@ -32,7 +32,7 @@ def possibilityCheck(amino, aminoCoordinates):
 
         return [left, right, up, down, front, back]
 
-
+# Returns a random VALID location for the next aminoacid
 def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
 
     if len(possibilities) == 4:
@@ -54,14 +54,6 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 # Will not add a location if it's taken by another amino acid
                 elif direction not in aminoCoordinates:
                     return direction
-
-        elif algorithm == 'simulated annealing':
-
-            if (aminoCoordinates[amino - 1] in possibilities and\
-            aminoCoordinates[amino + 1] in possibilities) and aminoCoordinates[amino]\
-            in [aminoCoordinates[amino - 1], aminoCoordinates[amino + 1]]:
-                return True
-
 
     if len(possibilities) == 6:
 
@@ -86,6 +78,7 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 # Will not add a location if it's taken by another amino acid
                 elif direction not in aminoCoordinates:
                     return direction
+<<<<<<< HEAD
 
         elif algorithm == 'simulated annealing':
 
@@ -108,3 +101,5 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
 #                 cancel += 1
 #         if not ('1, 1, 1' in str(options)) and not ('2, 2, 2' in str(options)) \
 #         and not ('3, 3, 3' in str(options)) and not ('4, 4, 4' in str(options)):
+=======
+>>>>>>> 9044affacf4aea91cafe7167dd7bb8e7b9db45c4
