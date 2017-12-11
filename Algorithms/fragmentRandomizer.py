@@ -5,24 +5,26 @@ import random
 from classes import Protein
 from random import randint
 from functions import calculateFolding, visualizeFolding
-from Algorithms import helpers
-from math import expm
+from Algorithms import helpers, randomizer
+from Algorithms.randomizer import randomizer
+# from math import expm
 
 def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
-    if len(origPro.proteinChain) < (fragment - 2):
+    if len(inputPro.proteinChain) < (fragment - 2):
         raise Exception('fragment is to big for fragmentRandomizer to sample fragment from protein')
 
     if fragment <= 2:
          raise Exception('fragment must be at least 2')
 
     # Get the best protein from a 100 random foldings
-    output = randomizer(Protein, 1000, dimension)
+
+    output = randomizer(inputPro, 1000, dimension)
     inputPro.aminoCoordinates = output[0]
     inputPro.strength = output[1]
 
-    origPro = Protein
-    print(inputPro.aminoCoordinates)
+    origPro = inputPro
+    print(origPro.aminoCoordinates)
     oldScore = origPro.strength
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
@@ -63,14 +65,16 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 shifts = shifts # dit was nodig om de random.shuffle te laten werken
                 random.shuffle(shifts)
 
+                # trie different shifts for this az
                 while newCtries < len(shifts):
 
                     # break when there was no coordinate added for last az
                     # break if there are already (fragmentlen) coordinates in newCoordinates and they are identical to original coordinates
-                    if az == len(newCoordinates) or (az == fragment-1 and newCoordinates == origPro.aminoCoordinates[start:stop]):
+                    if az == len(newCoordinates) or (az == fragment - 1 and newCoordinates == origPro.aminoCoordinates[start:stop]):
                         break
 
                     newShift = (shifts[newCtries])
+
                     # new coordinate that will be tested for validity
                     newC = (newCoordinates[az][0] + newShift[0] , newCoordinates[az][1] + newShift[1])
 
@@ -82,13 +86,17 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
                         # add new coordinate
                         newCoordinates.append(newC)
+
+                        # a possible shift was found, so break the while loop
                         break
 
+                    # shift created an already excisting coordinate so try again
                     newCtries += 1
 
-                # print(az)
+                # (could not find a shift for last az?)
                 if az == len(newCoordinates) and az != fragment:
                     break
+
                 az +=1
             # if it finds new possible coordinates, check the score change
             if len(newCoordinates) == fragment + 1:
@@ -104,7 +112,9 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 # calculate probability of acceptance
 
                 if newPro.strength >= origPro.strength:
+                    print('hiya')
                     if newPro.strength > origPro.strength:
+                        print('howdy')
                         visualizeFolding(origPro)
 
                     origPro = newPro
@@ -112,6 +122,5 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 # probability of acceptance
 
             check = 1
-
 
         tries +=1
