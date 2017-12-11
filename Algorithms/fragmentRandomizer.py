@@ -6,11 +6,9 @@ from classes import Protein
 from random import randint
 from functions import calculateFolding, visualizeFolding
 from Algorithms import helpers
+from math import expm
 
 def fragmentRandomizer (origPro, fragment, dimension, trieMax):
-    # input checks
-    if dimension != ('2D' or '3D'):
-        raise Exception('dimension has to be 2D or 3D')
 
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
@@ -22,8 +20,6 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
          raise Exception('fragment must be at least 2')
 
     tries = 0
-    oldScore = calculateFolding(origPro.aminoCoordinates, origPro.proteinChain)
-
     while tries < trieMax:
 
         # define start as random amino acid at least a fragment length before the end of the protein.
@@ -55,6 +51,8 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
             while az <= fragment:
 
                 newCtries = 0
+                shifts = shifts # dit was nodig om de random.shuffle te laten werken
+                random.shuffle(shifts)
 
                 while newCtries < len(shifts):
 
@@ -63,10 +61,6 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
                     if az == len(newCoordinates) or (az == fragment-1 and newCoordinates == origPro.aminoCoordinates[start:stop]):
                         break
 
-                    shifts = shifts # dit was nodig om de random.shuffle te laten werken
-                    random.shuffle(shifts)
-
-                    # print('az: ', az, ', start: ', start, 'newCoordinates: ', newCoordinates)
                     newShift = (shifts[newCtries])
                     # new coordinate that will be tested for validity
                     newC = (newCoordinates[az][0] + newShift[0] , newCoordinates[az][1] + newShift[1])
@@ -98,10 +92,13 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
 
                 # compare score with old protein
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
+                # calculate probability of acceptance
+                p = math.expm()
+                if newPro.strength >= origPro.strength:
+                    if newPro.strength > origPro.strength:
+                        visualizeFolding(origPro)
 
-                if newPro.strength > origPro.strength:
                     origPro = newPro
-                    visualizeFolding(origPro)
 
                 # probability of acceptance
 
