@@ -8,16 +8,25 @@ from functions import calculateFolding, visualizeFolding
 from Algorithms import helpers
 from math import expm
 
-def fragmentRandomizer (origPro, fragment, dimension, trieMax):
-
-    if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
-        raise Exception('proteinlength does not correspond to length of aminoCoordinates')
+def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
     if len(origPro.proteinChain) < (fragment - 2):
         raise Exception('fragment is to big for fragmentRandomizer to sample fragment from protein')
 
     if fragment <= 2:
          raise Exception('fragment must be at least 2')
+
+    # Get the best protein from a 100 random foldings
+    output = randomizer(Protein, 1000, dimension)
+    inputPro.aminoCoordinates = output[0]
+    inputPro.strength = output[1]
+
+    origPro = Protein
+    print(inputPro.aminoCoordinates)
+    oldScore = origPro.strength
+    # error if something went wrong in randomizer
+    if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
+        raise Exception('proteinlength does not correspond to length of aminoCoordinates')
 
     tries = 0
     while tries < trieMax:
@@ -93,7 +102,7 @@ def fragmentRandomizer (origPro, fragment, dimension, trieMax):
                 # compare score with old protein
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
                 # calculate probability of acceptance
-                p = math.expm()
+
                 if newPro.strength >= origPro.strength:
                     if newPro.strength > origPro.strength:
                         visualizeFolding(origPro)

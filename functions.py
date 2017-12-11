@@ -5,16 +5,14 @@ from mpl_toolkits.mplot3d import Axes3D as plot3D
 
 # Prints the correct usage (in a pretty way)
 def printUsage():
-        print('')
-        print('Usage: ')
-        print('')
+        print('\nUsage: \n')
         print(' Argument 1: protein string to be folded, e.a. \"HHPHPHP\"')
-        print(' Argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment randomizer\'')
+        print(' Argument 2: desired algorithm -> \'randomizer\', \'depth-first\', \'fragment-randomizer\'')
         print(' Argument 3: desired folding dimensions -> \'2D\' or \'3D\'')
-        print(' Argument 4: optional argument \'tries\' for \'randomizer\'')
-        print('')
+        print(' Argument 4: *optional argument \'tries\' for \'randomizer\' and \'fragment-randomizer\'')
+        print(' Argument 5: *optional argument \'fragmentLength\' for \'fragment-randomizer\'\n')
 
-        
+
 # Calculates the protein stability/strength
 def calculateFolding (aminoCoordinates, proteinChain):
 
