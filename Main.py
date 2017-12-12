@@ -9,10 +9,7 @@ from functions import visualizeFolding
 from functions import printUsage
 from Algorithms.randomizer import randomizer
 from Algorithms.fragmentRandomizer import fragmentRandomizer
-<<<<<<< HEAD
 from Algorithms.CheckAll import depthFirst, folder
-=======
->>>>>>> 9044affacf4aea91cafe7167dd7bb8e7b9db45c4
 
 # from Algorithms.simulatedAnnealing import simulatedAnnealing
 
