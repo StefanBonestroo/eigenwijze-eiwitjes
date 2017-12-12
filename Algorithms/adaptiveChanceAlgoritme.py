@@ -16,7 +16,7 @@ from functions import calculateFolding
 # in validityCheck build in directions in an array [(0,1,0), (-1,0,0) etc]
     #deze word bij de bestFolding opgeslagen
     #nu bij het maken van een random protein als er geen verbindingen kunnen worden gemaakt geef een grotere neiging om
-        #fouwingen te maken zoals bij de bestvolding
+        #vouwingen te maken zoals bij de bestfolding
             #Hoe meer het op best folding lijkt hoe groter de kans is op een betere folding.
                 #deze misschien pas na x aantal foldings toepassen zodat deze al een beetje een goede structuur heeft.
 #Loopen deze zooi
