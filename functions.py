@@ -1,6 +1,6 @@
 import matplotlib
 import matplotlib.pyplot as plot
-import matplotlib.patches as mpatches
+import matplotlib.axes as axis
 from mpl_toolkits.mplot3d import Axes3D as plot3D
 
 # Prints the correct usage (in a pretty way)
@@ -33,7 +33,6 @@ def calculateFolding (aminoCoordinates, proteinChain):
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
-                # print(aminoCoordinates)
                 neighbor_x = aminoCoordinates[partner][x]
                 neighbor_y = aminoCoordinates[partner][y]
 
@@ -43,9 +42,13 @@ def calculateFolding (aminoCoordinates, proteinChain):
                 (abs(current_y - neighbor_y) == 0)) or\
                 ((abs(current_y - neighbor_y) == 1) and\
                 (abs(current_x - neighbor_x) == 0))) and\
-                (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') and\
                 (focus-partner) not in [-1, 0, 1]:
-                    strength += 0.5
+                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
+                        strength += 0.5
+                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
+                        strength += 2.5
 
         return strength
 
@@ -77,9 +80,14 @@ def calculateFolding (aminoCoordinates, proteinChain):
                 ((abs(current_x - neighbor_x) == 0) and\
                 (abs(current_y - neighbor_y) == 0) and\
                 (abs(current_z - neighbor_z) == 1))) and\
-                (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') and\
                 (focus - partner) not in [-1, 0, 1]:
-                    strength += 0.5
+                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
+                        strength += 0.5
+                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
+                        strength += 2.5
+
 
         return strength
 
@@ -112,6 +120,8 @@ def visualizeFolding (Protein):
 
             if proteinChain[focus] == 'H':
                 plot.scatter(current_x,current_y,color='r',s=200,zorder=1)
+            elif proteinChain[focus] == 'C':
+                plot.scatter(current_x,current_y,color='y',s=200,zorder=1)
             else:
                 plot.scatter(current_x,current_y,color='b',s=200,zorder=1)
 
@@ -127,18 +137,22 @@ def visualizeFolding (Protein):
                 (abs(current_y - neighbor_y) == 0)) or\
                 ((abs(current_x - neighbor_x) == 0) and\
                 (abs(current_y - neighbor_y) == 1))) and\
-                (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') and\
                 (focus - partner) not in [-1, 0, 1]:
-                    plot.plot([current_x, neighbor_x],[current_y,neighbor_y]\
-                    , 'r--', linewidth=0.5, zorder=-1)
+                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
+                        plot.plot([current_x, neighbor_x],[current_y,neighbor_y]\
+                        , 'r--', linewidth=0.5, zorder=-1)
+                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
+                        plot.plot([current_x, neighbor_x],[current_y,neighbor_y]\
+                        , 'y--', linewidth=0.5, zorder=-1)
 
         # Plots the covalent bonds in the protein
         plot.plot(plotX, plotY, linewidth = 5.0, zorder = 0)
 
         # Graph info
         plot.title('Strength: ' + str(Protein.strength))
-        plot.ylabel('Y axis')
-        plot.xlabel('X axis')
+        plot.axis('off')
 
         plot.show()
 
@@ -160,11 +174,11 @@ def visualizeFolding (Protein):
             plotZ.append(current_z)
 
             if proteinChain[focus] == 'H':
-                plot3D.scatter(current_x, current_y, current_z, c='r', depthshade = 1\
-                ,s=200,zorder=1)
+                plot3D.scatter(current_x,current_y,current_z,c='r',s=200,zorder=1)
+            elif proteinChain[focus] == 'C':
+                plot3D.scatter(current_x,current_y,current_z,c='y',s=200,zorder=1)
             else:
-                plot3D.scatter(current_x, current_y, current_z, c='b',depthshade = 1\
-                ,s=200,zorder=1)
+                plot3D.scatter(current_x,current_y,current_z,c='b',s=200,zorder=1)
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
@@ -184,18 +198,21 @@ def visualizeFolding (Protein):
                 ((abs(current_x - neighbor_x) == 0) and\
                 (abs(current_y - neighbor_y) == 0) and\
                 (abs(current_z - neighbor_z) == 1))) and\
-                (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') and\
                 (focus - partner) not in [-1, 0, 1]:
-                    plot3D.plot([current_x, neighbor_x],[current_y,neighbor_y]\
-                    , [current_z, neighbor_z],'r--', linewidth=0.5, zorder=-1)
+                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
+                        plot3D.plot([current_x,neighbor_x],[current_y,neighbor_y],\
+                        [current_z,neighbor_z], 'r--', linewidth=0.5, zorder=-1)
+                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
+                        plot3D.plot([current_x,neighbor_x],[current_y,neighbor_y],\
+                        [current_z,neighbor_z], 'y--', linewidth=0.5, zorder=-1)
 
         # Plots the covalent bonds in the protein
         plot3D.plot(plotX, plotY, plotZ, linewidth = 5.0, zorder = 0)
 
         # Graph info
         plot3D.text2D(0.5, 0.95,'Strength: ' + str(Protein.strength), transform = plot3D.transAxes)
-        plot3D.set_ylabel('Y axis')
-        plot3D.set_xlabel('X axis')
-        plot3D.set_zlabel('Z axis')
+        plot3D.axis('off')
 
         plot.show()

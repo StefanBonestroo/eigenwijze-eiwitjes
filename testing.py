@@ -71,6 +71,3 @@
 for amino in reversed(range(6)):
 
     print(amino)
-# options = 0
-# options +=10
-# print (options)
