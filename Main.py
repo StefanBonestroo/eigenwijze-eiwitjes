@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
-
 import timeit
+
 import matplotlib.pyplot as plot
 
 from classes import Protein

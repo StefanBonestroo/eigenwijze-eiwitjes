@@ -33,7 +33,6 @@ def calculateFolding (aminoCoordinates, proteinChain):
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
-                print(aminoCoordinates)
                 neighbor_x = aminoCoordinates[partner][x]
                 neighbor_y = aminoCoordinates[partner][y]
 
