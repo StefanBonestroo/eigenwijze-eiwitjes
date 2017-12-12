@@ -9,10 +9,7 @@ from functions import visualizeFolding
 from functions import printUsage
 from Algorithms.randomizer import randomizer
 from Algorithms.fragmentRandomizer import fragmentRandomizer
-# <<<<<<< HEAD
-from Algorithms.CheckAll import depthFirst, folder
-# =======
-# >>>>>>> 9044affacf4aea91cafe7167dd7bb8e7b9db45c4
+# from Algorithms.CheckAll import depthFirst, folder
 
 # from Algorithms.simulatedAnnealing import simulatedAnnealing
 
@@ -84,7 +81,8 @@ def main():
         output = depthFirst(eggwhite)
     elif runningAlgorithm == 'fragment-randomizer':
         # Runs an algorithm that tweaks fragments of a randomized protein
-        output = fragmentRandomizer(eggwhite, tries, dimension, fragmentLength)
+        print(fragmentLength)
+        output = fragmentRandomizer(eggwhite, fragmentLength, dimension, tries)
 
     # Records stop time
     stop = round(timeit.default_timer(), 2)

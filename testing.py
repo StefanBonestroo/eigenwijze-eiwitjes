@@ -39,8 +39,14 @@
 #
 # print (set(z[0]))
 
-dataStructure = [[0,0,0,1],[0,0,0,0],[0,0,0,2]]
-correntCoor = dataStructure[2][3:8]
-for loop in correntCoor:
-    print("niks")
-print(dataStructure[2][3:4])
+# dataStructure = [[0,0,0,1],[0,0,0,0],[0,0,0,2]]
+# correntCoor = dataStructure[2][3:8]
+# for loop in correntCoor:
+#     print("niks")
+# print(dataStructure[2][3:4])
+
+start = 5
+fragment = 6
+stop = start + fragment
+for amino in range(fragment):
+    print(amino)
