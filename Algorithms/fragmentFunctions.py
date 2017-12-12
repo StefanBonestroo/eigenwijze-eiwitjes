@@ -1,4 +1,5 @@
 import random
+from Algorithms.helpers import possibilityCheck, validityCheck
 
 def middleFragment(origPro, start, fragment, dimension):
 
@@ -69,3 +70,19 @@ def middleFragment(origPro, start, fragment, dimension):
 
 
         check = 1
+
+def endFragment(origPro, start, fragment, dimension):
+
+    newCoordinates = origPro.aminoCoordinates[0:start]
+
+    for amino in range(start, start + fragment):
+        possibilities = possibilityCheck(amino, newCoordinates[0:start + amino])
+        valid = validityCheck(possibilities, newCoordinates, 'randomizer', amino)
+        if valid != None:
+            newCoordinates.append(valid)
+            print(newCoordinates)
+
+    if (len(newCoordinates) == len(origPro.aminoCoordinates)):
+        return(newCoordinates)
+    else:
+        return('none')

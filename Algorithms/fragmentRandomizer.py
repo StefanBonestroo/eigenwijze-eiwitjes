@@ -7,7 +7,7 @@ from random import randint
 from functions import calculateFolding, visualizeFolding
 from Algorithms import helpers, randomizer
 from Algorithms.randomizer import randomizer
-from Algorithms.fragmentFunctions import middleFragment
+from Algorithms.fragmentFunctions import middleFragment, endFragment
 # from math import expm
 
 def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
@@ -38,17 +38,21 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
         # define start as random amino acid at least a fragment length before the end of the protein.
         start = len(origPro.proteinChain)
         # print('stoppoint: ', (len(origPro.proteinChain) - fragment))
-        while start >= (len(origPro.proteinChain) - fragment):
+        while start > (len(origPro.proteinChain) - fragment):
             start = randint(0, (len(origPro.proteinChain) - fragment))
 
         if(start < len(origPro.proteinChain) - fragment):
              middleInfo = middleFragment(origPro, start, fragment, dimension)
              newCoordinates = middleInfo[0]
-
-        # elif() eindfragment
+        elif(start == len(origPro.proteinChain) - fragment):
+            print('!!!!!!!!!!!!!!!!!!!!EINDJE')
+            endInfo = endFragment(origPro, start, fragment, dimension)
+            newCoordinates = endInfo[0]
+            print(len(newCoordinates))
+            print(len(origPro.aminoCoordinates))
         # elif() beginfragment
         # else() iets fout gegaan
-            # error
+        #     error
 
         if newCoordinates != 'none':
                 # create protein with these coordinates for the fragments

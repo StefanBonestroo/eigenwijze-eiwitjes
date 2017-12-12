@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
-
 import timeit
+
 import matplotlib.pyplot as plot
 
 from classes import Protein
@@ -81,7 +81,8 @@ def main():
         output = depthFirst(eggwhite)
     elif runningAlgorithm == 'fragment-randomizer':
         # Runs an algorithm that tweaks fragments of a randomized protein
-        output = fragmentRandomizer(eggwhite, tries, dimension, fragmentLength)
+        print(fragmentLength)
+        output = fragmentRandomizer(eggwhite, fragmentLength, dimension, tries)
 
     # Records stop time
     stop = round(timeit.default_timer(), 2)
@@ -90,7 +91,7 @@ def main():
     if best[1] < output[1]:
         best = output
 
-    print('I found this solution in ' + str(round((stop - start), 2)) + ' seconds.')
+    print('\nI found this solution in ' + str(round((stop - start), 2)) + ' seconds.\n')
 
     # Store the best output
     eggwhite.aminoCoordinates = best[0]
