@@ -89,7 +89,7 @@ def main():
     if best[1] < output[1]:
         best = output
 
-    print('I found this solution in ' + str(round((stop - start), 2)) + ' seconds.')
+    print('\nI found this solution in ' + str(round((stop - start), 2)) + ' seconds.\n')
 
     # Store the best output
     eggwhite.aminoCoordinates = best[0]
