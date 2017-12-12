@@ -4,24 +4,47 @@
 # if not '0, 0, 3' in str(p) and not '0, 3' in str(p):
 #     print("indeed a wise choice")
 
+p = [5,4,3,2,5,8,9]
+
+for 5 in p:
+    print ("yes")
+
+# import timeit
+
 # def main():
 #     options = []
-#     counter = 3
+#
+#     counter = 8
 #     for aminos in range(counter):
 #         options.append(0)
 #     counter -= 1
+#     options2 = 1 * 10**counter
+#     print (options2)
 #     start = 0
-#     reroll = 0
-#     print (getNumbers(options, start, reroll))
+#     st = round(timeit.default_timer(), 2)
+#     # getNumbers(options, start, counter)
+#     gettingNumbers(options2, counter)
+#     stop = round(timeit.default_timer(), 2)
+#     print (stop-st)
 #
-# def getNumbers(options, start, reroll):
-#     options[start] += 1
-#     if options[start] == 5:
-#         reroll = 0
-#         getNumbers(options, start + 1, reroll)
-#     if options[2] == 2:
-#         return options
-#     getNumbers(options, 0, reroll)
+# def getNumbers(options, start, counter):
+#     while options[0] != 3:
+#         options[counter] += 1
+#         if options[counter] == 5:
+#             cancel = 0
+#             while True:
+#                 if options[counter - cancel] == 5:
+#                     options[counter - cancel] = 0
+#                     options[(counter - cancel) - 1] += 1
+#                 else:
+#                     break
+#                 cancel += 1
+#
+# def gettingNumbers(options, counter):
+#     k = options
+#     while options < (k*4):
+#         options += 1
+#
 #
 # if __name__ == "__main__":
 #     main()
@@ -44,9 +67,16 @@
 # for loop in correntCoor:
 #     print("niks")
 # print(dataStructure[2][3:4])
+<<<<<<< HEAD
 
 start = 5
 fragment = 6
 stop = start + fragment
 for amino in range(fragment):
     print(amino)
+=======
+#
+# options = 0
+# options +=10
+# print (options)
+>>>>>>> ac00719caddae4dd2eeb8c8e15a6a601e6ca498c
