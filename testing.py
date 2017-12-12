@@ -67,16 +67,9 @@ for 5 in p:
 # for loop in correntCoor:
 #     print("niks")
 # print(dataStructure[2][3:4])
-<<<<<<< HEAD
 
 start = 5
 fragment = 6
 stop = start + fragment
 for amino in range(fragment):
     print(amino)
-=======
-#
-# options = 0
-# options +=10
-# print (options)
->>>>>>> ac00719caddae4dd2eeb8c8e15a6a601e6ca498c
