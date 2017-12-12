@@ -1,6 +1,6 @@
 # Protein Power
 
-[!alt-text](https://github.com/StefanBonestroo/eigenwijze-eiwitjes/blob/master/Miscellaneous/Logo.png)
+![alt-text](https://github.com/StefanBonestroo/eigenwijze-eiwitjes/blob/master/Miscellaneous/Logo.png)
 
 Dit, in python geschreven, programma probeert een oplossing te vinden voor het zogenaamde 'Hydrophobic-polar Protein Folding'-probleem. Dit probleem kan als volgt beschreven worden: We hebben een eiwit hebben bestaande uit H en P aminozuren - weer te geven als bijv. "HHHPHHPHP" - en wij moeten deze vouwen, enkel gebruikmakende van hoeken van 90 graden, zonder aminozuren te doen laten overlappen of breken. Een vouwing wordt beter naarmate er H'tjes naast elkaar liggen, waar de covalente verbindingen tussen H'tjes niet meetellen. Een H-bond tussen 2 H'tjes zorgt namelijk voor een meer stabiele energietoestand. Wat is de beste manier om een eiwit te vouwen?
 
