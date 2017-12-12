@@ -78,7 +78,6 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 # Will not add a location if it's taken by another amino acid
                 elif direction not in aminoCoordinates:
                     return direction
-<<<<<<< HEAD
 
         elif algorithm == 'simulated annealing':
 
@@ -101,5 +100,3 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
 #                 cancel += 1
 #         if not ('1, 1, 1' in str(options)) and not ('2, 2, 2' in str(options)) \
 #         and not ('3, 3, 3' in str(options)) and not ('4, 4, 4' in str(options)):
-=======
->>>>>>> 9044affacf4aea91cafe7167dd7bb8e7b9db45c4
