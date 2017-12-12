@@ -64,3 +64,4 @@ Nadat het door jou gekozen algoritme gerund heeft, zal het programma je een visu
 ## Erkenningen
 
 * Wietze Slagman - *Voor de inzichten, tips, en begeleiding* - [Wietze](https://github.com/WietzeSlagman)
+* Het README.md template van [Purplebooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
