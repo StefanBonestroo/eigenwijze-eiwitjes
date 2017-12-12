@@ -4,10 +4,13 @@
 # if not '0, 0, 3' in str(p) and not '0, 3' in str(p):
 #     print("indeed a wise choice")
 
-p = [5,4,3,2,5,8,9]
+import numpy as np
 
-for 5 in p:
-    print ("yes")
+p = [[5,0],[4,0],[3,0]]
+p = [1, 3, 0, 0, 4, 2]
+
+print (np.array_equal(p))
+# print (len(set(p)))
 
 # import timeit
 
@@ -68,8 +71,8 @@ for 5 in p:
 #     print("niks")
 # print(dataStructure[2][3:4])
 
-start = 5
-fragment = 6
-stop = start + fragment
-for amino in range(fragment):
-    print(amino)
+# start = 5
+# fragment = 6
+# stop = start + fragment
+# for amino in range(fragment):
+#     print(amino)

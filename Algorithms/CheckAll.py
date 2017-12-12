@@ -18,7 +18,7 @@ def depthFirst(Protein):
         options.append(0)
     counter -= 1
 
-    while options[0] != 3:
+    while options[0] != 1:
         options[counter] += 1
         if options[counter] == 5:
             cancel = 0
@@ -53,26 +53,17 @@ def depthFirst(Protein):
     return [bestFolding, bestScore]
 
 def folder(directions, Protein):
-    aminoCoordinates = [[0,0,0]]
-    # print(directions)
-    for aminozuur in range(len(directions)):
-        if aminozuur == 0:
-            direction = (0,1,0)
-        else:
-            direction = ((aminoCoordinates[aminozuur][0] - aminoCoordinates[aminozuur - 1][0]),\
-            (aminoCoordinates[aminozuur][1] - aminoCoordinates[aminozuur - 1][1]),\
-            (aminoCoordinates[aminozuur][2] - aminoCoordinates[aminozuur - 1][2]))
-            # print (direction)
+    aminoCoordinates = [[0,0,0],[1,0,0]]
+    span = len(directions)
+    for aminozuur in range(1,span):
+        direction = ((aminoCoordinates[aminozuur][0] - aminoCoordinates[aminozuur - 1][0]),\
+        (aminoCoordinates[aminozuur][1] - aminoCoordinates[aminozuur - 1][1]),\
+        (aminoCoordinates[aminozuur][2] - aminoCoordinates[aminozuur - 1][2]))
         aminoCoordinates.append(copy.copy(aminoCoordinates[aminozuur]))
-        # print (direction)
         if directions[aminozuur] == 0: # straight
-            # aminoCoordinates.append(aminoCoordinates[aminozuur][0] + direction[0],\
-            # aminoCoordinates[aminozuur][1] + direction[1],\
-            # aminoCoordinates[aminozuur][2] + direction[2])
             aminoCoordinates[aminozuur+1][0] += direction[0]
             aminoCoordinates[aminozuur+1][1] += direction[1]
             aminoCoordinates[aminozuur+1][2] += direction[2]
-            # print (aminoCoordinates[aminozuur+1])
         elif directions[aminozuur] == 1 or directions[aminozuur] == 2: # up # down
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminozuur] == 1:
