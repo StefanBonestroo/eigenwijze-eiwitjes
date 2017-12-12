@@ -91,7 +91,7 @@ def beginFragment(origPro, fragment, dimension):
 
     for i in range(fragment):
         # print('start: ',start, ', amino: ',amino)
-        possibilities = possibilityCheck(2, newCoordinates)
+        possibilities = possibilityCheck(1, newCoordinates)
         valid = validityCheck(possibilities, newCoordinates, 'randomizer') # wat wordt hier
         # print('valid', valid)
         if valid != None:
