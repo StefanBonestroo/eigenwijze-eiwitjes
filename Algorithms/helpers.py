@@ -78,3 +78,25 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 # Will not add a location if it's taken by another amino acid
                 elif direction not in aminoCoordinates:
                     return direction
+
+        elif algorithm == 'simulated annealing':
+
+            if (aminoCoordinates[amino - 1] in possibilities and\
+            aminoCoordinates[amino + 1] in possibilities) and aminoCoordinates[amino]\
+            in [aminoCoordinates[amino - 1], aminoCoordinates[amino + 1]]:
+                return True
+
+# def numberGenerater(number):
+#     while number[0] != 3:
+#         options[counter] += 1
+#         if options[counter] == 5:
+#             cancel = 0
+#             while True:
+#                 if options[counter - cancel] == 5:
+#                     options[counter - cancel] = 0
+#                     options[(counter - cancel) - 1] += 1
+#                 else:
+#                     break
+#                 cancel += 1
+#         if not ('1, 1, 1' in str(options)) and not ('2, 2, 2' in str(options)) \
+#         and not ('3, 3, 3' in str(options)) and not ('4, 4, 4' in str(options)):
