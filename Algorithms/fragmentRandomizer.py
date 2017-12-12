@@ -21,7 +21,7 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
     # Get the best protein from a 100 random foldings
 
-    output = randomizer(inputPro, 10000, dimension)
+    output = randomizer(inputPro, 1, dimension)
     inputPro.aminoCoordinates = output[0]
     inputPro.strength = output[1]
 
