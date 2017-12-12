@@ -7,7 +7,7 @@ from random import randint
 from functions import calculateFolding, visualizeFolding
 from Algorithms import helpers, randomizer
 from Algorithms.randomizer import randomizer
-from Algorithms.fragmentFunctions import middleFragment, endFragment
+from Algorithms.fragmentFunctions import middleFragment, endFragment,beginFragment
 # from math import expm
 
 def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
@@ -25,9 +25,9 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
     inputPro.strength = output[1]
 
     origPro = inputPro
-    print(origPro.aminoCoordinates)
+    # print(origPro.aminoCoordinates)
     oldScore = origPro.strength # waar is dit voor dan?
-    print(oldScore)
+    # print(oldScore)
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
@@ -41,36 +41,50 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
         while start > (len(origPro.proteinChain) - fragment):
             start = randint(0, (len(origPro.proteinChain) - fragment))
 
-        if(start < len(origPro.proteinChain) - fragment):
+        # if(start == 0):
+        #     newCoordinates = beginFragment(origPro, fragment, dimension)
+        if(start == len(origPro.proteinChain) - fragment):
+            newCoordinates = endFragment(origPro, start, fragment, dimension)
+        elif(start < len(origPro.proteinChain) - fragment):
              middleInfo = middleFragment(origPro, start, fragment, dimension)
              newCoordinates = middleInfo[0]
-        elif(start == len(origPro.proteinChain) - fragment):
-            print('!!!!!!!!!!!!!!!!!!!!EINDJE')
-            endInfo = endFragment(origPro, start, fragment, dimension)
-            newCoordinates = endInfo[0]
-            print(len(newCoordinates))
-            print(len(origPro.aminoCoordinates))
-        # elif() beginfragment
         # else() iets fout gegaan
         #     error
 
         if newCoordinates != 'none':
                 # create protein with these coordinates for the fragments
                 newPro = Protein(origPro.proteinChain)
-                newPro.aminoCoordinates = origPro.aminoCoordinates[0:start ]
-                newPro.aminoCoordinates.extend(newCoordinates)
-                newPro.aminoCoordinates.extend(origPro.aminoCoordinates[middleInfo[1] + 1:])
+
+                # startFragment
+                # if(start == 0):
+                #     newPro.aminoCoordinates = newCoordinates
+                #     newPro.aminoCoordinates.extend(origPro.aminoCoordinates[fragment:])
+                #     print('testje', newPro.aminoCoordinates)
+
+                if(start == len(origPro.proteinChain) - fragment):
+                    newPro.aminoCoordinates = origPro.aminoCoordinates[0 : start]
+                    newPro.aminoCoordinates.extend(newCoordinates)
+
+                # middlefragment
+                elif(start < len(origPro.proteinChain) - fragment):
+                    newPro.aminoCoordinates = origPro.aminoCoordinates[0 : start]
+                    newPro.aminoCoordinates.extend(newCoordinates)
+                    newPro.aminoCoordinates.extend(origPro.aminoCoordinates[middleInfo[1] + 1:])
 
                 # compare score with old protein
+                # print('!!!', newPro.aminoCoordinates, newPro.proteinChain)
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
                 # calculate probability of acceptance
 
                 if newPro.strength >= origPro.strength:
                     if newPro.strength > origPro.strength:
-                        print(newPro.strength)
+                        # print(newPro.strength)
                         visualizeFolding(newPro)
 
                     origPro = newPro
 
         tries +=1
     return(origPro.aminoCoordinates, origPro.strength)
+
+# from math import expm
+# p =  - math.expm()

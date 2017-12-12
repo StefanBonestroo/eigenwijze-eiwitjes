@@ -76,13 +76,34 @@ def endFragment(origPro, start, fragment, dimension):
     newCoordinates = origPro.aminoCoordinates[0:start]
 
     for amino in range(start, start + fragment):
-        possibilities = possibilityCheck(amino, newCoordinates[0:start + amino])
-        valid = validityCheck(possibilities, newCoordinates, 'randomizer', amino)
+        # print('start: ',start, ', amino: ',amino)
+        possibilities = possibilityCheck(amino, newCoordinates[0:amino])
+        valid = validityCheck(possibilities, newCoordinates, 'randomizer')
+        # print('valid', valid)
         if valid != None:
             newCoordinates.append(valid)
-            print(newCoordinates)
+        else:
+            return 'none'
+    return(newCoordinates[start:])
 
-    if (len(newCoordinates) == len(origPro.aminoCoordinates)):
-        return(newCoordinates)
-    else:
-        return('none')
+def beginFragment(origPro, fragment, dimension):
+    newCoordinates = origPro.aminoCoordinates[fragment:]
+
+    for i in range(fragment):
+        # print('start: ',start, ', amino: ',amino)
+        possibilities = possibilityCheck(2, newCoordinates)
+        valid = validityCheck(possibilities, newCoordinates, 'randomizer') # wat wordt hier
+        # print('valid', valid)
+        if valid != None:
+            # print('will append valid')
+            oldCoordinates = newCoordinates
+            # print('oldCoordinates before new nc', oldCoordinates)
+            newCoordinates = [valid]
+            # print('oldcoordinates after', oldCoordinates)
+            newCoordinates.extend(oldCoordinates)
+
+        else:
+            # print('should return none')
+            return 'none'
+    # print('lengte nc', len(newCoordinates))
+    return(newCoordinates[:fragment])

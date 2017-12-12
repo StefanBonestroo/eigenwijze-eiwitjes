@@ -9,6 +9,7 @@ def possibilityCheck(amino, aminoCoordinates):
     z = 2
 
     # Get's location of previous amino acid
+    # print('checkAminoCoordinates', aminoCoordinates)
     currentLocation = aminoCoordinates[amino - 1]
 
     if len(aminoCoordinates[0]) == 2:
@@ -33,7 +34,7 @@ def possibilityCheck(amino, aminoCoordinates):
         return [left, right, up, down, front, back]
 
 # Returns a random VALID location for the next aminoacid
-def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
+def validityCheck(possibilities, aminoCoordinates, algorithm):
 
     if len(possibilities) == 4:
 
@@ -79,12 +80,12 @@ def validityCheck(possibilities, aminoCoordinates, algorithm, amino):
                 elif direction not in aminoCoordinates:
                     return direction
 
-        elif algorithm == 'simulated annealing':
-
-            if (aminoCoordinates[amino - 1] in possibilities and\
-            aminoCoordinates[amino + 1] in possibilities) and aminoCoordinates[amino]\
-            in [aminoCoordinates[amino - 1], aminoCoordinates[amino + 1]]:
-                return True
+        # elif algorithm == 'simulated annealing':
+        #
+        #     if (aminoCoordinates[amino - 1] in possibilities and\
+        #     aminoCoordinates[amino + 1] in possibilities) and aminoCoordinates[amino]\
+        #     in [aminoCoordinates[amino - 1], aminoCoordinates[amino + 1]]:
+        #         return True
 
 # def numberGenerater(number):
 #     while number[0] != 3:

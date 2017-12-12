@@ -2,12 +2,12 @@
 # maxi = len(p)/2
 #
 # if not '0, 0, 3' in str(p) and not '0, 3' in str(p):
-#     print("indeed a wise choice")
-
-p = [5,4,3,2,5,8,9]
-
-for 5 in p:
-    print ("yes")
+# #     print("indeed a wise choice")
+#
+# p = [5,4,3,2,5,8,9]
+#
+# for 5 in p:
+#     print ("yes")
 
 # import timeit
 
@@ -67,16 +67,10 @@ for 5 in p:
 # for loop in correntCoor:
 #     print("niks")
 # print(dataStructure[2][3:4])
-<<<<<<< HEAD
 
-start = 5
-fragment = 6
-stop = start + fragment
-for amino in range(fragment):
+for amino in reversed(range(6)):
+
     print(amino)
-=======
-#
 # options = 0
 # options +=10
 # print (options)
->>>>>>> ac00719caddae4dd2eeb8c8e15a6a601e6ca498c
