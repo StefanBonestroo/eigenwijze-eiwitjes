@@ -5,6 +5,8 @@ from Algorithms.helpers import possibilityCheck
 from Algorithms.helpers import validityCheck
 from functions import calculateFolding
 
+# hele eiwitten laatste dingen weg halen en nieuwe bij zetten zodat niet alles opnieuw ge
+
 def depthFirst(Protein):
 
     succes = 0
@@ -14,6 +16,7 @@ def depthFirst(Protein):
     # 0 == staigth; 1 == up; 2 == down; 3 == left; 4 == right;
     options = []
     counter = len(Protein.proteinChain)
+    xnl = int(counter/4)
     for aminos in range(counter):
         options.append(0)
     counter -= 1
@@ -30,7 +33,7 @@ def depthFirst(Protein):
                     break
                 cancel += 1
         if not ('1,1,1,1' in str(options)) and not ('2,2,2,2' in str(options)) \
-        and not ('3,3,3,3' in str(options)) and not ('4,4,4,4' in str(options)):
+        and not ('3,3,3,3' in str(options)) and not ('4,4,4,4' in str(options)) and xnl > options.count(0):
             solution = folder(options, Protein)
             if solution != None:
                 # Calculates the folding score
@@ -48,8 +51,6 @@ def depthFirst(Protein):
                 # Add one succes
                 succes += 1
 
-    print (bestFolding)
-    print (bestScore)
     return [bestFolding, bestScore]
 
 def folder(directions, Protein):

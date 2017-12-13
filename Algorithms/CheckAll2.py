@@ -14,6 +14,7 @@ def depthFirst(Protein):
     # 0 == staigth; 1 == up; 2 == down; 3 == left; 4 == right;
     options = []
     counter = len(Protein.proteinChain)
+    maxRange = int(counter/3)
     for aminos in range(counter):
         options.append(0)
     counter -= 1

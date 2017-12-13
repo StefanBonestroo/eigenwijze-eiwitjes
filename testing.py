@@ -4,12 +4,28 @@
 # if not '0, 0, 3' in str(p) and not '0, 3' in str(p):
 #     print("indeed a wise choice")
 
-import numpy as np
+maxRange = 2
+options = [0,5,0,5,5,0,5,5,5]
 
-p = [[5,0],[4,0],[3,0]]
-p = [1, 3, 0, 0, 4, 2]
+stuck = 0
 
-print (np.array_equal(p))
+if stuck == 0:
+    x = options.count(0) - options.count(5)
+    if x not in range(-maxRange,maxRange):
+        print ("stuck")
+    else:
+        print ("good")
+
+# import numpy as np
+#
+#
+# p = [1,3,0,0,4,2]
+# z = [0,1,0,5,6,8,0,0]
+# while (0 in p) or (0 in z):
+#     p.remove(0)
+#     z.remove(0)
+# print (p)
+# print (z)
 # print (len(set(p)))
 
 # import timeit
