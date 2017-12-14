@@ -22,20 +22,9 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
     # Get the best protein from a 100 random foldings
 
-<<<<<<< HEAD
-    output = randomizer(inputPro, 1, dimension)
-    inputPro.aminoCoordinates = output[0]
-    inputPro.strength = output[1]
-
-    origPro = inputPro
-    # print(origPro.aminoCoordinates)
-    bestPro = origPro # waar is dit voor dan?
-    # print(oldScore)
-=======
     randomPro = randomizer(inputPro, trieMax, dimension)
     origPro = randomPro
     bestPro = origPro # waar is dit voor dan?
->>>>>>> 1985cfc8e473442f9fad80296af0fbb94dd2f55f
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
@@ -65,10 +54,6 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 if(start == 0):
                     newPro.aminoCoordinates = newCoordinates
                     newPro.aminoCoordinates.extend(origPro.aminoCoordinates[fragment:])
-<<<<<<< HEAD
-                    # print('testje', newPro.aminoCoordinates)
-=======
->>>>>>> 1985cfc8e473442f9fad80296af0fbb94dd2f55f
 
                 elif(start == len(origPro.proteinChain) - fragment):
                     newPro.aminoCoordinates = origPro.aminoCoordinates[0 : start]
@@ -82,30 +67,16 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
                 # compare score with old protein
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
-<<<<<<< HEAD
-                # calculate probability of acceptance
-
-                probab =  min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
-                randumb = random.uniform(0,1)
-                if probab > randumb:
-                    print(newPro.strength)
-=======
 
                 # calculate probability of acceptance
                 probab =  min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
                 randumb = random.uniform(0,1)
                 if probab > randumb:
->>>>>>> 1985cfc8e473442f9fad80296af0fbb94dd2f55f
                     origPro = newPro
                     if origPro.strength > bestPro.strength:
                         bestPro = origPro
                 temp *= 0.9998
 
-<<<<<<< HEAD
-
-    visualizeFolding(origPro)
-    return(origPro.aminoCoordinates, origPro.strength)
-=======
     return(bestPro)
 
 def middleFragment(origPro, start, fragment, dimension):
@@ -219,7 +190,6 @@ def beginFragment(origPro, fragment, dimension):
             return 'none'
     # print('lengte nc', len(newCoordinates))
     return(newCoordinates[:fragment])
->>>>>>> 1985cfc8e473442f9fad80296af0fbb94dd2f55f
 
 # from math import expm
 # p =  - math.expm()
