@@ -5,6 +5,7 @@ from Algorithms.helpers import possibilityCheck
 from Algorithms.helpers import validityCheck
 from functions import calculateFolding
 
+
 def depthFirst(inputPro):
 
     succes = 0
@@ -13,12 +14,13 @@ def depthFirst(inputPro):
 
     # 0 == staigth; 1 == up; 2 == down; 3 == left; 4 == right;
     options = []
+
     counter = len(inputPro.proteinChain)
     for aminos in range(counter):
         options.append(0)
-    counter -= 1
+    counter -= 2
 
-    while options[0] != 3:
+    while options[0] != 1:
         options[counter] += 1
         if options[counter] == 5:
             cancel = 0
@@ -67,42 +69,27 @@ def folder(directions, inputProtein):
             (aminoCoordinates[aminozuur][2] - aminoCoordinates[aminozuur - 1][2]))
             # print (direction)
         aminoCoordinates.append(copy.copy(aminoCoordinates[aminozuur]))
-        # print (direction)
         if directions[aminozuur] == 0: # straight
-            # aminoCoordinates.append(aminoCoordinates[aminozuur][0] + direction[0],\
-            # aminoCoordinates[aminozuur][1] + direction[1],\
-            # aminoCoordinates[aminozuur][2] + direction[2])
             aminoCoordinates[aminozuur+1][0] += direction[0]
             aminoCoordinates[aminozuur+1][1] += direction[1]
             aminoCoordinates[aminozuur+1][2] += direction[2]
-            # print (aminoCoordinates[aminozuur+1])
         elif directions[aminozuur] == 1 or directions[aminozuur] == 2: # up # down
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminozuur] == 1:
                     aminoCoordinates[aminozuur+1][0] += direction[0]
                 else:
                     aminoCoordinates[aminozuur+1][0] -= direction[0]
-            elif direction == (0,1,0) or direction == (0,-1,0):
+            elif direction == (0,1,0) or direction == (0,-1,0) or direction == (0,0,1) or direction == (0,0,-1):
                 if directions[aminozuur] == 1:
                     aminoCoordinates[aminozuur+1][1] -= direction[1]
                 else:
                     aminoCoordinates[aminozuur+1][1] += direction[1]
-            elif direction == (0,0,1) or direction == (0,0,-1):
-                if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][1] -= direction[2]
-                else:
-                    aminoCoordinates[aminozuur+1][1] += direction[2]
         elif directions[aminozuur] == 3 or directions[aminozuur] == 4: # left, right
-            if direction == (1,0,0) or direction == (-1,0,0):
+            if direction == (1,0,0) or direction == (-1,0,0) or direction == (0,1,0) or direction == (0,-1,0):
                 if directions[aminozuur] == 3:
                     aminoCoordinates[aminozuur+1][2] += direction[0]
                 else:
                     aminoCoordinates[aminozuur+1][2] -= direction[0]
-            elif direction == (0,1,0) or direction == (0,-1,0):
-                if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur+1][2] += direction[1]
-                else:
-                    aminoCoordinates[aminozuur+1][2] -= direction[1]
             elif direction == (0,0,1) or direction == (0,0,-1):
                 if directions[aminozuur] == 3:
                     aminoCoordinates[aminozuur+1][0] -= direction[2]
@@ -114,6 +101,7 @@ def folder(directions, inputProtein):
     # print (tuples)
 
     if len(set(tuples[0])) == len(aminoCoordinates):
+        print (aminoCoordinates)
         return aminoCoordinates
     else:
         return None
