@@ -4,17 +4,24 @@
 # if not '0, 0, 3' in str(p) and not '0, 3' in str(p):
 #     print("indeed a wise choice")
 
-maxRange = 2
-options = [0,5,0,5,5,0,5,5,5]
+# p = "abcdeafgse"
+# o = []
+# x = [["vtbd"], ["vnrs"]]
+# o.append(p[0:8])
+#
+# print (o[0])
+# print (x[0][0] + x[1][0])
+# x[0].append("afina")
+# print (x)
 
-stuck = 0
+x = [[0,2,5],[5,3,4]]
+p = [[[3,5,8],[4,2,2]],[[7,6,5],[1,8,5]]]
 
-if stuck == 0:
-    x = options.count(0) - options.count(5)
-    if x not in range(-maxRange,maxRange):
-        print ("stuck")
-    else:
-        print ("good")
+for item in p[0]:
+    x.append(item)
+
+print (x)
+
 
 # import numpy as np
 #
@@ -86,9 +93,5 @@ if stuck == 0:
 # for loop in correntCoor:
 #     print("niks")
 # print(dataStructure[2][3:4])
-
-# start = 5
-# fragment = 6
-# stop = start + fragment
-# for amino in range(fragment):
-#     print(amino)
+import random
+import math

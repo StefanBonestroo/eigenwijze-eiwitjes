@@ -19,8 +19,10 @@ def middleFragment(origPro, start, fragment, dimension):
     check = 0
     while(check == 0):
         # initialize a list of new coordinates for the fragment
-        newCoordinates = [(origPro.aminoCoordinates[start][0],origPro.aminoCoordinates[start][1])]
-
+        if dimension == '2D':
+            newCoordinates = [(origPro.aminoCoordinates[start][0], origPro.aminoCoordinates[start][1])]
+        else:
+            newCoordinates = [(origPro.aminoCoordinates[start][0], origPro.aminoCoordinates[start][1], origPro.aminoCoordinates[start][2])]
         # find a new coordinate for every aminoacid of the fragment
         az = 0
         while az <= fragment:
@@ -40,7 +42,10 @@ def middleFragment(origPro, start, fragment, dimension):
                 newShift = (shifts[newCtries])
 
                 # new coordinate that will be tested for validity
-                newC = (newCoordinates[az][0] + newShift[0] , newCoordinates[az][1] + newShift[1])
+                if dimension == '2D':
+                    newC = (newCoordinates[az][0] + newShift[0] , newCoordinates[az][1] + newShift[1])
+                else:
+                    newC = (newCoordinates[az][0] + newShift[0] , newCoordinates[az][1] + newShift[1], newCoordinates[az][2] + newShift[2])
 
                 if (newC not in origPro.aminoCoordinates[0:start + az]
                 and newC not in origPro.aminoCoordinates[stop + 1:]
@@ -91,7 +96,7 @@ def beginFragment(origPro, fragment, dimension):
 
     for i in range(fragment):
         # print('start: ',start, ', amino: ',amino)
-        possibilities = possibilityCheck(2, newCoordinates)
+        possibilities = possibilityCheck(1, newCoordinates)
         valid = validityCheck(possibilities, newCoordinates, 'randomizer') # wat wordt hier
         # print('valid', valid)
         if valid != None:

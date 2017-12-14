@@ -1,6 +1,7 @@
 # This function takes a folded protein and refolds a fragment of a defined length
 # in a randomized matter.
 import random
+import math
 
 from classes import Protein
 from random import randint
@@ -26,14 +27,14 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
     origPro = inputPro
     # print(origPro.aminoCoordinates)
-    oldScore = origPro.strength # waar is dit voor dan?
+    bestPro = origPro # waar is dit voor dan?
     # print(oldScore)
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
 
-    tries = 0
-    while tries < trieMax:
+    temp = 3.5
+    while temp > 0.1:
 
         # define start as random amino acid at least a fragment length before the end of the protein.
         start = len(origPro.proteinChain)
@@ -41,27 +42,25 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
         while start > (len(origPro.proteinChain) - fragment):
             start = randint(0, (len(origPro.proteinChain) - fragment))
 
-        # if(start == 0):
-        #     newCoordinates = beginFragment(origPro, fragment, dimension)
-        if(start == len(origPro.proteinChain) - fragment):
+        if(start == 0):
+            newCoordinates = beginFragment(origPro, fragment, dimension)
+        elif(start == len(origPro.proteinChain) - fragment):
             newCoordinates = endFragment(origPro, start, fragment, dimension)
         elif(start < len(origPro.proteinChain) - fragment):
-             middleInfo = middleFragment(origPro, start, fragment, dimension)
-             newCoordinates = middleInfo[0]
-        # else() iets fout gegaan
-        #     error
+            middleInfo = middleFragment(origPro, start, fragment, dimension)
+            newCoordinates = middleInfo[0]
 
         if newCoordinates != 'none':
                 # create protein with these coordinates for the fragments
                 newPro = Protein(origPro.proteinChain)
 
                 # startFragment
-                # if(start == 0):
-                #     newPro.aminoCoordinates = newCoordinates
-                #     newPro.aminoCoordinates.extend(origPro.aminoCoordinates[fragment:])
-                #     print('testje', newPro.aminoCoordinates)
+                if(start == 0):
+                    newPro.aminoCoordinates = newCoordinates
+                    newPro.aminoCoordinates.extend(origPro.aminoCoordinates[fragment:])
+                    # print('testje', newPro.aminoCoordinates)
 
-                if(start == len(origPro.proteinChain) - fragment):
+                elif(start == len(origPro.proteinChain) - fragment):
                     newPro.aminoCoordinates = origPro.aminoCoordinates[0 : start]
                     newPro.aminoCoordinates.extend(newCoordinates)
 
@@ -76,14 +75,17 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
                 # calculate probability of acceptance
 
-                if newPro.strength >= origPro.strength:
-                    if newPro.strength > origPro.strength:
-                        # print(newPro.strength)
-                        visualizeFolding(newPro)
-
+                probab =  min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+                randumb = random.uniform(0,1)
+                if probab > randumb:
+                    print(newPro.strength)
                     origPro = newPro
+                    if origPro.strength > bestPro.strength:
+                        bestPro = origPro
+                temp *= 0.9998
 
-        tries +=1
+
+    visualizeFolding(origPro)
     return(origPro.aminoCoordinates, origPro.strength)
 
 # from math import expm
