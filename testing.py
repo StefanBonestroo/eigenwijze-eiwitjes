@@ -95,3 +95,16 @@ print (x)
 # print(dataStructure[2][3:4])
 import random
 import math
+<<<<<<< HEAD
+=======
+
+newScore = -8
+oldScore = -14
+temp = 3.5
+while temp > 0.1:
+    probab =  min(1,(math.expm1(-newPro.strength/temp)/math.expm1(-origPro.strength/temp)))
+    randumb = random.uniform(0,1)
+    if probab > randumb:
+        origPro = newPro
+    temp *= 0.5
+>>>>>>> 1985cfc8e473442f9fad80296af0fbb94dd2f55f

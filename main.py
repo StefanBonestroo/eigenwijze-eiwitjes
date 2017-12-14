@@ -19,6 +19,7 @@ def main():
     if len(sys.argv) < 4:
         printUsage()
         return
+
     elif sys.argv[2] not in ['randomizer','depth-first','fragment-randomizer'] or\
     sys.argv[3] not in ['2D','3D']:
         printUsage()
@@ -47,7 +48,7 @@ def main():
                 return
 
         else:
-            tries = 10000
+            tries = 1
 
         # Plus an optional fragment length argument
         if len(sys.argv) == 6:
@@ -64,7 +65,8 @@ def main():
         else:
             fragmentLength = 9
 
-    best = [0, 0]
+    bestPro = Protein('H')
+    bestPro.strength = 0
     totaltime = 0
 
     # Initiate object
@@ -75,30 +77,28 @@ def main():
 
     if runningAlgorithm == 'randomizer':
         # Runs the randomizer algorithm
-        output = randomizer(eggwhite, tries, dimension)
+        outputPro = randomizer(eggwhite, tries, dimension)
     elif runningAlgorithm == 'depth-first':
         # Runs the depth-first algorithm (only in 3D)
-        output = depthFirst(eggwhite)
+        outputPro = depthFirst(eggwhite)
     elif runningAlgorithm == 'fragment-randomizer':
         # Runs an algorithm that tweaks fragments of a randomized protein
         print(fragmentLength)
-        output = fragmentRandomizer(eggwhite, fragmentLength, dimension, tries)
+        outputPro = fragmentRandomizer(eggwhite, fragmentLength, dimension, tries)
 
     # Records stop time
     stop = round(timeit.default_timer(), 2)
 
-    # Updates the best score
-    if best[1] < output[1]:
-        best = output
+    # # Updates the best score
+    # if best[1] < output[1]:
+    #     best = output
+    if bestPro.strength < outputPro.strength:
+        bestPro = outputPro
 
     print('\nI found this solution in ' + str(round((stop - start), 2)) + ' seconds.\n')
 
-    # Store the best output
-    eggwhite.aminoCoordinates = best[0]
-    eggwhite.strength = best[1]
-
     # Visualizes the best folding
-    visualizeFolding(eggwhite)
+    visualizeFolding(bestPro)
 
 if __name__ == "__main__":
     main()

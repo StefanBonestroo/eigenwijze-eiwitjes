@@ -3,7 +3,7 @@ import sys
 
 import timeit
 import matplotlib.pyplot as plot
-
+from functions import printUsage
 from classes import Protein
 from functions import visualizeFolding
 from Algorithms.randomizer import randomizer
@@ -24,7 +24,7 @@ def main():
         return
 
     # Stores 'totalTime'(X) and 'bestScore' (Y)
-    best = [0, 0]
+    bestPro = Protein('H')
     totaltime = 0
     testX = [0]
     testY = [0]
@@ -32,6 +32,7 @@ def main():
     proteinString = sys.argv[1]
     runningAlgorithm = sys.argv[2]
     dimension = sys.argv[3]
+
     if runningAlgorithm == 'randomizer':
         tries = sys.argv[4]
 
