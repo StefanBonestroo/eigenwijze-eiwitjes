@@ -75,7 +75,6 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                         bestPro = origPro
                 temp *= 0.9998
 
-    print(bestPro.aminoCoordinates)
     return(bestPro)
 
 def middleFragment(origPro, start, fragment, dimension):
