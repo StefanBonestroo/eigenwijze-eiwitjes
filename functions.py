@@ -119,11 +119,11 @@ def visualizeFolding (Protein):
             plotY.append(current_y)
 
             if proteinChain[focus] == 'H':
-                plot.scatter(current_x,current_y,color='r',s=200,zorder=1)
+                plot.scatter(current_x,current_y,color='r',s=150,zorder=1)
             elif proteinChain[focus] == 'C':
-                plot.scatter(current_x,current_y,color='y',s=200,zorder=1)
+                plot.scatter(current_x,current_y,color='y',s=150,zorder=1)
             else:
-                plot.scatter(current_x,current_y,color='b',s=200,zorder=1)
+                plot.scatter(current_x,current_y,color='b',s=150,zorder=1)
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
@@ -148,7 +148,7 @@ def visualizeFolding (Protein):
                         , 'y--', linewidth=0.5, zorder=-1)
 
         # Plots the covalent bonds in the protein
-        plot.plot(plotX, plotY, linewidth = 5.0, zorder = 0)
+        plot.plot(plotX, plotY, linewidth = 3.0, zorder = 0)
 
         # Graph info
         plot.title('Strength: ' + str(Protein.strength))
@@ -174,11 +174,11 @@ def visualizeFolding (Protein):
             plotZ.append(current_z)
 
             if proteinChain[focus] == 'H':
-                plot3D.scatter(current_x,current_y,current_z,c='r',s=200,zorder=1)
+                plot3D.scatter(current_x,current_y,current_z,c='r',s=150,zorder=1)
             elif proteinChain[focus] == 'C':
-                plot3D.scatter(current_x,current_y,current_z,c='y',s=200,zorder=1)
+                plot3D.scatter(current_x,current_y,current_z,c='y',s=150,zorder=1)
             else:
-                plot3D.scatter(current_x,current_y,current_z,c='b',s=200,zorder=1)
+                plot3D.scatter(current_x,current_y,current_z,c='b',s=150,zorder=1)
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
@@ -209,7 +209,7 @@ def visualizeFolding (Protein):
                         [current_z,neighbor_z], 'y--', linewidth=0.5, zorder=-1)
 
         # Plots the covalent bonds in the protein
-        plot3D.plot(plotX, plotY, plotZ, linewidth = 5.0, zorder = 0)
+        plot3D.plot(plotX, plotY, plotZ, linewidth = 3.0, zorder = 0)
 
         # Graph info
         plot3D.text2D(0.5, 0.95,'Strength: ' + str(Protein.strength), transform = plot3D.transAxes)
