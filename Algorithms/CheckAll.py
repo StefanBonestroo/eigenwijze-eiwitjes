@@ -4,8 +4,12 @@ from functions import calculateFolding
 from Algorithms.helpers import possibilityCheck
 from Algorithms.helpers import validityCheck
 from functions import calculateFolding
+from classes import Protein
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 3754943f54d3169243cb12d17bf1e090c92297fa
 def depthFirst(inputPro):
 
     succes = 0
@@ -14,9 +18,14 @@ def depthFirst(inputPro):
 
     # 0 == staigth; 1 == up; 2 == down; 3 == left; 4 == right;
     options = []
+<<<<<<< HEAD
+    counter = len(inputPro.proteinChain)
+    for aminos in range(1,counter):
+=======
 
     counter = len(inputPro.proteinChain)
     for aminos in range(counter):
+>>>>>>> 3754943f54d3169243cb12d17bf1e090c92297fa
         options.append(0)
     counter -= 2
 
@@ -57,6 +66,15 @@ def depthFirst(inputPro):
     bestPro.aminoCoordinates= bestFolding
     return bestPro
 
+<<<<<<< HEAD
+def folder(directions, Protein):
+    aminoCoordinates = [[0,0,0],[1,0,0]]
+    span = len(directions)
+    for aminozuur in range(1,span):
+        direction = ((aminoCoordinates[aminozuur][0] - aminoCoordinates[aminozuur - 1][0]),\
+        (aminoCoordinates[aminozuur][1] - aminoCoordinates[aminozuur - 1][1]),\
+        (aminoCoordinates[aminozuur][2] - aminoCoordinates[aminozuur - 1][2]))
+=======
 def folder(directions, inputProtein):
     aminoCoordinates = [[0,0,0]]
     # print(directions)
@@ -68,6 +86,7 @@ def folder(directions, inputProtein):
             (aminoCoordinates[aminozuur][1] - aminoCoordinates[aminozuur - 1][1]),\
             (aminoCoordinates[aminozuur][2] - aminoCoordinates[aminozuur - 1][2]))
             # print (direction)
+>>>>>>> 3754943f54d3169243cb12d17bf1e090c92297fa
         aminoCoordinates.append(copy.copy(aminoCoordinates[aminozuur]))
         if directions[aminozuur] == 0: # straight
             aminoCoordinates[aminozuur+1][0] += direction[0]

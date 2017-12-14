@@ -23,7 +23,6 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
             go = 1
     origPro = randomPro
     bestPro = origPro
-    print(origPro.strength)
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
