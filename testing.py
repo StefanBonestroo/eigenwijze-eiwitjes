@@ -92,6 +92,21 @@ print (x)
 # correntCoor = dataStructure[2][3:8]
 # for loop in correntCoor:
 #     print("niks")
+<<<<<<< HEAD
+# # print(dataStructure[2][3:4])
+# import random
+# import math
+#
+# newScore = -8
+# oldScore = -14
+# temp = 3.5
+# while temp > 0.1:
+#     probab =  min(1,(math.expm1(-newPro.strength/temp)/math.expm1(-origPro.strength/temp)))
+#     randumb = random.uniform(0,1)
+#     if probab > randumb:
+#         origPro = newPro
+#     temp *= 0.5
+=======
 # print(dataStructure[2][3:4])
 import random
 import math
@@ -100,11 +115,19 @@ import math
 
 newScore = -8
 oldScore = -14
+>>>>>>> 880b2456ef59ad838d1ecba80245d3950cdb80b7
 temp = 3.5
+counter = 0
 while temp > 0.1:
+<<<<<<< HEAD
+    counter +=1
+    temp *= 0.98
+print("counter: ", counter)
+=======
     probab =  min(1,(math.expm1(-newPro.strength/temp)/math.expm1(-origPro.strength/temp)))
     randumb = random.uniform(0,1)
     if probab > randumb:
         origPro = newPro
     temp *= 0.5
 >>>>>>> 1985cfc8e473442f9fad80296af0fbb94dd2f55f
+>>>>>>> 880b2456ef59ad838d1ecba80245d3950cdb80b7
