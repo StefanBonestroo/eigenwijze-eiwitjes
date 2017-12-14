@@ -19,7 +19,7 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
     randomPro = randomizer(inputPro, trieMax, dimension)
     origPro = randomPro
     bestPro = origPro
->>>>>>> 880b2456ef59ad838d1ecba80245d3950cdb80b7
+
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
@@ -64,7 +64,10 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
 
                 # calculate probability of acceptance
-                probab =  min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+                try:
+                    probab = min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+                except ZeroDivisionError:
+                    probab = 0
                 randumb = random.uniform(0,1)
                 if probab > randumb:
                     origPro = newPro
@@ -176,5 +179,3 @@ def beginFragment(origPro, fragment, dimension):
         else:
             return 'none'
     return(newCoordinates[:fragment])
-<<<<<<< HEAD
-=======
