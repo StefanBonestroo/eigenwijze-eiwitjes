@@ -2,11 +2,12 @@
 
 ![alt-text](https://github.com/StefanBonestroo/eigenwijze-eiwitjes/blob/master/Miscellaneous/Logo.png)
 
-Dit, in python geschreven, programma probeert een oplossing te vinden voor het zogenaamde 'Hydrophobic-polar Protein Folding'-probleem. Dit probleem kan als volgt beschreven worden: We hebben een eiwit hebben bestaande uit H en P aminozuren - weer te geven als bijv. "HHHPHHPHP" - en wij moeten deze vouwen, enkel gebruikmakende van hoeken van 90 graden, zonder aminozuren te doen laten overlappen of breken. Een vouwing wordt beter naarmate er H'tjes naast elkaar liggen, waar de covalente verbindingen tussen H'tjes niet meetellen. Een H-bond tussen 2 H'tjes zorgt namelijk voor een meer stabiele energietoestand. Wat is de beste manier om een eiwit te vouwen?
+Dit, in python geschreven, programma probeert een oplossing te vinden voor het 'Hydrophobic-polar Protein Folding'-probleem. Dit probleem kan als volgt beschreven worden: We hebben een eiwit hebben bestaande uit H en P aminozuren - weer te geven als bijv. "HHHPHHPHP" - en wij moeten deze vouwen, enkel gebruikmakende van hoeken van 90 graden, zonder dat aminozuren overlappen of verbindingen worden gebroken. Een vouwing wordt beter naarmate er H'tjes naast elkaar liggen, waar de covalente verbindingen tussen H'tjes niet meetellen. Een H-bond tussen 2 H'tjes zorgt namelijk voor een meer stabiele energietoestand. Wat is de beste manier om een eiwit te vouwen? 
+([hier meer details over de case](http://heuristieken.nl/wiki/index.php?title=Protein_Pow(d)er))
 
 ## Voorbereidingen
 
-Na het volgen van deze instructies zou het programma goed 'runnable' moeten zijn in de terminal van je computer.
+Na het volgen van deze instructies zou je het programma moeten kunnen runnen in de terminal van je computer.
 
 
 ### Randvoorwaarden
@@ -14,7 +15,7 @@ Na het volgen van deze instructies zou het programma goed 'runnable' moeten zijn
 Er zijn wat tools nodig om dit programma effectief te kunnen runnen.
 
 #### Matplotlib
-Dit package verzorgd het visualisatie onderdeel van 'Protein Power'. Deze kan op de volgende manier geinstalleerd worden:
+Dit package verzorgt het visualisatie onderdeel van 'Protein Power'. Deze kan op de volgende manier geinstalleerd worden:
 ```
 python3 -mpip install matplotlib
 ```
@@ -30,7 +31,7 @@ Mocht de installatie niet succesvol zijn geweest, dan kan de [Matplotlib documen
 
 ### Het programma zelf
 
-Het programma kan in de terminal gerund worden en vereist verder geen installaties.
+Het programma kan in de terminal gerund worden met python 3 en vereist verder geen installaties.
 
 ## Vouw je eiwit
 
@@ -38,7 +39,7 @@ Nadat alle bestanden op je computer aanwezig zijn, kun je beginnen met het vouwe
 
 ### Gebruik
 
-Wanneer enkel ``` python3 Main.py ``` gerund wordt, zal het programma je vertellen hoe je het programma moet gebruiken en welke argumenten je daarmee kan (en mag) meegeven:
+Wanneer enkel ``` python3 main.py ``` gerund wordt, zal het programma je vertellen hoe je het programma moet gebruiken en welke argumenten je daarmee kan (en mag) meegeven:
 ```
 Usage: 
 
@@ -51,7 +52,7 @@ Usage:
 
 ### De resultaten
 
-Nadat het door jou gekozen algoritme gerund heeft, zal het programma je een visualisatie van de gevonden resultaten geven. Aangezien de resultaten opgeslagen worden in je 'Protein' klasse, kun je elke gewenst stuk code voor verdere bewerking aan het einde van Main.py toevoegen, om daarin deze aan te roepen.
+Nadat het door jou gekozen algoritme gerund heeft, zal het programma je een visualisatie van de gevonden resultaten geven. Aangezien de resultaten opgeslagen worden in je 'Protein' klasse, kun je elke gewenst stuk code voor verdere bewerking aan het einde van main.py toevoegen, om daarin deze aan te roepen.
 
 ## Gebruikte software
 
@@ -66,4 +67,5 @@ Nadat het door jou gekozen algoritme gerund heeft, zal het programma je een visu
 ## Erkenningen
 
 * Wietze Slagman - *Voor de inzichten, tips, en begeleiding* - [Wietze](https://github.com/WietzeSlagman)
+* Bas Terwijn - *Voor de inzichten, tips, en begeleiding* - [Bas](https://github.com/bterwijn)
 * Het README.md template van [Purplebooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
