@@ -5,7 +5,7 @@ from Algorithms.helpers import possibilityCheck
 from Algorithms.helpers import validityCheck
 from functions import calculateFolding
 
-def depthFirst(Protein):
+def depthFirst(inputPro):
 
     succes = 0
     bestScore = 0
@@ -13,7 +13,7 @@ def depthFirst(Protein):
 
     # 0 == staigth; 1 == up; 2 == down; 3 == left; 4 == right;
     options = []
-    counter = len(Protein.proteinChain)
+    counter = len(inputPro.proteinChain)
     for aminos in range(counter):
         options.append(0)
     counter -= 1
@@ -31,10 +31,10 @@ def depthFirst(Protein):
                 cancel += 1
         if not ('1,1,1,1' in str(options)) and not ('2,2,2,2' in str(options)) \
         and not ('3,3,3,3' in str(options)) and not ('4,4,4,4' in str(options)):
-            solution = folder(options, Protein)
+            solution = folder(options, inputPro)
             if solution != None:
                 # Calculates the folding score
-                oneScore = calculateFolding(solution, Protein.proteinChain)
+                oneScore = calculateFolding(solution, inputPro.proteinChain)
 
                 # Updates 'bestScore' and 'bestFolding' if the folding is better, and
                 # resets the coordinates
@@ -50,9 +50,12 @@ def depthFirst(Protein):
 
     print (bestFolding)
     print (bestScore)
-    return [bestFolding, bestScore]
+    bestPro = Protein(inputPro.proteinChain)
+    bestPro.strength = bestScore
+    bestPro.aminoCoordinates= bestFolding
+    return bestPro
 
-def folder(directions, Protein):
+def folder(directions, inputProtein):
     aminoCoordinates = [[0,0,0]]
     # print(directions)
     for aminozuur in range(len(directions)):

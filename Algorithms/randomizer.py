@@ -1,10 +1,10 @@
-
+from classes import Protein
 from functions import calculateFolding
 from Algorithms.helpers import possibilityCheck
 from Algorithms.helpers import validityCheck
 from functions import calculateFolding
 
-def randomizer (Protein, tries, dimension):
+def randomizer (inputProtein, tries, dimension):
 
     if dimension == '2D':
         aminoCoordinates = [(0,0),(0,1)]
@@ -21,7 +21,7 @@ def randomizer (Protein, tries, dimension):
 
     while success < tries:
 
-        for amino in range(2,len(Protein.proteinChain)):
+        for amino in range(2,len(inputProtein.proteinChain)):
 
             # Generate possibilities for neighboring locations
             possibilities = possibilityCheck(amino, aminoCoordinates)
@@ -36,7 +36,7 @@ def randomizer (Protein, tries, dimension):
 
         if stuck == 0:
             # Calculates the folding score
-            oneScore = calculateFolding(aminoCoordinates, Protein.proteinChain)
+            oneScore = calculateFolding(aminoCoordinates, inputProtein.proteinChain)
 
             # Updates 'bestScore' and 'bestFolding' if the folding is better, and
             # resets the coordinates
@@ -59,4 +59,7 @@ def randomizer (Protein, tries, dimension):
             aminoCoordinates = [(0,0,0),(0,0,1)]
 
     # print(loops)
-    return [bestFolding, bestScore]
+    bestPro = Protein(inputProtein.proteinChain)
+    bestPro.aminoCoordinates = bestFolding
+    bestPro.strength = bestScore
+    return bestPro
