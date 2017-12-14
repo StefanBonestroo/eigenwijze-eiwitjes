@@ -16,10 +16,13 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
          raise Exception('fragment must be at least 2')
 
     # Get the best protein from a 100 random foldings
-    randomPro = randomizer(inputPro, trieMax, dimension)
+    go = 0
+    while go == 0:
+        randomPro = randomizer(inputPro, trieMax, dimension)
+        if randomPro.strength != 0:
+            go = 1
     origPro = randomPro
     bestPro = origPro
-
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')

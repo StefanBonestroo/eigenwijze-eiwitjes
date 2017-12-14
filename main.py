@@ -10,6 +10,7 @@ from functions import printUsage
 from Algorithms.randomizer import randomizer
 from Algorithms.fragmentRandomizer import fragmentRandomizer
 from Algorithms.CheckAll import depthFirst, folder
+from Algorithms.checkAllLong import checkAllLong, folderLong
 
 # from Algorithms.simulatedAnnealing import simulatedAnnealing
 
@@ -20,7 +21,7 @@ def main():
         printUsage()
         return
 
-    elif sys.argv[2] not in ['randomizer','depth-first','fragment-randomizer'] or\
+    elif sys.argv[2] not in ['randomizer','depth-first','fragment-randomizer','depth-first-long'] or\
     sys.argv[3] not in ['2D','3D']:
         printUsage()
         return
@@ -81,6 +82,10 @@ def main():
     elif runningAlgorithm == 'depth-first':
         # Runs the depth-first algorithm (only in 3D)
         outputPro = depthFirst(eggwhite)
+        print (outputPro.aminoCoordinates)
+    elif runningAlgorithm == 'depth-first-long':
+        # Runs the depth-first algorithm (only in 3D)
+        outputPro = checkAllLong(eggwhite)
     elif runningAlgorithm == 'fragment-randomizer':
         # Runs an algorithm that tweaks fragments of a randomized protein
         print(fragmentLength)
