@@ -58,7 +58,7 @@ def depthFirst(inputPro):
 def folder(directions):
     aminoCoordinates = [[0,0,0],[0,1,0]]
     span = len(directions)
-    for aminozuur in range(1,span):
+    for aminozuur in range(1,span)):
         if aminozuur == 1:
             direction = (0,1,0)
         else:
@@ -74,30 +74,20 @@ def folder(directions):
         elif directions[aminozuur] == 1 or directions[aminozuur] == 2: # up # down
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][1] += direction[0]
+                    aminoCoordinates[aminozuur+1][0] += direction[0]
                 else:
-                    aminoCoordinates[aminozuur+1][1] -= direction[0]
-            elif direction == (0,0,1) or direction == (0,0,-1):
+                    aminoCoordinates[aminozuur+1][0] -= direction[0]
+            elif direction == (0,1,0) or direction == (0,-1,0) or direction == (0,0,1) or direction == (0,0,-1):
                 if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][1] -= direction[2]
+                    aminoCoordinates[aminozuur+1][1] -= direction[1]
                 else:
-                    aminoCoordinates[aminozuur+1][1] += direction[2]
-            elif direction == (0,1,0) or direction == (0,-1,0):
-                if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][0] -= direction[1]
-                else:
-                    aminoCoordinates[aminozuur+1][0] += direction[1]
+                    aminoCoordinates[aminozuur+1][1] += direction[1]
         elif directions[aminozuur] == 3 or directions[aminozuur] == 4: # left, right
-            if direction == (1,0,0) or direction == (-1,0,0):
+            if direction == (1,0,0) or direction == (-1,0,0) or direction == (0,1,0) or direction == (0,-1,0):
                 if directions[aminozuur] == 3:
                     aminoCoordinates[aminozuur+1][2] += direction[0]
                 else:
                     aminoCoordinates[aminozuur+1][2] -= direction[0]
-            elif direction == (0,1,0) or direction == (0,-1,0):
-                if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur+1][2] += direction[1]
-                else:
-                    aminoCoordinates[aminozuur+1][2] -= direction[1]
             elif direction == (0,0,1) or direction == (0,0,-1):
                 if directions[aminozuur] == 3:
                     aminoCoordinates[aminozuur+1][0] -= direction[2]
@@ -106,8 +96,11 @@ def folder(directions):
 
     tuples = []
     tuples.append([tuple(l) for l in aminoCoordinates])
+    # print (tuples)
 
     if len(set(tuples[0])) == len(aminoCoordinates):
         return aminoCoordinates
     else:
         return None
+
+    # scipy en numpy

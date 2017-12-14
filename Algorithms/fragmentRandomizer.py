@@ -19,7 +19,6 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
     randomPro = randomizer(inputPro, trieMax, dimension)
     origPro = randomPro
     bestPro = origPro
->>>>>>> 3754943f54d3169243cb12d17bf1e090c92297fa
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
@@ -176,5 +175,3 @@ def beginFragment(origPro, fragment, dimension):
         else:
             return 'none'
     return(newCoordinates[:fragment])
-<<<<<<< HEAD
-=======
