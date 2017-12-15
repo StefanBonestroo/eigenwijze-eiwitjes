@@ -82,7 +82,6 @@ def main():
     elif runningAlgorithm == 'depth-first':
         # Runs the depth-first algorithm (only in 3D)
         outputPro = depthFirst(eggwhite)
-        print (outputPro.aminoCoordinates)
     elif runningAlgorithm == 'depth-first-long':
         # Runs the depth-first algorithm (only in 3D)
         outputPro = checkAllLong(eggwhite)

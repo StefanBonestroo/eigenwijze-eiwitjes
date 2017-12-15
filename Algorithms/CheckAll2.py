@@ -1,9 +1,6 @@
 import timeit
 import copy
-from functions import calculateFolding
-from Algorithms.helpers import possibilityCheck
-from Algorithms.helpers import validityCheck
-from functions import calculateFolding
+from Algorithms.helpers import calculateFolding
 
 def depthFirst(Protein):
 
