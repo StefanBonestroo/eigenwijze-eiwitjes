@@ -2,8 +2,6 @@
 # in a randomized matter.
 import random
 import math
-import matplotlib.pyplot as plot
-import timeit
 
 from classes import Protein
 from random import randint
@@ -12,34 +10,22 @@ from Algorithms import helpers, randomizer
 from Algorithms.randomizer import randomizer
 from Algorithms.helpers import possibilityCheck, validityCheck, CalculateFolding
 
-# from Algorithms.fragmentFunctions import middleFragment, endFragment,beginFragment
-# from math import expm
-timeArray = [0]
-scoreArray = [0]
-
-
 def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
-
-    if len(inputPro.proteinChain) < (fragment - 2):
-        raise Exception('fragment is to big for fragmentRandomizer to sample fragment from protein')
 
     if fragment <= 2:
          raise Exception('fragment must be at least 2')
 
     # Get the best protein from a 100 random foldings
-    startTime = round(timeit.default_timer(), 2)
     randomPro = randomizer(inputPro, trieMax, dimension)
     origPro = randomPro
-    bestPro = origPro # waar is dit voor dan?
+    bestPro = origPro
+>>>>>>> 880b2456ef59ad838d1ecba80245d3950cdb80b7
     # error if something went wrong in randomizer
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
 
     temp = 3.5
-    counter = 0
     while temp > 0.1:
-
-
 
         # define start as random amino acid
         start = len(origPro.proteinChain)
@@ -78,7 +64,10 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
 
                 # calculate probability of acceptance
-                probab =  min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+                try:
+                    probab = min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+                except ZeroDivisionError:
+                    probab = 0
                 randumb = random.uniform(0,1)
                 if probab > randumb:
                     origPro = newPro
@@ -86,19 +75,7 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                         bestPro = origPro
                 temp *= 0.9998
 
-                stopTime = round(timeit.default_timer(), 2)
-                counter += 1
-                timeArray.append(timeArray[counter - 1] + stopTime - startTime)
-                scoreArray.append(newPro.strength)
-                startTime = round(timeit.default_timer(), 2)
-
-    # print(timArray)
-
-    plot.plot(timeArray,scoreArray,linewidth = 1)
-    plot.xlabel('Running time (seconds)')
-    plot.ylabel('Protein stability score')
-    plot.title(bestPro.proteinChain)
-    return(bestPro)
+    return(bestPro.strength)
 
 def middleFragment(origPro, start, fragment, dimension):
 
@@ -180,10 +157,8 @@ def endFragment(origPro, start, fragment, dimension):
     newCoordinates = origPro.aminoCoordinates[0:start]
 
     for amino in range(start, start + fragment):
-        # print('start: ',start, ', amino: ',amino)
         possibilities = possibilityCheck(amino, newCoordinates[0:amino])
         valid = validityCheck(possibilities, newCoordinates, 'randomizer')
-        # print('valid', valid)
         if valid != None:
             newCoordinates.append(valid)
         else:
@@ -194,10 +169,8 @@ def beginFragment(origPro, fragment, dimension):
     newCoordinates = origPro.aminoCoordinates[fragment:]
 
     for i in range(fragment):
-        # print('start: ',start, ', amino: ',amino)
         possibilities = possibilityCheck(1, newCoordinates)
-        valid = validityCheck(possibilities, newCoordinates, 'randomizer') # wat wordt hier
-        # print('valid', valid)
+        valid = validityCheck(possibilities, newCoordinates, 'randomizer')
         if valid != None:
             oldCoordinates = newCoordinates
             newCoordinates = [valid]
@@ -206,6 +179,3 @@ def beginFragment(origPro, fragment, dimension):
         else:
             return 'none'
     return(newCoordinates[:fragment])
-
-# from math import expm
-# p =  - math.expm()
