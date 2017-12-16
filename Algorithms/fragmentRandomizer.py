@@ -5,10 +5,10 @@ import math
 
 from classes import Protein
 from random import randint
-from functions import calculateFolding, visualizeFolding
+from functions import visualizeFolding
 from Algorithms import helpers, randomizer
 from Algorithms.randomizer import randomizer
-from Algorithms.helpers import possibilityCheck, validityCheck
+from Algorithms.helpers import possibilityCheck, validityCheck, calculateFolding
 
 def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
 
@@ -67,10 +67,8 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
 
                 # calculate probability of acceptance
-                try:
-                    probab = min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
-                except ZeroDivisionError:
-                    probab = 0
+                probab = min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+
                 randumb = random.uniform(0,1)
                 if probab > randumb:
                     origPro = newPro
