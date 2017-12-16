@@ -96,7 +96,6 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
     plot.xlabel('Running time (seconds)')
     plot.ylabel('Protein stability score')
     plot.title(bestPro.proteinChain)
-
     return(bestPro)
 
 def middleFragment(origPro, start, fragment, dimension):
@@ -203,4 +202,5 @@ def beginFragment(origPro, fragment, dimension):
     return(newCoordinates[:fragment])
 
 testProtein = Protein('HCPHPCPHPCHCHPHPPPHPPPHPPPPHPCPHPPPHPHHHCCHCHCHCHH')
-fragmentRandomizer(testProtein, 17, '3D', 1)
+bestProtie = fragmentRandomizer(testProtein, 17, '3D', 1)
+bestProtie.
