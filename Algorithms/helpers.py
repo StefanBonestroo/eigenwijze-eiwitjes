@@ -80,6 +80,83 @@ def validityCheck(possibilities, aminoCoordinates, algorithm):
                 elif direction not in aminoCoordinates:
                     return direction
 
+def calculateFolding (aminoCoordinates, proteinChain):
+
+    # X & Y's for increased readability
+    x = 0
+    y = 1
+    z = 2
+
+    strength = 0
+
+    if len(aminoCoordinates[0]) == 2:
+
+        # Iterates over all single amino acids in the protein
+        for focus in range(len(proteinChain)):
+
+            current_x = aminoCoordinates[focus][x]
+            current_y = aminoCoordinates[focus][y]
+
+            # Iterates over all the other amino acids in the chain
+            for partner in range(len(proteinChain)):
+                neighbor_x = aminoCoordinates[partner][x]
+                neighbor_y = aminoCoordinates[partner][y]
+
+                # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
+                # , checks whether these can form an H-bond, and plots those
+                if (((abs(current_x - neighbor_x) == 1) and\
+                (abs(current_y - neighbor_y) == 0)) or\
+                ((abs(current_y - neighbor_y) == 1) and\
+                (abs(current_x - neighbor_x) == 0))) and\
+                (focus-partner) not in [-1, 0, 1]:
+                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
+                        strength += 0.5
+                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
+                        strength += 2.5
+
+        return strength
+
+
+    elif len(aminoCoordinates[0]) == 3:
+
+        # Iterates over all single amino acids in the protein
+        for focus in range(len(proteinChain)):
+
+            current_x = aminoCoordinates[focus][x]
+            current_y = aminoCoordinates[focus][y]
+            current_z = aminoCoordinates[focus][z]
+
+            # Iterates over all the other amino acids in the chain
+            for partner in range(len(proteinChain)):
+
+                neighbor_x = aminoCoordinates[partner][x]
+                neighbor_y = aminoCoordinates[partner][y]
+                neighbor_z = aminoCoordinates[partner][z]
+
+                # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
+                # , checks whether these can form an H-bond, and plots those
+                if (((abs(current_x - neighbor_x) == 1) and\
+                (abs(current_y - neighbor_y) == 0) and\
+                (abs(current_z - neighbor_z) == 0)) or\
+                ((abs(current_x - neighbor_x) == 0) and\
+                (abs(current_y - neighbor_y) == 1) and\
+                (abs(current_z - neighbor_z) == 0)) or\
+                ((abs(current_x - neighbor_x) == 0) and\
+                (abs(current_y - neighbor_y) == 0) and\
+                (abs(current_z - neighbor_z) == 1))) and\
+                (focus - partner) not in [-1, 0, 1]:
+                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
+                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
+                        strength += 0.5
+                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
+                        strength += 2.5
+
+
+        return strength
+
         # elif algorithm == 'simulated annealing':
         #
         #     if (aminoCoordinates[amino - 1] in possibilities and\
