@@ -1,7 +1,3 @@
-import matplotlib
-import matplotlib.pyplot as plot
-import matplotlib.axes as axis
-from mpl_toolkits.mplot3d import Axes3D as plot3D
 
 # Prints the correct usage (in a pretty way)
 def printUsage():
@@ -28,20 +24,20 @@ def calculateFolding (aminoCoordinates, proteinChain):
         # Iterates over all single amino acids in the protein
         for focus in range(len(proteinChain)):
 
-            current_x = aminoCoordinates[focus][x]
-            current_y = aminoCoordinates[focus][y]
+            currentX = aminoCoordinates[focus][x]
+            currentY = aminoCoordinates[focus][y]
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
-                neighbor_x = aminoCoordinates[partner][x]
-                neighbor_y = aminoCoordinates[partner][y]
+                neighborX = aminoCoordinates[partner][x]
+                neighborY = aminoCoordinates[partner][y]
 
                 # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
                 # , checks whether these can form an H-bond, and plots those
-                if (((abs(current_x - neighbor_x) == 1) and\
-                (abs(current_y - neighbor_y) == 0)) or\
-                ((abs(current_y - neighbor_y) == 1) and\
-                (abs(current_x - neighbor_x) == 0))) and\
+                if (((abs(currentX - neighborX) == 1) and\
+                (abs(currentY - neighborY) == 0)) or\
+                ((abs(currentY - neighborY) == 1) and\
+                (abs(currentX - neighborX) == 0))) and\
                 (focus-partner) not in [-1, 0, 1]:
                     if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
                     (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
@@ -58,28 +54,28 @@ def calculateFolding (aminoCoordinates, proteinChain):
         # Iterates over all single amino acids in the protein
         for focus in range(len(proteinChain)):
 
-            current_x = aminoCoordinates[focus][x]
-            current_y = aminoCoordinates[focus][y]
-            current_z = aminoCoordinates[focus][z]
+            currentX = aminoCoordinates[focus][x]
+            currentY = aminoCoordinates[focus][y]
+            currentZ = aminoCoordinates[focus][z]
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
 
-                neighbor_x = aminoCoordinates[partner][x]
-                neighbor_y = aminoCoordinates[partner][y]
-                neighbor_z = aminoCoordinates[partner][z]
+                neighborX = aminoCoordinates[partner][x]
+                neighborY = aminoCoordinates[partner][y]
+                neighborZ = aminoCoordinates[partner][z]
 
                 # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
                 # , checks whether these can form an H-bond, and plots those
-                if (((abs(current_x - neighbor_x) == 1) and\
-                (abs(current_y - neighbor_y) == 0) and\
-                (abs(current_z - neighbor_z) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 1) and\
-                (abs(current_z - neighbor_z) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 0) and\
-                (abs(current_z - neighbor_z) == 1))) and\
+                if (((abs(currentX - neighborX) == 1) and\
+                (abs(currentY - neighborY) == 0) and\
+                (abs(currentZ - neighborZ) == 0)) or\
+                ((abs(currentX - neighborX) == 0) and\
+                (abs(currentY - neighborY) == 1) and\
+                (abs(currentZ - neighborZ) == 0)) or\
+                ((abs(currentX - neighborX) == 0) and\
+                (abs(currentY - neighborY) == 0) and\
+                (abs(currentZ - neighborZ) == 1))) and\
                 (focus - partner) not in [-1, 0, 1]:
                     if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
                     (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
@@ -90,129 +86,3 @@ def calculateFolding (aminoCoordinates, proteinChain):
 
 
         return strength
-
-
-# This function takes a string ('proteinChain') and a set of coordinates ('output')
-# and uses these to present the user with a visualization of the protein and its H-bonds
-def visualizeFolding (Protein):
-
-    proteinChain = Protein.proteinChain
-    x = 0
-    y = 1
-    z = 2
-
-    plotX = []
-    plotY = []
-    plotZ = []
-
-    if len(Protein.aminoCoordinates[0]) == 2:
-
-        # Initiate figure
-        plot2D = plot.figure()
-
-        # Iterates over all single amino acids in the protein
-        for focus in range(len(proteinChain)):
-
-            current_x = Protein.aminoCoordinates[focus][x]
-            current_y = Protein.aminoCoordinates[focus][y]
-            plotX.append(current_x)
-            plotY.append(current_y)
-
-            if proteinChain[focus] == 'H':
-                plot.scatter(current_x,current_y,color='r',s=100,zorder=1)
-            elif proteinChain[focus] == 'C':
-                plot.scatter(current_x,current_y,color='y',s=100,zorder=1)
-            else:
-                plot.scatter(current_x,current_y,color='b',s=100,zorder=1)
-
-            # Iterates over all the other amino acids in the chain
-            for partner in range(len(proteinChain)):
-
-                neighbor_x = Protein.aminoCoordinates[partner][x]
-                neighbor_y = Protein.aminoCoordinates[partner][y]
-
-                # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
-                # , checks whether these can form an H-bond, and plots those
-                if (((abs(current_x - neighbor_x) == 1) and\
-                (abs(current_y - neighbor_y) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 1))) and\
-                (focus - partner) not in [-1, 0, 1]:
-                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
-                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
-                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
-                        plot.plot([current_x, neighbor_x],[current_y,neighbor_y]\
-                        , 'r--', linewidth=1, zorder=-1)
-                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
-                        plot.plot([current_x, neighbor_x],[current_y,neighbor_y]\
-                        , 'y--', linewidth=1, zorder=-1)
-
-        # Plots the covalent bonds in the protein
-        plot.plot(plotX, plotY, linewidth = 0.5, zorder = 0)
-
-        # Graph info
-        plot.title('Strength: ' + str(Protein.strength))
-        plot.axis('off')
-
-        plot.show()
-
-
-    elif len(Protein.aminoCoordinates[0]) == 3:
-
-        # Initiate 3D plot
-        figure3D = plot.figure()
-        plot3D = figure3D.add_subplot(111, projection = '3d')
-
-        # Iterates over all single amino acids in the protein
-        for focus in range(len(proteinChain)):
-
-            current_x = Protein.aminoCoordinates[focus][x]
-            current_y = Protein.aminoCoordinates[focus][y]
-            current_z = Protein.aminoCoordinates[focus][z]
-            plotX.append(current_x)
-            plotY.append(current_y)
-            plotZ.append(current_z)
-
-            if proteinChain[focus] == 'H':
-                plot3D.scatter(current_x,current_y,current_z,c='r',s=100,zorder=1)
-            elif proteinChain[focus] == 'C':
-                plot3D.scatter(current_x,current_y,current_z,c='y',s=100,zorder=1)
-            else:
-                plot3D.scatter(current_x,current_y,current_z,c='b',s=100,zorder=1)
-
-            # Iterates over all the other amino acids in the chain
-            for partner in range(len(proteinChain)):
-
-                neighbor_x = Protein.aminoCoordinates[partner][x]
-                neighbor_y = Protein.aminoCoordinates[partner][y]
-                neighbor_z = Protein.aminoCoordinates[partner][z]
-
-                # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
-                # , checks whether these can form an H-bond, and plots those
-                if (((abs(current_x - neighbor_x) == 1) and\
-                (abs(current_y - neighbor_y) == 0) and\
-                (abs(current_z - neighbor_z) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 1) and\
-                (abs(current_z - neighbor_z) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 0) and\
-                (abs(current_z - neighbor_z) == 1))) and\
-                (focus - partner) not in [-1, 0, 1]:
-                    if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
-                    (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
-                    (proteinChain[focus] == 'H' and proteinChain[partner] == 'C'):
-                        plot3D.plot([current_x,neighbor_x],[current_y,neighbor_y],\
-                        [current_z,neighbor_z], 'r--', linewidth=1, zorder=-1)
-                    elif proteinChain[focus] == 'C' and proteinChain[partner] == 'C':
-                        plot3D.plot([current_x,neighbor_x],[current_y,neighbor_y],\
-                        [current_z,neighbor_z], 'y--', linewidth=1, zorder=-1)
-
-        # Plots the covalent bonds in the protein
-        plot3D.plot(plotX, plotY, plotZ, linewidth = 0.5, zorder = 0)
-
-        # Graph info
-        plot3D.text2D(0.5, 0.95,'Strength: ' + str(Protein.strength), transform = plot3D.transAxes)
-        plot3D.axis('off')
-
-        plot.show()

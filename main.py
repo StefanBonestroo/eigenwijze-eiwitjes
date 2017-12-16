@@ -5,7 +5,6 @@ import timeit
 import matplotlib.pyplot as plot
 
 from classes import Protein
-from functions import visualizeFolding
 from functions import printUsage
 from Algorithms.randomizer import randomizer
 from Algorithms.fragmentRandomizer import fragmentRandomizer
@@ -103,7 +102,7 @@ def main():
     print('\nI found this solution in ' + str(round((stop - start), 2)) + ' seconds.\n')
 
     # Visualizes the best folding
-    visualizeFolding(bestPro)
+    bestPro.visualizeFolding()
 
 if __name__ == "__main__":
     main()
