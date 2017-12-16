@@ -1,8 +1,5 @@
 from classes import Protein
-from functions import calculateFolding
-from Algorithms.helpers import possibilityCheck
-from Algorithms.helpers import validityCheck
-from functions import calculateFolding
+from Algorithms.helpers import possibilityCheck, calculateFolding, validityCheck
 
 def randomizer (inputProtein, tries, dimension):
 
