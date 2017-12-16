@@ -67,10 +67,8 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                 newPro.strength = calculateFolding(newPro.aminoCoordinates, newPro.proteinChain)
 
                 # calculate probability of acceptance
-                try:
-                    probab = min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
-                except ZeroDivisionError:
-                    probab = 0
+                probab = min(1,(math.expm1(newPro.strength/temp)/math.expm1(origPro.strength/temp)))
+
                 randumb = random.uniform(0,1)
                 if probab > randumb:
                     origPro = newPro
