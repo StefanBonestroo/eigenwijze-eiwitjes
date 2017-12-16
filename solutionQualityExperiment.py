@@ -28,7 +28,7 @@ def main():
                 proteinInstance = Protein(current[0])
 
                 if algorithm == 'randomizer':
-                    proteinSample = randomizer(proteinInstance, 100, '3D')
+                    proteinSample = randomizer(proteinInstance, 50000, '3D')
                 elif algorithm == 'fragment-randomizer':
                     proteinSample = fragmentRandomizer(proteinInstance, current[2], '3D', 1)
 
@@ -56,7 +56,7 @@ def main():
             plot.savefig(myPath + myFile)
             plot.clf()
 
-            print("The best folding of protein ", current[1], " had a strength of ", bestPro.strength, " and coordinates: ", bestPro.aminoCoordinates)
+            print(algorithm, "The best folding of protein ", current[1], " had a strength of ", bestPro.strength, " and coordinates: ", bestPro.aminoCoordinates)
 
         print('Folded all the proteins using the', algorithm, 'algorithm.')
 
