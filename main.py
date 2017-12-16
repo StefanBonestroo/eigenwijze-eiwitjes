@@ -1,3 +1,21 @@
+"""
+Protein Power by 'Eigenwijze eiwitjes'
+'A problem solving assignment in the Heuristieken course'
+
+Date: 17/12/2017
+
+Authors:
+    Yente Stor
+    Jesse Groot
+    Stefan Bonestroo
+
+This program folds a protein string to its, possibly, most stable conformation.
+A protein is a string of P/H/C's which, when adjacent (but not covalently connected)
+can give stability-points (H-C and H-H - 1 point, C-C - 5 points). There are several
+ways to get as many points, check 'printUsage' for the different algorithms you can use to
+fold a protein.
+"""
+
 #!/usr/bin/env python
 import sys
 import timeit
@@ -11,8 +29,6 @@ from Algorithms.fragmentRandomizer import fragmentRandomizer
 from Algorithms.CheckAll import depthFirst, folder
 from Algorithms.checkAllLong import checkAllLong, folderLong
 
-# from Algorithms.simulatedAnnealing import simulatedAnnealing
-
 def main():
 
     # Ensure proper usage
@@ -20,8 +36,8 @@ def main():
         printUsage()
         return
 
-    elif sys.argv[2] not in ['randomizer','depth-first','fragment-randomizer','depth-first-long'] or\
-    sys.argv[3] not in ['2D','3D']:
+    elif sys.argv[2] not in ['randomizer','depth-first','fragment-randomizer',\
+    'depth-first-long'] or sys.argv[3] not in ['2D','3D']:
         printUsage()
         return
 

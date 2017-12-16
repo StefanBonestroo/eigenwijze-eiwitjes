@@ -41,10 +41,10 @@ def main():
                 occurances[int(proteinSample.strength)] += 1
 
             scores = []
-            for score in range(worstScore, bestScore):
+            for score in range(worstScore, bestScore + 1):
                 scores.append(int(score))
 
-            occurances = (occurances[worstScore:bestScore])
+            occurances = (occurances[worstScore:bestScore + 1])
             plot.bar(scores, occurances)
             plot.title(current)
             plot.xlabel('Scores')

@@ -80,6 +80,7 @@ def validityCheck(possibilities, aminoCoordinates, algorithm):
                 elif direction not in aminoCoordinates:
                     return direction
 
+# Calculates the protein stability/strength
 def calculateFolding (aminoCoordinates, proteinChain):
 
     # X & Y's for increased readability
@@ -94,20 +95,20 @@ def calculateFolding (aminoCoordinates, proteinChain):
         # Iterates over all single amino acids in the protein
         for focus in range(len(proteinChain)):
 
-            current_x = aminoCoordinates[focus][x]
-            current_y = aminoCoordinates[focus][y]
+            currentX = aminoCoordinates[focus][x]
+            currentY = aminoCoordinates[focus][y]
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
-                neighbor_x = aminoCoordinates[partner][x]
-                neighbor_y = aminoCoordinates[partner][y]
+                neighborX = aminoCoordinates[partner][x]
+                neighborY = aminoCoordinates[partner][y]
 
                 # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
                 # , checks whether these can form an H-bond, and plots those
-                if (((abs(current_x - neighbor_x) == 1) and\
-                (abs(current_y - neighbor_y) == 0)) or\
-                ((abs(current_y - neighbor_y) == 1) and\
-                (abs(current_x - neighbor_x) == 0))) and\
+                if (((abs(currentX - neighborX) == 1) and\
+                (abs(currentY - neighborY) == 0)) or\
+                ((abs(currentY - neighborY) == 1) and\
+                (abs(currentX - neighborX) == 0))) and\
                 (focus-partner) not in [-1, 0, 1]:
                     if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
                     (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
@@ -124,28 +125,28 @@ def calculateFolding (aminoCoordinates, proteinChain):
         # Iterates over all single amino acids in the protein
         for focus in range(len(proteinChain)):
 
-            current_x = aminoCoordinates[focus][x]
-            current_y = aminoCoordinates[focus][y]
-            current_z = aminoCoordinates[focus][z]
+            currentX = aminoCoordinates[focus][x]
+            currentY = aminoCoordinates[focus][y]
+            currentZ = aminoCoordinates[focus][z]
 
             # Iterates over all the other amino acids in the chain
             for partner in range(len(proteinChain)):
 
-                neighbor_x = aminoCoordinates[partner][x]
-                neighbor_y = aminoCoordinates[partner][y]
-                neighbor_z = aminoCoordinates[partner][z]
+                neighborX = aminoCoordinates[partner][x]
+                neighborY = aminoCoordinates[partner][y]
+                neighborZ = aminoCoordinates[partner][z]
 
                 # Checks whether the 'partner' amino acid neighbors the 'focus' amino acids
                 # , checks whether these can form an H-bond, and plots those
-                if (((abs(current_x - neighbor_x) == 1) and\
-                (abs(current_y - neighbor_y) == 0) and\
-                (abs(current_z - neighbor_z) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 1) and\
-                (abs(current_z - neighbor_z) == 0)) or\
-                ((abs(current_x - neighbor_x) == 0) and\
-                (abs(current_y - neighbor_y) == 0) and\
-                (abs(current_z - neighbor_z) == 1))) and\
+                if (((abs(currentX - neighborX) == 1) and\
+                (abs(currentY - neighborY) == 0) and\
+                (abs(currentZ - neighborZ) == 0)) or\
+                ((abs(currentX - neighborX) == 0) and\
+                (abs(currentY - neighborY) == 1) and\
+                (abs(currentZ - neighborZ) == 0)) or\
+                ((abs(currentX - neighborX) == 0) and\
+                (abs(currentY - neighborY) == 0) and\
+                (abs(currentZ - neighborZ) == 1))) and\
                 (focus - partner) not in [-1, 0, 1]:
                     if (proteinChain[focus] == 'H' and proteinChain[partner] == 'H') or\
                     (proteinChain[focus] == 'C' and proteinChain[partner] == 'H') or\
@@ -157,12 +158,6 @@ def calculateFolding (aminoCoordinates, proteinChain):
 
         return strength
 
-        # elif algorithm == 'simulated annealing':
-        #
-        #     if (aminoCoordinates[amino - 1] in possibilities and\
-        #     aminoCoordinates[amino + 1] in possibilities) and aminoCoordinates[amino]\
-        #     in [aminoCoordinates[amino - 1], aminoCoordinates[amino + 1]]:
-        #         return True
 
 # def numberGenerater(number):
 #     while number[0] != 3:

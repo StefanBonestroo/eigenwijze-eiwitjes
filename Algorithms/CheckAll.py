@@ -28,7 +28,8 @@ def depthFirst(inputPro):
                     break
                 cancel += 1
         if not ('1,1,1,1' in str(options)) and not ('2,2,2,2' in str(options)) \
-        and not ('3,3,3,3' in str(options)) and not ('4,4,4,4' in str(options)) and (options.count(0) < xnl):
+        and not ('3,3,3,3' in str(options)) and not ('4,4,4,4' in str(options)) \
+        and (options.count(0) < xnl):
             solution = folder(options)
             if solution != None:
                 # Calculates the folding score
@@ -45,8 +46,6 @@ def depthFirst(inputPro):
                 # Add one succes
                 succes += 1
 
-    print (bestFolding)
-    print (bestScore)
     bestPro = Protein(inputPro.proteinChain)
     bestPro.strength = bestScore
     bestPro.aminoCoordinates= bestFolding
