@@ -5,7 +5,6 @@ import math
 
 from classes import Protein
 from random import randint
-from functions import visualizeFolding
 from Algorithms import helpers, randomizer
 from Algorithms.randomizer import randomizer
 from Algorithms.helpers import possibilityCheck, validityCheck, calculateFolding

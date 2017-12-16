@@ -5,17 +5,17 @@ from mpl_toolkits.mplot3d import Axes3D as plot3D
 
 class Protein:
 
-    def __init__(self, self.proteinChain):
+    def __init__(self, proteinChain):
         # string of amino acids chars
-        self.self.proteinChain = self.proteinChain
+        self.proteinChain = proteinChain
 
         # location coordinates and amino acid type
-        self.self.aminoCoordinates = []
+        self.aminoCoordinates = []
         self.strength = 0
 
     # This function takes a string ('self.proteinChain') and a set of coordinates ('output')
     # and uses these to present the user with a visualization of the protein and its H-bonds
-    def visualizeFolding ():
+    def visualizeFolding (self):
 
         x = 0
         y = 1

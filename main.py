@@ -86,7 +86,6 @@ def main():
         outputPro = checkAllLong(eggwhite)
     elif runningAlgorithm == 'fragment-randomizer':
         # Runs an algorithm that tweaks fragments of a randomized protein
-        print(fragmentLength)
         outputPro = fragmentRandomizer(eggwhite, fragmentLength, dimension, tries)
 
     # Records stop time
