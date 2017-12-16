@@ -1,6 +1,7 @@
 import copy
 from Algorithms.helpers import calculateFolding
 from classes import Protein
+# from itertools import product
 
 # PseudoCode:
 
@@ -30,9 +31,9 @@ def checkAllLong(inputPro):
     print (fragmentsCode)
 
     for fragment in range(len(fragmentsCode)):
-        print (fragment)
+        bestScore = 0
 
-        counter = len(fragmentsCode[fragment]) - 1
+        counter = len(fragmentsCode[fragment])
         directions = []
         if fragment != 0:
             lengthbean = len(beans[0])
@@ -44,9 +45,10 @@ def checkAllLong(inputPro):
             currentFragment += fragmentsCode[fragment]
 
         options = []
-        for aminos in range(len(fragmentsCode[fragment])):
+        for aminos in range(len(fragmentsCode[fragment])+1):
             options.append(0)
 
+        # for options in product([0,1,2,3,4], repeat = len(fragmentsCode[fragment])):
         while options[0] != 1:
             options[counter] += 1
             if options[counter] == 5:
@@ -58,91 +60,84 @@ def checkAllLong(inputPro):
                     else:
                         break
                     cancel += 1
-            if not ('1,1,1,1' in str(options)) and not ('2,2,2,2' in str(options)) \
-            and not ('3,3,3,3' in str(options)) and not ('4,4,4,4' in str(options)):
-                solution = folderLong(options,fragment,directions)
+            solution = folderLong(options,fragment,directions)
 
-                continues = 0
-                if fragment != 0:
-                    length = len(beans[0]) - 1
-                    beanTotal = []
-                    for bean in range(len(beans)):
-                        beanTotal.append(copy.deepcopy(beans[bean]))
-                        copySolution = copy.deepcopy(solution)
-                        tuples = []
-                        for item in range(1,len(copySolution)):
-                            copySolution[item][0] += beans[bean][length][0]
-                            copySolution[item][1] += beans[bean][length][1]
-                            copySolution[item][2] += beans[bean][length][2]
-                            beanTotal[bean].append(copySolution[item])
-
-                        tuples.append([tuple(l) for l in beanTotal[bean]])
-                        if len(set(tuples[0])) == len(currentFragment):
-                            oneScore = calculateFolding(tuples[0], currentFragment)
-                            # Updates 'bestScore' and 'bestFolding' if the folding is better, and
-                            # resets the coordinates
-                            tupleLength = len(tuples[0]) - 1
-                            if oneScore > bestScore:
-                                bestScore = oneScore
-                                bestFolding = tuples[0]
-                                fourthBean = thirthBean
-                                thirthBean = secondBean
-                                secondBean = bestBean[0:20]
-                                bestBean = []
-                                bestBean.append(tuples[0])
-                            elif oneScore == bestScore and len(tuples[0]) == len(currentFragment):
-                                if beanCheck(tuples[0], bestBean) == 0:
-                                    bestBean.append(tuples[0])
-                            elif oneScore == (bestScore - 1) and (len(secondBean) != 20):
-                                if beanCheck(tuples[0], secondBean) == 0:
-                                    secondBean.append(tuples[0])
-                            elif oneScore == (bestScore - 2) and (len(thirthBean) != 20):
-                                if beanCheck(tuples[0], thirthBean) == 0:
-                                    thirthBean.append(tuples[0])
-                            elif oneScore >= (bestScore - 5) and oneScore < (bestScore - 2) and (len(fourthBean) != 20):
-                                if beanCheck(tuples[0], fourthBean) == 0:
-                                    fourthBean.append(tuples[0])
-                else:
-                    solution = solution[0:length]
+            continues = 0
+            if fragment != 0:
+                length = len(beans[0]) - 1
+                beanTotal = []
+                for bean in range(len(beans)):
+                    beanTotal.append(copy.deepcopy(beans[bean]))
+                    copySolution = copy.deepcopy(solution)
                     tuples = []
-                    tuples.append([tuple(l) for l in solution])
+                    for item in range(1,len(copySolution)):
+                        copySolution[item][0] += beans[bean][length][0]
+                        copySolution[item][1] += beans[bean][length][1]
+                        copySolution[item][2] += beans[bean][length][2]
+                        copySolution[item] = tuple(copySolution[item])
+                        if copySolution[item] in beans[bean]:
+                            break
+                        beanTotal[bean].append(copySolution[item])
 
-                    if len(set(tuples[0])) == len(solution):
-                        oneScore = calculateFolding(tuples[0], currentFragment)
+
+                    if len(set(beanTotal[bean])) == len(currentFragment):
+                        oneScore = calculateFolding(beanTotal[bean], currentFragment)
                         # Updates 'bestScore' and 'bestFolding' if the folding is better, and
                         # resets the coordinates
-                        if succes == 0:
+                        tupleLength = len(beanTotal[bean]) - 1
+                        if oneScore > bestScore:
                             bestScore = oneScore
-                            bestFolding = tuples[0]
-                        elif oneScore > bestScore:
-                            bestScore = oneScore
-                            bestFolding = tuples[0]
-                            thirthBean == secondBean
-                            secondBean == bestBean[0:5]
+                            bestFolding = beanTotal[bean]
+                            fourthBean = thirthBean
+                            thirthBean = secondBean
+                            secondBean = bestBean[0:10]
                             bestBean = []
-                            bestBean.append(tuples[0])
-                        elif oneScore == bestScore and (len(bestBean) != 20):
-                            if beanCheck(tuples[0], bestBean) == 0:
-                                bestBean.append(tuples[0])
+                            bestBean.append(beanTotal[bean])
+                        elif oneScore == bestScore and len(beanTotal[bean]) == len(currentFragment):
+                            if beanCheck(beanTotal[bean], bestBean) == 0:
+                                bestBean.append(beanTotal[bean])
                         elif oneScore == (bestScore - 1) and (len(secondBean) != 10):
-                            if beanCheck(tuples[0], secondBean) == 0:
-                                secondBean.append(tuples[0])
+                            if beanCheck(beanTotal[bean], secondBean) == 0:
+                                secondBean.append(beanTotal[bean])
                         elif oneScore == (bestScore - 2) and (len(thirthBean) != 10):
-                            if beanCheck(tuples[0], thirthBean) == 0:
-                                thirthBean.append(tuples[0])
+                            if beanCheck(beanTotal[bean], thirthBean) == 0:
+                                thirthBean.append(beanTotal[bean])
+                        elif oneScore >= (bestScore - 5) and oneScore < (bestScore - 2) and (len(fourthBean) != 10):
+                            if beanCheck(beanTotal[bean], fourthBean) == 0:
+                                fourthBean.append(beanTotal[bean])
+            else:
+                solution = solution[0:length]
+                tuples = []
+                tuples.append([tuple(l) for l in solution])
 
-                    # Add one succes
-                    succes += 1
+                if len(set(tuples[0])) == len(solution):
+                    oneScore = calculateFolding(tuples[0], currentFragment)
+                    # Updates 'bestScore' and 'bestFolding' if the folding is better, and
+                    # resets the coordinates
+                    if succes == 0:
+                        bestScore = oneScore
+                        bestFolding = tuples[0]
+                    elif oneScore > bestScore:
+                        bestScore = oneScore
+                        bestFolding = tuples[0]
+                        thirthBean == secondBean
+                        secondBean == bestBean[0:5]
+                        bestBean = []
+                        bestBean.append(tuples[0])
+                    elif oneScore == bestScore and (len(bestBean) != 20):
+                        if beanCheck(tuples[0], bestBean) == 0:
+                            bestBean.append(tuples[0])
+                    elif oneScore == (bestScore - 1) and (len(secondBean) != 10):
+                        if beanCheck(tuples[0], secondBean) == 0:
+                            secondBean.append(tuples[0])
+                    elif oneScore == (bestScore - 2) and (len(thirthBean) != 10):
+                        if beanCheck(tuples[0], thirthBean) == 0:
+                            thirthBean.append(tuples[0])
 
-        beans = []
-        for bean in bestBean:
-            beans.append(bean)
-        for bean in secondBean:
-            beans.append(bean)
-        for bean in thirthBean:
-            beans.append(bean)
-        for bean in fourthBean:
-            beans.append(bean)
+                # Add one succes
+                succes += 1
+
+        beans = bestBean + secondBean + thirthBean + fourthBean
         bestBean, secondBean, thirthBean, fourthBean = [], [], [], []
 
     bestPro = Protein(inputPro.proteinChain)
@@ -150,6 +145,7 @@ def checkAllLong(inputPro):
     bestPro.aminoCoordinates= bestFolding
     print (bestPro.strength)
     print (bestPro.aminoCoordinates)
+    print (inputPro.proteinChain)
     return bestPro
 
 def beanCheck(tuplee, allBeans):
@@ -164,53 +160,54 @@ def beanCheck(tuplee, allBeans):
 def folderLong(directions, usage, pointer):
     aminoCoordinates = [[0,0,0]]
     span = len(directions)
-    for aminozuur in range(span):
-        if aminozuur == 0:
+    for aminozuur in range(1,span):
+        coordinateAmino = aminozuur - 1
+        if aminozuur == 1:
             if usage == 0:
                 direction = (0,1,0)
             else:
                 direction = pointer[usage]
         else:
-            direction = ((aminoCoordinates[aminozuur][0] - aminoCoordinates[aminozuur - 1][0]),\
-            (aminoCoordinates[aminozuur][1] - aminoCoordinates[aminozuur - 1][1]),\
-            (aminoCoordinates[aminozuur][2] - aminoCoordinates[aminozuur - 1][2]))
-        aminoCoordinates.append(copy.copy(aminoCoordinates[aminozuur]))
+            direction = ((aminoCoordinates[coordinateAmino][0] - aminoCoordinates[coordinateAmino - 1][0]),\
+            (aminoCoordinates[coordinateAmino][1] - aminoCoordinates[coordinateAmino - 1][1]),\
+            (aminoCoordinates[coordinateAmino][2] - aminoCoordinates[coordinateAmino - 1][2]))
+        aminoCoordinates.append(copy.copy(aminoCoordinates[coordinateAmino]))
         if directions[aminozuur] == 0: # straight
-            aminoCoordinates[aminozuur+1][0] += direction[0]
-            aminoCoordinates[aminozuur+1][1] += direction[1]
-            aminoCoordinates[aminozuur+1][2] += direction[2]
+            aminoCoordinates[coordinateAmino+1][0] += direction[0]
+            aminoCoordinates[coordinateAmino+1][1] += direction[1]
+            aminoCoordinates[coordinateAmino+1][2] += direction[2]
         elif directions[aminozuur] == 1 or directions[aminozuur] == 2: # up # down
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][1] += direction[0]
+                    aminoCoordinates[coordinateAmino+1][1] += direction[0]
                 else:
-                    aminoCoordinates[aminozuur+1][1] -= direction[0]
+                    aminoCoordinates[coordinateAmino+1][1] -= direction[0]
             elif direction == (0,0,1) or direction == (0,0,-1):
                 if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][1] -= direction[2]
+                    aminoCoordinates[coordinateAmino+1][1] -= direction[2]
                 else:
-                    aminoCoordinates[aminozuur+1][1] += direction[2]
+                    aminoCoordinates[coordinateAmino+1][1] += direction[2]
             elif direction == (0,1,0) or direction == (0,-1,0):
                 if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur+1][0] -= direction[1]
+                    aminoCoordinates[coordinateAmino+1][0] -= direction[1]
                 else:
-                    aminoCoordinates[aminozuur+1][0] += direction[1]
+                    aminoCoordinates[coordinateAmino+1][0] += direction[1]
         elif directions[aminozuur] == 3 or directions[aminozuur] == 4: # left, right
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur+1][2] += direction[0]
+                    aminoCoordinates[coordinateAmino+1][2] += direction[0]
                 else:
-                    aminoCoordinates[aminozuur+1][2] -= direction[0]
+                    aminoCoordinates[coordinateAmino+1][2] -= direction[0]
             elif direction == (0,1,0) or direction == (0,-1,0):
                 if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur+1][2] += direction[1]
+                    aminoCoordinates[coordinateAmino+1][2] += direction[1]
                 else:
-                    aminoCoordinates[aminozuur+1][2] -= direction[1]
+                    aminoCoordinates[coordinateAmino+1][2] -= direction[1]
             elif direction == (0,0,1) or direction == (0,0,-1):
                 if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur+1][0] -= direction[2]
+                    aminoCoordinates[coordinateAmino+1][0] -= direction[2]
                 else:
-                    aminoCoordinates[aminozuur+1][0] += direction[2]
+                    aminoCoordinates[coordinateAmino+1][0] += direction[2]
     if usage == 0:
         return aminoCoordinates[0:span]
 

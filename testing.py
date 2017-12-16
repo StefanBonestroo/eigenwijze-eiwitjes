@@ -14,8 +14,24 @@
 # x[0].append("afina")
 # print (x)
 
-x = "HCPHPHPHCHHHHPCCPPHPPPHPPPPCPPPHPPPHPHHHHCHPHPHPHH"
-print (len(x)/8)
+# x = [0,2,5,64,94,1,2,5,6,1,4,8,1]
+# if all(p in x for p in ([555,4,8,64] and [2,994,1,6] and [8,5,2,0])):
+#     print ("hallo")
+# else:
+#     print ("doenst work").
+
+x = [0,2,5,64,94,1,2,2,2,2,5,6,1,4,8,1]
+print (str(x))
+if ('2, 2, 2, 2') in str(x):
+    print ("hallo")
+else:
+    print ("doenst work")
+
+# x = [[0,2,5]]
+# p = [[6,2,7]]
+# z = []
+# z = x+p
+# print (z)
 
 
 # import numpy as np

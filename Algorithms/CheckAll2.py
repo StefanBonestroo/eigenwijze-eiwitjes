@@ -1,8 +1,9 @@
 import timeit
 import copy
+from classes import Protein
 from Algorithms.helpers import calculateFolding
 
-def depthFirst(Protein):
+def depthFirst(inputPro):
 
     succes = 0
     bestScore = 0
@@ -10,7 +11,7 @@ def depthFirst(Protein):
 
     # 0 == staigth; 1 == up; 2 == down; 3 == left; 4 == right;
     options = []
-    counter = len(Protein.proteinChain)
+    counter = len(inputPro.proteinChain)
     maxRange = int(counter/3)
     for aminos in range(counter):
         options.append(0)
@@ -29,32 +30,26 @@ def depthFirst(Protein):
                 cancel += 1
 
         stuck = 0
-        for item in range(len(options) - 1):
+        item = 0
+        while stuck == 0 and item < (len(options) - 1):
             if (options[item] + options[item+1]) == 5:
                 stuck = 1
-
-        if stuck == 0:
-            for item in range(len(options) - 5):
-                if len(set(options[(item):(item+6)])) == 6:
+            elif item < (counter - 4) and stuck == 0:
+                if all(p in options[(item):(item+4)] for p in ([0,5,2,3] and [0,1,5,4] and [1,4,3,2])):
                     stuck = 1
-                elif (((0 in options[(item):(item+4)] and 1 in options[(item):(item+4)]) \
-                and 5 in options[(item):(item+4)]) and 4 in options[(item):(item+4)]):
-                    stuck = 1
-                elif (((2 in options[(item):(item+4)] and 0 in options[(item):(item+4)]) \
-                and 3 in options[(item):(item+4)]) and 5 in options[(item):(item+4)]):
-                    stuck = 1
-                elif (((1 in options[(item):(item+4)] and 4 in options[(item):(item+4)]) \
-                and 2 in options[(item):(item+4)]) and 3 in options[(item):(item+4)]):
-                    stuck = 1
+                elif item < (counter - 6) and stuck == 0:
+                    if len(set(options[(item):(item+6)])) == 6:
+                        stuck = 1
+            item += 1
 
 
         # if 6 verschillende getallen achter erlkaar crash of als 4 getallen en dan missend (0, 5 of 1, 4 of 2, 3)
         if stuck == 0:
             # print ("came here")
-            solution = folder(options, Protein)
+            solution = folder(options)
             if solution != None:
                 # Calculates the folding score
-                oneScore = calculateFolding(solution, Protein.proteinChain)
+                oneScore = calculateFolding(solution, inputPro.proteinChain)
 
                 # Updates 'bestScore' and 'bestFolding' if the folding is better, and
                 # resets the coordinates
@@ -68,11 +63,12 @@ def depthFirst(Protein):
                 # Add one succes
                 succes += 1
 
-    print (bestFolding)
-    print (bestScore)
-    return [bestFolding, bestScore]
+    bestPro = Protein(inputPro.proteinChain)
+    bestPro.strength = bestScore
+    bestPro.aminoCoordinates= bestFolding
+    return bestPro
 
-def folder(directions, Protein):
+def folder(directions):
     aminoCoordinates = [[0,0,0],[1,0,0]]
     # print(directions)
     span = len(directions)
