@@ -23,12 +23,12 @@ def main():
             bestScore = 0
             worstScore = 100
 
-            if algoritm = 'randomizer':
+            if algoritm == 'randomizer':
                 triesEnd = 100
             elif:
                 triesEnd = 10
 
-            for tries in range(0, 100):
+            for tries in range(0, triesEnd):
 
                 proteinInstance = Protein(current[0])
 
