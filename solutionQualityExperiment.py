@@ -28,7 +28,7 @@ def main():
                 proteinInstance = Protein(current[0])
 
                 if algorithm == 'randomizer':
-                    proteinSample = randomizer(proteinInstance, 50000, '3D')
+                    proteinSample = randomizer(proteinInstance, 25000, '3D')
                 elif algorithm == 'fragment-randomizer':
                     proteinSample = fragmentRandomizer(proteinInstance, current[2], '3D', 1)
 
