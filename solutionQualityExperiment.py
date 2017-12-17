@@ -23,14 +23,19 @@ def main():
             bestScore = 0
             worstScore = 100
 
+            if algoritm = 'randomizer':
+                triesEnd = 100
+            elif:
+                triesEnd = 10
+
             for tries in range(0, 100):
 
                 proteinInstance = Protein(current[0])
 
                 if algorithm == 'randomizer':
-                    proteinSample = randomizer(proteinInstance, 50000, '3D')
+                    proteinSample = randomizer(proteinInstance, 1000, '3D')
                 elif algorithm == 'fragment-randomizer':
-                    proteinSample = fragmentRandomizer(proteinInstance, current[2], '3D', 1)
+                    proteinSample = fragmentRandomizer(proteinInstance, 7, '3D', 1)
 
                 if proteinSample.strength > bestScore:
                     bestScore = int(proteinSample.strength)
@@ -51,7 +56,7 @@ def main():
             plot.ylabel('Occurances')
 
             myPath = os.path.dirname(os.path.abspath(__file__))
-            myFile = '/Data/solution-quality/' + algorithm + '-' + current[1] + '.png'
+            myFile = '/Data/solution-quality/' + algorithm + current[1]+'-f7-1712B.png'
 
             plot.savefig(myPath + myFile)
             plot.clf()
