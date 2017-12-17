@@ -20,12 +20,12 @@
 # else:
 #     print ("doenst work").
 
-x = [0,2,5,64,94,1,2,2,2,2,5,6,1,4,8,1]
-print (str(x))
-if ('2, 2, 2, 2') in str(x):
-    print ("hallo")
-else:
-    print ("doenst work")
+# x = [0,2,5,64,94,1,2,2,2,2,5,6,1,4,8,1]
+# print (str(x))
+# if ('2, 2, 2, 2') in str(x):
+#     print ("hallo")
+# else:
+#     print ("doenst work")
 
 # x = [[0,2,5]]
 # p = [[6,2,7]]
@@ -109,10 +109,13 @@ else:
 #
 # newScore = -8
 # oldScore = -14
-# temp = 3.5
-# while temp > 0.1:
-#     probab =  min(1,(math.expm1(-newPro.strength/temp)/math.expm1(-origPro.strength/temp)))
-#     randumb = random.uniform(0,1)
-#     if probab > randumb:
-#         origPro = newPro
-#     temp *= 0.5
+counter = 0
+temp = 3.5
+while temp > 0.1:
+    # probab =  min(1,(math.expm1(-newPro.strength/temp)/math.expm1(-origPro.strength/temp)))
+    # randumb = random.uniform(0,1)
+    # if probab > randumb:
+    #     origPro = newPro
+    counter += 1
+    temp *= 0.9998
+print(counter)
