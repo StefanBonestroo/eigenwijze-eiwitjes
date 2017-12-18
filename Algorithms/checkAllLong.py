@@ -136,14 +136,14 @@ def folderLong(directions, usage, pointer):
     aminoCoordinates = [[0,0,0]]
     span = len(directions)
     # for each aminoacid that has to be added
-    for aminozuur in range(1,span):
-        coordinateAmino = aminozuur - 1
+    for aminoAcid in range(1,span):
+        coordinateAmino = aminoAcid - 1
         # gets the direction of the first aminoacid
-        if aminozuur == 1:
+        if aminoAcid == 1:
             if usage == 0:
                 direction = (0,1,0)
             else:
-                direction = pointer[aminozuur]
+                direction = pointer[aminoAcid]
         else:
             direction = ((aminoCoordinates[coordinateAmino][0] - aminoCoordinates[coordinateAmino - 1][0]),\
             (aminoCoordinates[coordinateAmino][1] - aminoCoordinates[coordinateAmino - 1][1]),\
@@ -151,42 +151,42 @@ def folderLong(directions, usage, pointer):
         # adds the new coodinate
         aminoCoordinates.append(copy.copy(aminoCoordinates[coordinateAmino]))
         # changes the coordinate to its right place
-        if directions[aminozuur] == 0: # straight
-            aminoCoordinates[aminozuur][0] += direction[0]
-            aminoCoordinates[aminozuur][1] += direction[1]
-            aminoCoordinates[aminozuur][2] += direction[2]
-        elif directions[aminozuur] == 1 or directions[aminozuur] == 2: # up # down
+        if directions[aminoAcid] == 0: # straight
+            aminoCoordinates[aminoAcid][0] += direction[0]
+            aminoCoordinates[aminoAcid][1] += direction[1]
+            aminoCoordinates[aminoAcid][2] += direction[2]
+        elif directions[aminoAcid] == 1 or directions[aminoAcid] == 2: # up # down
             if direction == (1,0,0) or direction == (-1,0,0):
-                if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur][1] += direction[0]
+                if directions[aminoAcid] == 1:
+                    aminoCoordinates[aminoAcid][1] += direction[0]
                 else:
-                    aminoCoordinates[aminozuur][1] -= direction[0]
+                    aminoCoordinates[aminoAcid][1] -= direction[0]
             elif direction == (0,0,1) or direction == (0,0,-1):
-                if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur][1] -= direction[2]
+                if directions[aminoAcid] == 1:
+                    aminoCoordinates[aminoAcid][1] -= direction[2]
                 else:
-                    aminoCoordinates[aminozuur][1] += direction[2]
+                    aminoCoordinates[aminoAcid][1] += direction[2]
             elif direction == (0,1,0) or direction == (0,-1,0):
-                if directions[aminozuur] == 1:
-                    aminoCoordinates[aminozuur][0] -= direction[1]
+                if directions[aminoAcid] == 1:
+                    aminoCoordinates[aminoAcid][0] -= direction[1]
                 else:
-                    aminoCoordinates[aminozuur][0] += direction[1]
-        elif directions[aminozuur] == 3 or directions[aminozuur] == 4: # left, right
+                    aminoCoordinates[aminoAcid][0] += direction[1]
+        elif directions[aminoAcid] == 3 or directions[aminoAcid] == 4: # left, right
             if direction == (1,0,0) or direction == (-1,0,0):
-                if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur][2] += direction[0]
+                if directions[aminoAcid] == 3:
+                    aminoCoordinates[aminoAcid][2] += direction[0]
                 else:
-                    aminoCoordinates[aminozuur][2] -= direction[0]
+                    aminoCoordinates[aminoAcid][2] -= direction[0]
             elif direction == (0,1,0) or direction == (0,-1,0):
-                if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur][2] += direction[1]
+                if directions[aminoAcid] == 3:
+                    aminoCoordinates[aminoAcid][2] += direction[1]
                 else:
-                    aminoCoordinates[aminozuur][2] -= direction[1]
+                    aminoCoordinates[aminoAcid][2] -= direction[1]
             elif direction == (0,0,1) or direction == (0,0,-1):
-                if directions[aminozuur] == 3:
-                    aminoCoordinates[aminozuur][0] -= direction[2]
+                if directions[aminoAcid] == 3:
+                    aminoCoordinates[aminoAcid][0] -= direction[2]
                 else:
-                    aminoCoordinates[aminozuur][0] += direction[2]
+                    aminoCoordinates[aminoAcid][0] += direction[2]
     # returns the coordinates
     if usage == 0:
         return aminoCoordinates[0:(span-1)]
