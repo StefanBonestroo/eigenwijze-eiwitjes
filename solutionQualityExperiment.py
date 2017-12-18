@@ -13,7 +13,7 @@ import matplotlib
 import matplotlib.pyplot as plot
 
 def main():
-    
+
     experiment = sys.argv[1]
     allProteins = [['HHPHHHPH', 'A', 3], ['HHPHHHPHPHHHPH', 'B1', 5], \
     ['HPHPPHHPHPPHPHHPPHPH', 'B2', 7], ['PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'B3', 12],\
