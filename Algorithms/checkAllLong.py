@@ -1,8 +1,11 @@
-from copy import copy, deepcopy
+import copy
 from Algorithms.helpers import calculateFolding
 from classes import Protein
 
 def checkAllLong(inputPro):
+    """ checks all combinations the protein can have up to 8 aminoAcids. After that
+    checks all combinations of the next 8 aminoAcids and adds them together. this happends
+    till the whole protein is folded."""
 
     # sets some values that are going to be used later
     bestFolding = 0
@@ -131,7 +134,10 @@ def checkAllLong(inputPro):
     print (bestPro.aminoCoordinates)
     return bestPro
 
+
+
 def folderLong(directions, usage, pointer):
+    """ folds the protein given the directions of each protein """
     # makes a variable for the coordinates and determines the length of the given string
     aminoCoordinates = [[0,0,0]]
     span = len(directions)

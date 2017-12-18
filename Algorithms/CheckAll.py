@@ -1,9 +1,9 @@
-import timeit
 import copy
 from Algorithms.helpers import calculateFolding
 from classes import Protein
 
 def depthFirst(inputPro):
+    """ Checks all combinations the protein can have. But with more than 12 amino acids it will take too long. """
 
     # sets some variables
     succes = 0
@@ -34,7 +34,7 @@ def depthFirst(inputPro):
                     break
                 cancel += 1
         # prunes by checking if it doesn't goes straight to much
-        if (options.count(0) < xnl):
+        if (options.count(0) < xnl) or (counter < 4):
             # folds the protein
             solution = folder(options)
             # if there is a soluction
@@ -59,6 +59,7 @@ def depthFirst(inputPro):
     return bestPro
 
 def folder(directions):
+    """ Folds the protein given the directions of each protein """
     # makes a variable for the coordinates and calculates the length of it
     aminoCoordinates = [[0,0,0],[0,1,0]]
     span = len(directions)
@@ -73,12 +74,13 @@ def folder(directions):
             (aminoCoordinates[aminoAcid][2] - aminoCoordinates[aminoAcid - 1][2]))
         # adds the new coodinate
         aminoCoordinates.append(copy.copy(aminoCoordinates[aminoAcid]))
-        # changes the new coordinate to its rightfull place depending on the direction
-        if directions[aminoAcid] == 0: # straight
+        # changes the new coordinate to its rightfull place depending on the direction.
+        # 0 = straigth, 1 = up, 2 = down, 3 = left and 4 = right
+        if directions[aminoAcid] == 0:
             aminoCoordinates[aminoAcid+1][0] += direction[0]
             aminoCoordinates[aminoAcid+1][1] += direction[1]
             aminoCoordinates[aminoAcid+1][2] += direction[2]
-        elif directions[aminoAcid] == 1 or directions[aminoAcid] == 2: # up # down
+        elif directions[aminoAcid] == 1 or directions[aminoAcid] == 2:
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminoAcid] == 1:
                     aminoCoordinates[aminoAcid+1][1] += direction[0]
@@ -94,7 +96,7 @@ def folder(directions):
                     aminoCoordinates[aminoAcid+1][0] -= direction[1]
                 else:
                     aminoCoordinates[aminoAcid+1][0] += direction[1]
-        elif directions[aminoAcid] == 3 or directions[aminoAcid] == 4: # left, right
+        elif directions[aminoAcid] == 3 or directions[aminoAcid] == 4:
             if direction == (1,0,0) or direction == (-1,0,0):
                 if directions[aminoAcid] == 3:
                     aminoCoordinates[aminoAcid+1][2] += direction[0]
