@@ -1,5 +1,6 @@
 import timeit
 import copy
+
 from Algorithms.helpers import calculateFolding
 from classes import Protein
 

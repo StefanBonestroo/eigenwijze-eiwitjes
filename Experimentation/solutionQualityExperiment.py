@@ -1,3 +1,7 @@
+# You can run this seperate script to get some insights into the solution finding
+# qualities of the different algorithms. 'allProteins' is filled with values based
+# on the 'Heuristieken 2017' course (the 3rd value is fragment length in this case)
+
 import os
 import sys
 
@@ -9,10 +13,14 @@ import matplotlib
 import matplotlib.pyplot as plot
 
 def main():
+    
     experiment = sys.argv[1]
-    allProteins = [['HHPHHHPH', 'A', 3], ['HHPHHHPHPHHHPH', 'B1', 5], ['HPHPPHHPHPPHPHHPPHPH', 'B2', 7], ['PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'B3', 12],\
-    ['HHPHPHPHPHHHHPHPPPHPPPHPPPPHPPPHPPPHPHHHHPHPHPHPHH', 'B4', 17], ['PPCHHPPCHPPPPCHHHHCHHPPHHPPPPHHPPHPP', 'C1', 12],\
-    ['CPPCHPPCHPPCPPHHHHHHCCPCHPPCPCHPPHPC','C2', 12], ['HCPHPCPHPCHCHPHPPPHPPPHPPPPHPCPHPPPHPHHHCCHCHCHCHH','C3', 17],\
+    allProteins = [['HHPHHHPH', 'A', 3], ['HHPHHHPHPHHHPH', 'B1', 5], \
+    ['HPHPPHHPHPPHPHHPPHPH', 'B2', 7], ['PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'B3', 12],\
+    ['HHPHPHPHPHHHHPHPPPHPPPHPPPPHPPPHPPPHPHHHHPHPHPHPHH', 'B4', 17], \
+    ['PPCHHPPCHPPPPCHHHHCHHPPHHPPPPHHPPHPP', 'C1', 12],\
+    ['CPPCHPPCHPPCPPHHHHHHCCPCHPPCPCHPPHPC','C2', 12], \
+    ['HCPHPCPHPCHCHPHPPPHPPPHPPPPHPCPHPPPHPHHHCCHCHCHCHH','C3', 17],\
     ['HCPHPHPHCHHHHPCCPPHPPPHPPPPCPPPHPPPHPHHHHCHPHPHPHH', 'C4', 17]]
 
     allAlgorithms = ['fragment-randomizer', 'randomizer']
@@ -60,6 +68,8 @@ def main():
             bestPro.visualizeFoldingSave(algorithm, current[1], experiment)
 
         print('Folded all the proteins using the', algorithm, 'algorithm.')
+
+
 
 if __name__ == "__main__":
     main()

@@ -23,7 +23,8 @@ def randomizer (inputProtein, tries, dimension):
             # Generate possibilities for neighboring locations
             possibilities = possibilityCheck(amino, aminoCoordinates)
 
-            # Randomly picks one of the directions, checks if it's valid, and adds it to 'aminoCoordinates'
+            # Randomly picks one of the directions, checks if it's valid,
+            # and adds it to 'aminoCoordinates'
             valid = validityCheck(possibilities, aminoCoordinates, 'randomizer')
             if valid != None:
                 aminoCoordinates.append(valid)
