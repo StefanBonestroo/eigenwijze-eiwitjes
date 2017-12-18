@@ -1,4 +1,5 @@
 import os
+import sys
 
 from classes import Protein
 from Algorithms.fragmentRandomizer import fragmentRandomizer
@@ -8,7 +9,7 @@ import matplotlib
 import matplotlib.pyplot as plot
 
 def main():
-
+    experiment = sys.argv[1]
     allProteins = [['HHPHHHPH', 'A', 3], ['HHPHHHPHPHHHPH', 'B1', 5], ['HPHPPHHPHPPHPHHPPHPH', 'B2', 7], ['PPPHHPPHHPPPPPHHHHHHHPPHHPPPPHHPPHPP', 'B3', 12],\
     ['HHPHPHPHPHHHHPHPPPHPPPHPPPPHPPPHPPPHPHHHHPHPHPHPHH', 'B4', 17], ['PPCHHPPCHPPPPCHHHHCHHPPHHPPPPHHPPHPP', 'C1', 12],\
     ['CPPCHPPCHPPCPPHHHHHHCCPCHPPCPCHPPHPC','C2', 12], ['HCPHPCPHPCHCHPHPPPHPPPHPPPPHPCPHPPPHPHHHCCHCHCHCHH','C3', 17],\
@@ -28,9 +29,9 @@ def main():
                 proteinInstance = Protein(current[0])
 
                 if algorithm == 'randomizer':
-                    proteinSample = randomizer(proteinInstance, 25000, '3D')
+                    proteinSample = randomizer(proteinInstance, 18000, '3D')
                 elif algorithm == 'fragment-randomizer':
-                    proteinSample = fragmentRandomizer(proteinInstance, current[2], '3D', 1)
+                    proteinSample = fragmentRandomizer(proteinInstance, 7, '3D', 1)
 
                 if proteinSample.strength > bestScore:
                     bestScore = int(proteinSample.strength)
@@ -51,12 +52,14 @@ def main():
             plot.ylabel('Occurances')
 
             myPath = os.path.dirname(os.path.abspath(__file__))
-            myFile = '/Data/solution-quality/' + algorithm + '-' + current[1] + '.png'
+            myFile = '/Data/solution-quality/' + algorithm + current[1] + experiment + '.png'
 
             plot.savefig(myPath + myFile)
             plot.clf()
 
-            print(algorithm, "The best folding of protein ", current[1], " had a strength of ", bestPro.strength, " and coordinates: ", bestPro.aminoCoordinates)
+            bestPro.visualizeFoldingSave(algorithm, current[1], experiment)
+
+            # print(algorithm, "The best folding of protein ", current[1], " had a strength of ", bestPro.strength, " and coordinates: ", bestPro.aminoCoordinates)
 
         print('Folded all the proteins using the', algorithm, 'algorithm.')
 

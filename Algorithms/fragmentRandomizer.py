@@ -26,6 +26,7 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
     if len(origPro.aminoCoordinates) != len(origPro.proteinChain):
         raise Exception('proteinlength does not correspond to length of aminoCoordinates')
 
+    invalidFold = 0
     temp = 3.5
     while temp > 0.1:
 
@@ -74,6 +75,13 @@ def fragmentRandomizer (inputPro, fragment, dimension, trieMax):
                     if origPro.strength > bestPro.strength:
                         bestPro = origPro
                 temp *= 0.9998
+                invalidFold = 0
+        else:
+            invalidFold += 1
+            if invalidFold > 20:
+                print('stuck! ', origPro.aminoCoordinates,': ', origPro.aminoCoordinates)
+                bestPro = fragmentRandomizer(inputPro, fragment, dimension, trieMax)
+
 
     return(bestPro)
 
