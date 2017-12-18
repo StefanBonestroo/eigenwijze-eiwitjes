@@ -15,7 +15,7 @@ def main():
     ['CPPCHPPCHPPCPPHHHHHHCCPCHPPCPCHPPHPC','C2', 12], ['HCPHPCPHPCHCHPHPPPHPPPHPPPPHPCPHPPPHPHHHCCHCHCHCHH','C3', 17],\
     ['HCPHPHPHCHHHHPCCPPHPPPHPPPPCPPPHPPPHPHHHHCHPHPHPHH', 'C4', 17]]
 
-    allAlgorithms = ['randomizer', 'fragment-randomizer']
+    allAlgorithms = ['fragment-randomizer', 'randomizer']
 
     for algorithm in allAlgorithms:
         for current in allProteins:
@@ -58,8 +58,6 @@ def main():
             plot.clf()
 
             bestPro.visualizeFoldingSave(algorithm, current[1], experiment)
-
-            # print(algorithm, "The best folding of protein ", current[1], " had a strength of ", bestPro.strength, " and coordinates: ", bestPro.aminoCoordinates)
 
         print('Folded all the proteins using the', algorithm, 'algorithm.')
 
